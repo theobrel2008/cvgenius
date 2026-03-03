@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVGenius — Créez votre CV parfait en 30 secondes</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0a0a0f;
+  --ink2:#1a1a2e;
+  --paper:#fafaf8;
+  --paper2:#f2f2ee;
+  --accent:#6c47ff;
+  --accent2:#8b6fff;
+  --accent-soft:rgba(108,71,255,0.1);
+  --gold:#f5a623;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --border:#e4e4e0;
+  --border2:#d0d0cc;
+  --text:#2d2d3a;
+  --text2:#6b6b80;
+  --text3:#9b9baa;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);
+  --shadow-lg:0 8px 32px rgba(0,0,0,0.1),0 2px 8px rgba(0,0,0,0.06);
+  --shadow-xl:0 24px 64px rgba(0,0,0,0.12),0 8px 24px rgba(0,0,0,0.08);
+  --radius:14px;
+  --radius-sm:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* ── NAV ── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,250,248,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo {
+  font-family:'Instrument Serif',serif;
+  font-size:22px; color:var(--ink);
+  display:flex;align-items:center;gap:8px;
+}
+.nav-logo span{color:var(--accent);}
+.nav-badge{
+  font-size:10px;font-weight:600;letter-spacing:.5px;
+  background:var(--accent-soft);color:var(--accent);
+  padding:2px 8px;border-radius:20px;
+  font-family:'DM Sans',sans-serif;
+}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-cta{
+  background:var(--accent);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:8px 20px;border-radius:20px;
+  border:none;cursor:pointer;
+  transition:all .2s ease;
+  font-family:'DM Sans',sans-serif;
+}
+.nav-cta:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(108,71,255,0.35);}
+
+/* ── HERO ── */
+.hero {
+  padding:120px 32px 80px;
+  text-align:center;
+  max-width:860px;
+  margin:0 auto;
+  position:relative;
+}
+.hero::before {
+  content:'';position:absolute;top:60px;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(108,71,255,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow {
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;letter-spacing:.5px;
+  color:var(--accent);text-transform:uppercase;
+  background:var(--accent-soft);padding:6px 16px;border-radius:20px;
+  margin-bottom:28px;
+  animation:fadeUp .5s ease both;
+}
+.hero-eyebrow::before{content:'✦';font-size:10px;}
+.hero h1 {
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(38px,6vw,72px);
+  line-height:1.1;
+  color:var(--ink);
+  margin-bottom:24px;
+  animation:fadeUp .5s ease .1s both;
+}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub {
+  font-size:clamp(15px,2vw,18px);
+  color:var(--text2);
+  max-width:520px;margin:0 auto 40px;
+  font-weight:400;
+  animation:fadeUp .5s ease .2s both;
+}
+.hero-actions{
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  animation:fadeUp .5s ease .3s both;
+}
+.btn-primary{
+  background:var(--accent);color:#fff;font-size:15px;font-weight:600;
+  padding:14px 32px;border-radius:28px;border:none;cursor:pointer;
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,71,255,0.4);}
+.btn-secondary{
+  background:transparent;color:var(--text);font-size:15px;font-weight:500;
+  padding:14px 28px;border-radius:28px;border:1.5px solid var(--border2);cursor:pointer;
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+.hero-social-proof{
+  margin-top:48px;display:flex;align-items:center;justify-content:center;gap:20px;
+  font-size:13px;color:var(--text3);
+  animation:fadeUp .5s ease .4s both;
+}
+.avatars{display:flex;}
+.avatar{
+  width:32px;height:32px;border-radius:50%;border:2px solid var(--paper);
+  margin-left:-8px;font-size:14px;display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);color:var(--accent);font-weight:600;
+}
+.stars{color:var(--gold);letter-spacing:1px;font-size:12px;}
+
+/* ── FEATURES STRIP ── */
+.features-strip{
+  display:flex;justify-content:center;gap:0;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--paper2);
+  overflow-x:auto;
+}
+.feat-item{
+  display:flex;align-items:center;gap:10px;
+  padding:18px 28px;font-size:13px;font-weight:500;
+  color:var(--text2);white-space:nowrap;
+  border-right:1px solid var(--border);
+}
+.feat-item:last-child{border-right:none;}
+.feat-icon{font-size:16px;}
+
+/* ── MAIN APP ── */
+.app-section{
+  max-width:1100px;margin:0 auto;
+  padding:80px 32px;
+}
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(28px,4vw,42px);
+  color:var(--ink);margin-bottom:8px;text-align:center;
+}
+.section-sub{font-size:15px;color:var(--text2);text-align:center;margin-bottom:48px;}
+
+/* ── STEPS ── */
+.steps{display:flex;gap:0;margin-bottom:60px;position:relative;}
+.steps::before{
+  content:'';position:absolute;top:20px;left:20px;right:20px;height:1px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));
+  opacity:.2;
+}
+.step{
+  flex:1;text-align:center;padding:0 16px;position:relative;
+}
+.step-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  font-weight:700;font-size:14px;
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-bottom:12px;position:relative;z-index:1;
+  box-shadow:0 0 0 6px rgba(108,71,255,0.1);
+}
+.step-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.step-desc{font-size:12px;color:var(--text3);}
+
+/* ── FORM CARD ── */
+.form-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+  overflow:hidden;
+}
+.form-tabs{
+  display:flex;border-bottom:1px solid var(--border);
+  background:var(--paper2);
+}
+.form-tab{
+  flex:1;padding:16px;text-align:center;
+  font-size:13px;font-weight:600;color:var(--text3);
+  cursor:pointer;transition:all .2s;
+  border-bottom:2px solid transparent;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.form-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:#fff;}
+.form-tab:hover:not(.active){color:var(--text);}
+.form-body{padding:32px;}
+
+/* ── FORM GRID ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+label{font-size:12px;font-weight:600;color:var(--text);letter-spacing:.3px;text-transform:uppercase;}
+input,textarea,select{
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  padding:11px 14px;border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);background:#fff;color:var(--text);
+  transition:border-color .2s,box-shadow .2s;
+  outline:none;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(108,71,255,0.08);
+}
+textarea{resize:vertical;min-height:90px;line-height:1.6;}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b6b80' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.char-count{font-size:11px;color:var(--text3);text-align:right;}
+
+/* ── TONE SELECTOR ── */
+.tone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tone-opt{
+  padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.tone-opt:hover{border-color:var(--accent);}
+.tone-opt.active{border-color:var(--accent);background:var(--accent-soft);}
+.tone-emoji{font-size:18px;display:block;margin-bottom:4px;}
+.tone-label{font-size:11px;font-weight:600;color:var(--text);}
+.tone-desc{font-size:10px;color:var(--text3);}
+
+/* ── SUBMIT ── */
+.form-footer{
+  padding:24px 32px;border-top:1px solid var(--border);
+  background:var(--paper2);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;
+}
+.free-note{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:6px;}
+.free-note strong{color:var(--success);}
+.generate-btn{
+  background:var(--accent);color:#fff;font-size:14px;font-weight:700;
+  padding:14px 36px;border-radius:28px;border:none;cursor:pointer;
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 4px 16px rgba(108,71,255,0.3);
+}
+.generate-btn:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(108,71,255,0.4);}
+.generate-btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none;}
+.spinner{
+  width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin .7s linear infinite;display:none;
+}
+.generate-btn.loading .spinner{display:block;}
+.generate-btn.loading .btn-text{display:none;}
+
+/* ── RESULT ── */
+.result-section{
+  margin-top:40px;display:none;
+  animation:fadeUp .4s ease;
+}
+.result-section.show{display:block;}
+.result-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;flex-wrap:wrap;gap:12px;
+}
+.result-title{font-family:'Instrument Serif',serif;font-size:22px;color:var(--ink);}
+.result-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.action-btn{
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;
+  padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;gap:6px;
+}
+.action-btn.copy{border:1.5px solid var(--border2);background:#fff;color:var(--text);}
+.action-btn.copy:hover{border-color:var(--accent);color:var(--accent);}
+.action-btn.download{background:var(--accent);color:#fff;border:none;box-shadow:0 2px 8px rgba(108,71,255,0.3);}
+.action-btn.download:hover{background:var(--accent2);}
+.action-btn.regenerate{border:1.5px solid var(--border2);background:#fff;color:var(--text2);}
+.action-btn.regenerate:hover{border-color:var(--text);color:var(--text);}
+
+/* ── CV PREVIEW ── */
+.cv-preview{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-xl);overflow:hidden;
+}
+.cv-preview-inner{
+  padding:48px 52px;
+  font-family:'DM Sans',sans-serif;
+  max-width:800px;margin:0 auto;
+  line-height:1.6;
+}
+.cv-name{
+  font-family:'Instrument Serif',serif;
+  font-size:32px;color:var(--ink);margin-bottom:4px;
+}
+.cv-title-line{font-size:15px;color:var(--accent);font-weight:600;margin-bottom:16px;}
+.cv-contact{
+  display:flex;gap:16px;flex-wrap:wrap;
+  font-size:12px;color:var(--text2);
+  padding-bottom:20px;border-bottom:2px solid var(--accent);
+  margin-bottom:24px;
+}
+.cv-contact span{display:flex;align-items:center;gap:4px;}
+.cv-section-title{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:12px;margin-top:24px;
+  display:flex;align-items:center;gap:8px;
+}
+.cv-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.cv-text{font-size:13px;color:var(--text);line-height:1.7;}
+.cv-job{margin-bottom:16px;}
+.cv-job-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;}
+.cv-job-title{font-size:14px;font-weight:700;color:var(--ink);}
+.cv-job-date{font-size:11px;color:var(--text3);}
+.cv-job-company{font-size:13px;color:var(--accent);font-weight:600;margin-bottom:6px;}
+.cv-job-desc{font-size:12px;color:var(--text2);line-height:1.7;}
+.cv-skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.cv-skill{
+  font-size:11px;font-weight:600;padding:4px 10px;
+  border-radius:20px;background:var(--accent-soft);color:var(--accent);
+}
+.cv-educ{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.cv-educ-left .title{font-size:13px;font-weight:700;color:var(--ink);}
+.cv-educ-left .school{font-size:12px;color:var(--text2);}
+.cv-educ-date{font-size:11px;color:var(--text3);}
+
+/* ── COVER LETTER PREVIEW ── */
+.letter-preview{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-xl);
+  padding:48px 52px;
+  font-size:14px;line-height:1.9;color:var(--text);
+  white-space:pre-wrap;
+  font-family:'DM Sans',sans-serif;
+}
+
+/* ── LOADING OVERLAY ── */
+.loading-overlay{
+  text-align:center;padding:60px 32px;
+}
+.loading-steps{display:flex;flex-direction:column;gap:12px;max-width:300px;margin:24px auto 0;}
+.loading-step{
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;color:var(--text3);
+  transition:all .3s;
+}
+.loading-step.active{color:var(--text);}
+.loading-step.done{color:var(--success);}
+.loading-step-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.loading-spinner-small{
+  width:16px;height:16px;border:2px solid var(--border);
+  border-top-color:var(--accent);border-radius:50%;
+  animation:spin .6s linear infinite;
+}
+
+/* ── PRICING ── */
+.pricing-section{
+  padding:80px 32px;background:var(--paper2);
+  border-top:1px solid var(--border);
+}
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;max-width:900px;margin:0 auto;
+}
+.price-card{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  transition:all .2s;position:relative;
+}
+.price-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
+.price-card.popular{border-color:var(--accent);box-shadow:0 0 0 4px rgba(108,71,255,0.08);}
+.popular-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#fff;font-size:11px;font-weight:700;
+  padding:4px 16px;border-radius:20px;white-space:nowrap;letter-spacing:.5px;
+}
+.price-name{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase;}
+.price-amount{
+  font-family:'Instrument Serif',serif;font-size:44px;color:var(--ink);
+  line-height:1;margin-bottom:4px;
+}
+.price-amount span{font-size:16px;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--text2);}
+.price-period{font-size:12px;color:var(--text3);margin-bottom:24px;}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.price-features li{font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px;}
+.price-features li::before{content:'✓';color:var(--success);font-weight:700;font-size:12px;min-width:14px;}
+.price-features li.no::before{content:'✗';color:var(--text3);}
+.price-features li.no{color:var(--text3);}
+.price-btn{
+  width:100%;padding:12px;border-radius:28px;font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.price-btn.free-btn{background:var(--paper2);color:var(--text);border:1.5px solid var(--border);}
+.price-btn.free-btn:hover{border-color:var(--accent);color:var(--accent);}
+.price-btn.pro-btn{background:var(--accent);color:#fff;border:none;box-shadow:0 4px 16px rgba(108,71,255,0.3);}
+.price-btn.pro-btn:hover{background:var(--accent2);}
+.price-btn.business-btn{background:var(--ink);color:#fff;border:none;}
+.price-btn.business-btn:hover{background:var(--ink2);}
+
+/* ── TESTIMONIALS ── */
+.testimonials{
+  padding:80px 32px;max-width:1000px;margin:0 auto;
+}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);
+}
+.testi-stars{color:var(--gold);font-size:12px;margin-bottom:12px;}
+.testi-text{font-size:13px;color:var(--text);line-height:1.7;margin-bottom:16px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:10px;}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+.testi-name{font-size:13px;font-weight:600;color:var(--ink);}
+.testi-role{font-size:11px;color:var(--text3);}
+
+/* ── FAQ ── */
+.faq-section{padding:60px 32px;max-width:700px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0;cursor:pointer;}
+.faq-q{font-size:15px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;align-items:center;}
+.faq-icon{color:var(--accent);font-size:18px;transition:transform .2s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.7;margin-top:12px;display:none;}
+.faq-item.open .faq-a{display:block;}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.5);
+  padding:48px 32px 32px;text-align:center;
+}
+.footer-logo{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;margin-bottom:8px;}
+.footer-tagline{font-size:13px;margin-bottom:24px;}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:12px;margin-bottom:24px;}
+.footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:#fff;}
+.footer-copy{font-size:11px;opacity:.4;}
+
+/* ── MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(10,10,15,0.6);backdrop-filter:blur(8px);
+  z-index:1000;display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-overlay.show{opacity:1;pointer-events:all;}
+.modal{
+  background:#fff;border-radius:var(--radius);padding:40px;
+  max-width:440px;width:100%;box-shadow:var(--shadow-xl);
+  transform:translateY(20px);transition:transform .25s;
+}
+.modal-overlay.show .modal{transform:translateY(0);}
+.modal-title{font-family:'Instrument Serif',serif;font-size:26px;color:var(--ink);margin-bottom:8px;}
+.modal-sub{font-size:13px;color:var(--text2);margin-bottom:24px;}
+.modal-form{display:flex;flex-direction:column;gap:14px;}
+.modal-input{
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  padding:12px 16px;border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);outline:none;transition:border-color .2s;
+}
+.modal-input:focus{border-color:var(--accent);}
+.modal-btn{
+  background:var(--accent);color:#fff;font-size:14px;font-weight:700;
+  padding:13px;border-radius:28px;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all .2s;
+}
+.modal-btn:hover{background:var(--accent2);}
+.modal-close{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  border-radius:50%;border:none;background:var(--paper2);
+  cursor:pointer;font-size:16px;color:var(--text2);display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{background:var(--border2);}
+.modal-wrapper{position:relative;}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--ink);color:#fff;font-size:13px;font-weight:500;
+  padding:12px 24px;border-radius:28px;z-index:9999;
+  transition:transform .3s ease;white-space:nowrap;
+  display:flex;align-items:center;gap:8px;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.success{background:var(--success);}
+.toast.error{background:var(--danger);}
+
+/* ── UTILS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.skeleton{
+  background:linear-gradient(90deg,var(--paper2) 25%,var(--border) 50%,var(--paper2) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:4px;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .hero{padding:100px 20px 60px;}
+  .form-grid{grid-template-columns:1fr;}
+  .form-grid .form-group.full{grid-column:1;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .steps{flex-direction:column;gap:20px;}
+  .steps::before{display:none;}
+  .app-section{padding:60px 20px;}
+  .cv-preview-inner,.letter-preview{padding:32px 24px;}
+  .box-body{padding:20px;}
+  .form-body{padding:20px;}
+  .form-footer{padding:20px;}
+  .features-strip{justify-content:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">CV<span>Genius</span> <span class="nav-badge">IA</span></div>
+  <div class="nav-right">
+    <button class="btn-secondary" style="padding:8px 18px;font-size:13px" onclick="showModal('login')">Connexion</button>
+    <button class="nav-cta" onclick="scrollToApp()">Créer mon CV</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Nouveau — Propulsé par IA</div>
+  <h1>Votre CV parfait<br>en <em>30 secondes</em></h1>
+  <p class="hero-sub">Décrivez votre parcours, notre IA génère un CV professionnel et une lettre de motivation sur mesure. Instantanément.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="scrollToApp()">✦ Créer mon CV gratuit <span style="opacity:.7;font-size:12px">→</span></button>
+    <button class="btn-secondary" onclick="document.querySelector('.result-section').classList.add('show');showExample()">Voir un exemple</button>
+  </div>
+  <div class="hero-social-proof">
+    <div class="avatars">
+      <div class="avatar">M</div><div class="avatar">S</div><div class="avatar">A</div><div class="avatar">J</div><div class="avatar">+</div>
+    </div>
+    <span><span class="stars">★★★★★</span> 4.9/5 · Plus de 2 400 CV générés</span>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip">
+  <div class="feat-item"><span class="feat-icon">⚡</span> Génération en 15 secondes</div>
+  <div class="feat-item"><span class="feat-icon">🎨</span> Design professionnel</div>
+  <div class="feat-item"><span class="feat-icon">📄</span> Export PDF inclus</div>
+  <div class="feat-item"><span class="feat-icon">✉️</span> Lettre de motivation</div>
+  <div class="feat-item"><span class="feat-icon">🔒</span> 100% confidentiel</div>
+</div>
+
+<!-- APP SECTION -->
+<section class="app-section" id="app">
+  <div class="section-title">Créez votre CV en 3 étapes</div>
+  <div class="section-sub">Remplissez le formulaire, notre IA s'occupe du reste</div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-label">Vos infos</div><div class="step-desc">Décrivez votre parcours</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-label">L'IA génère</div><div class="step-desc">En 15 secondes</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-label">Téléchargez</div><div class="step-desc">PDF prêt à envoyer</div></div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-tabs">
+      <div class="form-tab active" data-tab="cv" onclick="switchTab('cv')">📄 CV</div>
+      <div class="form-tab" data-tab="cover" onclick="switchTab('cover')">✉️ Lettre de motivation</div>
+      <div class="form-tab" data-tab="both" onclick="switchTab('both')">✦ Les deux</div>
+    </div>
+
+    <div class="form-body">
+      <form id="cvForm" onsubmit="return false;">
+        <div class="form-grid">
+          <!-- Infos perso -->
+          <div class="form-group">
+            <label>Prénom & Nom *</label>
+            <input type="text" id="name" placeholder="ex: Sophie Martin" required>
+          </div>
+          <div class="form-group">
+            <label>Poste visé *</label>
+            <input type="text" id="jobTitle" placeholder="ex: Développeur Web, Chef de projet…" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="sophie@email.com">
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" id="phone" placeholder="06 12 34 56 78">
+          </div>
+          <div class="form-group">
+            <label>Ville</label>
+            <input type="text" id="city" placeholder="Paris">
+          </div>
+          <div class="form-group">
+            <label>Niveau d'expérience</label>
+            <select id="level">
+              <option value="junior">Junior (0-2 ans)</option>
+              <option value="intermediaire" selected>Intermédiaire (3-5 ans)</option>
+              <option value="senior">Senior (5+ ans)</option>
+              <option value="etudiant">Étudiant / Alternant</option>
+              <option value="reconversion">Reconversion professionnelle</option>
+            </select>
+          </div>
+
+          <!-- Expérience -->
+          <div class="form-group full">
+            <label>Expériences professionnelles *</label>
+            <textarea id="experience" placeholder="Décrivez vos expériences passées :&#10;- Développeur chez XYZ (2022-2024) : création d'une app mobile, gestion d'une équipe de 3 personnes…&#10;- Stage chez ABC : mise en place d'une stratégie marketing digital…" required></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Formation</label>
+            <textarea id="education" placeholder="ex: Master en Informatique - Université Paris (2020-2022)&#10;BTS Commerce - Lycée XYZ (2018-2020)" style="min-height:70px;"></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Compétences clés</label>
+            <input type="text" id="skills" placeholder="ex: JavaScript, React, Gestion de projet, Excel, Photoshop…">
+          </div>
+
+          <!-- Cover letter specific -->
+          <div class="form-group full cover-field" style="display:none">
+            <label>Entreprise cible</label>
+            <input type="text" id="company" placeholder="ex: Google, La SNCF, Startup XYZ…">
+          </div>
+          <div class="form-group full cover-field" style="display:none">
+            <label>Description du poste (copiez-collez l'annonce)</label>
+            <textarea id="jobDesc" placeholder="Copiez ici la description du poste pour une lettre ultra-personnalisée…" style="min-height:80px;"></textarea>
+          </div>
+
+          <!-- Tone -->
+          <div class="form-group full">
+            <label>Ton du document</label>
+            <div class="tone-grid" id="toneGrid">
+              <div class="tone-opt" data-tone="professionnel" onclick="selectTone(this)"><span class="tone-emoji">👔</span><div class="tone-label">Professionnel</div><div class="tone-desc">Formel & sérieux</div></div>
+              <div class="tone-opt active" data-tone="dynamique" onclick="selectTone(this)"><span class="tone-emoji">⚡</span><div class="tone-label">Dynamique</div><div class="tone-desc">Moderne & percutant</div></div>
+              <div class="tone-opt" data-tone="creatif" onclick="selectTone(this)"><span class="tone-emoji">🎨</span><div class="tone-label">Créatif</div><div class="tone-desc">Original & audacieux</div></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="form-footer">
+      <div class="free-note">🔒 <strong>Gratuit</strong> — 1 génération sans inscription</div>
+      <button class="generate-btn" id="generateBtn" onclick="generate()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Générer avec l'IA</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-section" id="resultSection">
+    <div class="result-header">
+      <div class="result-title" id="resultTitle">Votre CV est prêt ✓</div>
+      <div class="result-actions">
+        <button class="action-btn regenerate" onclick="generate()">↺ Regénérer</button>
+        <button class="action-btn copy" onclick="copyResult()">📋 Copier</button>
+        <button class="action-btn download" onclick="downloadPDF()">⬇ Télécharger PDF</button>
+      </div>
+    </div>
+    <div id="resultContent"></div>
+    <!-- Paywall -->
+    <div id="paywallBanner" style="display:none;margin-top:24px;">
+      <div style="background:linear-gradient(135deg,var(--accent) 0%,#9333ea 100%);border-radius:var(--radius);padding:32px;text-align:center;color:#fff;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.7;margin-bottom:8px;text-transform:uppercase">LIMITE ATTEINTE</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:26px;margin-bottom:8px;">Débloquez l'accès illimité</div>
+        <div style="font-size:14px;opacity:.85;margin-bottom:24px;">Générez autant de CV et lettres que vous voulez · Export PDF · Historique</div>
+        <button onclick="showModal('pricing')" style="background:#fff;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:13px 32px;border-radius:28px;border:none;cursor:pointer;">Passer à Pro — 4,99€ <span style="opacity:.6;font-size:12px;font-weight:400">paiement unique</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-title">Tarifs simples & transparents</div>
+  <div class="section-sub">Pas d'abonnement caché. Un seul paiement pour un accès à vie.</div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Gratuit</div>
+      <div class="price-amount">0€</div>
+      <div class="price-period">Pour toujours</div>
+      <ul class="price-features">
+        <li>1 CV généré par jour</li>
+        <li>1 lettre de motivation</li>
+        <li>Aperçu en ligne</li>
+        <li class="no">Export PDF</li>
+        <li class="no">Historique</li>
+        <li class="no">Modèles premium</li>
+      </ul>
+      <button class="price-btn free-btn" onclick="scrollToApp()">Commencer</button>
+    </div>
+    <div class="price-card popular">
+      <div class="popular-badge">⭐ PLUS POPULAIRE</div>
+      <div class="price-name">Pro</div>
+      <div class="price-amount">4,99€ <span style="font-size:12px;color:var(--text3);text-decoration:line-through">14,99€</span></div>
+      <div class="price-period">Paiement unique · Accès à vie</div>
+      <ul class="price-features">
+        <li>CV illimités</li>
+        <li>Lettres illimitées</li>
+        <li>Export PDF haute qualité</li>
+        <li>Historique de vos documents</li>
+        <li>3 modèles de design</li>
+        <li>Support prioritaire</li>
+      </ul>
+      <button class="price-btn pro-btn" onclick="showModal('payment')">Acheter maintenant</button>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Business</div>
+      <div class="price-amount">19€ <span style="font-size:14px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text2)">/mois</span></div>
+      <div class="price-period">Pour les équipes RH & cabinets</div>
+      <ul class="price-features">
+        <li>Tout Pro inclus</li>
+        <li>Jusqu'à 50 utilisateurs</li>
+        <li>Tableau de bord admin</li>
+        <li>Marque blanche (logo custom)</li>
+        <li>API access</li>
+        <li>Support dédié</li>
+      </ul>
+      <button class="price-btn business-btn" onclick="showModal('contact')">Contacter</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-title">Ils ont trouvé leur poste</div>
+  <div class="section-sub" style="margin-bottom:40px">Des milliers de candidats utilisent CVGenius chaque semaine</div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"J'avais du mal à me vendre sur mon CV. En 30 secondes, l'IA a mis en valeur toutes mes compétences. J'ai décroché un entretien la semaine suivante."</div>
+      <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Mehdi B.</div><div class="testi-role">Dev Web — Paris</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"La lettre de motivation générée était parfaitement adaptée à l'offre. Mon recruteur m'a dit que ma candidature sortait du lot. Merci !"</div>
+      <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sarah K.</div><div class="testi-role">Marketing — Lyon</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"En reconversion, je ne savais pas comment présenter mon parcours. L'IA a transformé mes expériences disparates en un CV cohérent et convaincant."</div>
+      <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Antoine R.</div><div class="testi-role">Reconversion — Bordeaux</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-title" style="font-size:28px;margin-bottom:8px">Questions fréquentes</div>
+  <div style="font-size:14px;color:var(--text2);text-align:center;margin-bottom:36px">Tout ce que vous devez savoir</div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Comment fonctionne la génération IA ? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Notre IA (Claude d'Anthropic) analyse vos informations et génère un CV structuré et professionnel en tenant compte de votre secteur, niveau d'expérience et ton souhaité. Chaque document est unique et personnalisé.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Mes données sont-elles sécurisées ? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Oui, vos données ne sont jamais stockées sur nos serveurs sans votre consentement. Les informations saisies sont uniquement transmises à l'IA pour générer votre document, puis supprimées.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Le plan Pro est-il vraiment un paiement unique ? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Oui, 4,99€ une seule fois et vous avez accès à vie à toutes les fonctionnalités Pro. Aucun renouvellement automatique, aucune surprise.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Puis-je modifier le CV généré ? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Absolument. Vous pouvez copier le contenu généré et le coller dans Word ou Google Docs pour le personnaliser. Avec le plan Pro, vous pouvez aussi regénérer autant de fois que vous voulez.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CV<span style="color:var(--accent2)">Genius</span></div>
+  <div class="footer-tagline">Le CV parfait, généré par l'IA en 30 secondes.</div>
+  <div class="footer-links">
+    <a href="#">Accueil</a><a href="#">Tarifs</a><a href="#">Blog</a>
+    <a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 CVGenius — Tous droits réservés</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-wrapper">
+    <div class="modal" id="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+const APP = {
+  tab: 'cv',
+  tone: 'dynamique',
+  generationCount: 0,
+  maxFree: 1,
+  isPro: false,
+  lastResult: ''
+};
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+function scrollToApp(){document.getElementById('app').scrollIntoView({behavior:'smooth'});}
+
+// ══════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════
+function switchTab(tab){
+  APP.tab = tab;
+  document.querySelectorAll('.form-tab').forEach(t=>{t.classList.remove('active');if(t.dataset.tab===tab)t.classList.add('active');});
+  const coverFields = document.querySelectorAll('.cover-field');
+  coverFields.forEach(f=>f.style.display=(tab==='cover'||tab==='both')?'flex':'none');
+}
+
+// ══════════════════════════════════════════
+// TONE
+// ══════════════════════════════════════════
+function selectTone(el){
+  APP.tone = el.dataset.tone;
+  document.querySelectorAll('.tone-opt').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// GENERATE
+// ══════════════════════════════════════════
+async function generate(){
+  const name=document.getElementById('name').value.trim();
+  const jobTitle=document.getElementById('jobTitle').value.trim();
+  const experience=document.getElementById('experience').value.trim();
+  if(!name||!jobTitle||!experience){showToast('Remplissez les champs obligatoires *','error');return;}
+
+  // Freemium check
+  if(!APP.isPro && APP.generationCount >= APP.maxFree){
+    document.getElementById('resultSection').classList.add('show');
+    document.getElementById('paywallBanner').style.display='block';
+    showModal('payment');
+    return;
+  }
+
+  const btn=document.getElementById('generateBtn');
+  btn.classList.add('loading');btn.disabled=true;
+
+  const resultSection=document.getElementById('resultSection');
+  resultSection.classList.add('show');
+  document.getElementById('paywallBanner').style.display='none';
+  document.getElementById('resultContent').innerHTML=renderLoading();
+
+  const data={
+    name, jobTitle,
+    email:document.getElementById('email').value,
+    phone:document.getElementById('phone').value,
+    city:document.getElementById('city').value,
+    level:document.getElementById('level').value,
+    experience,
+    education:document.getElementById('education').value,
+    skills:document.getElementById('skills').value,
+    company:document.getElementById('company').value,
+    jobDesc:document.getElementById('jobDesc').value,
+    tone:APP.tone, tab:APP.tab
+  };
+
+  try{
+    if(APP.tab==='cv') await generateCV(data);
+    else if(APP.tab==='cover') await generateCoverLetter(data);
+    else await generateBoth(data);
+    APP.generationCount++;
+    resultSection.scrollIntoView({behavior:'smooth',block:'start'});
+    showToast('✓ Généré avec succès !','success');
+    if(!APP.isPro && APP.generationCount >= APP.maxFree){
+      setTimeout(()=>{document.getElementById('paywallBanner').style.display='block';},1500);
+    }
+  }catch(e){
+    document.getElementById('resultContent').innerHTML=`<div style="padding:32px;text-align:center;color:var(--danger)">⚠ Erreur : ${e.message}<br><br><button onclick="generate()" style="margin-top:12px;padding:10px 24px;border-radius:20px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">↺ Réessayer</button></div>`;
+  }finally{
+    btn.classList.remove('loading');btn.disabled=false;
+  }
+}
+
+function renderLoading(){
+  return `<div style="text-align:center;padding:60px 32px;">
+    <div style="width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px;"></div>
+    <div style="font-family:'Instrument Serif',serif;font-size:20px;color:var(--ink);margin-bottom:8px;">L'IA génère votre document…</div>
+    <div style="font-size:13px;color:var(--text3)">Analyse de votre profil · Rédaction optimisée · Mise en forme</div>
+  </div>`;
+}
+
+// ── GENERATE CV ──
+async function generateCV(d){
+  const levelMap={junior:'profil junior avec peu d\'expérience',intermediaire:'profil intermédiaire avec 3-5 ans d\'expérience',senior:'profil senior expert avec 5+ ans',etudiant:'étudiant ou alternant',reconversion:'en reconversion professionnelle'};
+  const prompt=`Tu es un expert RH et rédacteur de CV professionnel.
+Génère un CV complet pour :
+- Nom : ${d.name}
+- Poste visé : ${d.jobTitle}
+- Niveau : ${levelMap[d.level]||d.level}
+- Expériences : ${d.experience}
+- Formation : ${d.education||'non précisée'}
+- Compétences : ${d.skills||'à déduire des expériences'}
+- Ville : ${d.city||'non précisée'}
+- Ton souhaité : ${d.tone}
+
+Réponds UNIQUEMENT en JSON valide, sans markdown :
+{
+  "name": "${d.name}",
+  "title": "titre accrocheur pour le poste",
+  "email": "${d.email||'email@exemple.com'}",
+  "phone": "${d.phone||'06 XX XX XX XX'}",
+  "city": "${d.city||'France'}",
+  "summary": "accroche professionnelle percutante 2-3 phrases",
+  "experiences": [{"title":"","company":"","period":"","description":""}],
+  "education": [{"degree":"","school":"","year":""}],
+  "skills": ["skill1","skill2","skill3","skill4","skill5","skill6"],
+  "languages": ["Français - Natif","Anglais - Courant"]
+}`;
+
+  const res=await callClaude(prompt);
+  const cv=JSON.parse(res.replace(/```json|```/g,'').trim());
+  APP.lastResult=JSON.stringify(cv);
+  document.getElementById('resultTitle').textContent='Votre CV est prêt ✓';
+  document.getElementById('resultContent').innerHTML=renderCV(cv);
+}
+
+// ── GENERATE COVER LETTER ──
+async function generateCoverLetter(d){
+  const prompt=`Tu es expert en rédaction de lettres de motivation percutantes.
+Rédige une lettre de motivation pour :
+- Candidat : ${d.name}
+- Poste : ${d.jobTitle}
+- Entreprise : ${d.company||'l\'entreprise'}
+- Expériences : ${d.experience}
+- Formation : ${d.education||''}
+- Compétences : ${d.skills||''}
+- Description du poste : ${d.jobDesc||'non fournie'}
+- Ton : ${d.tone}
+
+Rédige une lettre complète, personnalisée, avec : introduction accrocheuse, 2-3 paragraphes sur les compétences et motivations, conclusion avec call-to-action.
+Maximum 350 mots. Commence directement par la lettre sans explication.`;
+
+  const res=await callClaude(prompt);
+  APP.lastResult=res;
+  document.getElementById('resultTitle').textContent='Votre lettre de motivation est prête ✓';
+  document.getElementById('resultContent').innerHTML=`<div class="letter-preview">${res}</div>`;
+}
+
+// ── GENERATE BOTH ──
+async function generateBoth(d){
+  await generateCV(d);
+  const cvHTML=document.getElementById('resultContent').innerHTML;
+  const lvlMap={junior:'junior',intermediaire:'intermédiaire',senior:'senior',etudiant:'étudiant',reconversion:'en reconversion'};
+  const prompt=`Rédige une lettre de motivation pour ${d.name} (${lvlMap[d.level]||d.level}), poste : ${d.jobTitle}${d.company?' chez '+d.company:''}.
+Expériences : ${d.experience}. Compétences : ${d.skills||''}. Ton : ${d.tone}.
+${d.jobDesc?'Annonce : '+d.jobDesc:''}
+300-350 mots, percutant, personnalisé. Directement la lettre.`;
+  const letterRes=await callClaude(prompt);
+  APP.lastResult=letterRes;
+  document.getElementById('resultTitle').textContent='CV + Lettre de motivation prêts ✓';
+  document.getElementById('resultContent').innerHTML=cvHTML+`<div style="margin-top:32px"><div class="result-header" style="margin-bottom:16px"><div class="result-title">Votre lettre de motivation</div><div class="result-actions"><button class="action-btn copy" onclick="copyLetter()">📋 Copier la lettre</button></div></div><div class="letter-preview">${letterRes}</div></div>`;
+}
+
+// ── CLAUDE API ──
+async function callClaude(prompt){
+  const res=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:1500,
+      messages:[{role:"user",content:prompt}]
+    })
+  });
+  if(!res.ok)throw new Error(`Erreur API (${res.status})`);
+  const data=await res.json();
+  return data.content.map(c=>c.text||'').join('');
+}
+
+// ── RENDER CV ──
+function renderCV(cv){
+  const expHTML=(cv.experiences||[]).map(e=>`
+    <div class="cv-job">
+      <div class="cv-job-header">
+        <div class="cv-job-title">${e.title||''}</div>
+        <div class="cv-job-date">${e.period||''}</div>
+      </div>
+      <div class="cv-job-company">${e.company||''}</div>
+      <div class="cv-job-desc">${e.description||''}</div>
+    </div>`).join('');
+  const eduHTML=(cv.education||[]).map(e=>`
+    <div class="cv-educ">
+      <div class="cv-educ-left">
+        <div class="title">${e.degree||''}</div>
+        <div class="school">${e.school||''}</div>
+      </div>
+      <div class="cv-educ-date">${e.year||''}</div>
+    </div>`).join('');
+  const skillsHTML=(cv.skills||[]).map(s=>`<span class="cv-skill">${s}</span>`).join('');
+  const langHTML=(cv.languages||[]).map(l=>`<span class="cv-skill" style="background:rgba(245,166,35,0.1);color:var(--gold);">${l}</span>`).join('');
+
+  return `<div class="cv-preview"><div class="cv-preview-inner">
+    <div class="cv-name">${cv.name||''}</div>
+    <div class="cv-title-line">${cv.title||''}</div>
+    <div class="cv-contact">
+      ${cv.email?`<span>✉ ${cv.email}</span>`:''}
+      ${cv.phone?`<span>📞 ${cv.phone}</span>`:''}
+      ${cv.city?`<span>📍 ${cv.city}</span>`:''}
+    </div>
+    ${cv.summary?`<div class="cv-section-title">Profil</div><div class="cv-text">${cv.summary}</div>`:''}
+    ${expHTML?`<div class="cv-section-title">Expériences</div>${expHTML}`:''}
+    ${eduHTML?`<div class="cv-section-title">Formation</div>${eduHTML}`:''}
+    ${skillsHTML?`<div class="cv-section-title">Compétences</div><div class="cv-skills">${skillsHTML}</div>`:''}
+    ${langHTML?`<div class="cv-section-title">Langues</div><div class="cv-skills">${langHTML}</div>`:''}
+  </div></div>`;
+}
+
+// ── EXAMPLE ──
+function showExample(){
+  const exampleCV={
+    name:"Sophie Martin",title:"Développeuse Web Full Stack",
+    email:"sophie.martin@email.com",phone:"06 12 34 56 78",city:"Paris",
+    summary:"Développeuse passionnée avec 4 ans d'expérience en React et Node.js. J'ai contribué à des projets qui ont atteint 100k utilisateurs. Toujours en quête de nouvelles technologies pour créer des expériences utilisateur exceptionnelles.",
+    experiences:[{title:"Développeuse Front-End Senior",company:"TechStartup SAS",period:"2022 – 2024",description:"Développement de l'interface principale de la plateforme SaaS (React, TypeScript). Réduction de 40% du temps de chargement. Encadrement de 2 développeurs juniors."},{title:"Développeuse Web",company:"Agence Digital Pro",period:"2020 – 2022",description:"Création de sites e-commerce sur mesure (React, Next.js, Stripe). Mise en place de tests automatisés, réduction des bugs de 60%."}],
+    education:[{degree:"Master Génie Logiciel",school:"Université Paris-Saclay",year:"2020"},{degree:"Licence Informatique",school:"IUT de Villetaneuse",year:"2018"}],
+    skills:["React / Next.js","Node.js / Express","TypeScript","PostgreSQL","Git / CI-CD","Agile / Scrum"],
+    languages:["Français — Natif","Anglais — Courant (C1)"]
+  };
+  document.getElementById('resultSection').classList.add('show');
+  document.getElementById('resultTitle').textContent='Exemple de CV généré ✓';
+  document.getElementById('resultContent').innerHTML=renderCV(exampleCV);
+  document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════
+// ACTIONS
+// ══════════════════════════════════════════
+function copyResult(){
+  const text=document.querySelector('.cv-preview-inner,.letter-preview')?.innerText||'';
+  navigator.clipboard.writeText(text).then(()=>showToast('✓ Copié dans le presse-papier','success')).catch(()=>showToast('Erreur lors de la copie','error'));
+}
+function copyLetter(){
+  const text=document.querySelector('.letter-preview')?.innerText||'';
+  navigator.clipboard.writeText(text).then(()=>showToast('✓ Lettre copiée','success'));
+}
+function downloadPDF(){
+  if(!APP.isPro&&APP.generationCount>=APP.maxFree){showModal('payment');return;}
+  showToast('⬇ Préparation du PDF…');
+  setTimeout(()=>{
+    window.print();
+    showToast('✓ Impression lancée','success');
+  },500);
+}
+
+// ══════════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════════
+function showModal(type){
+  const overlay=document.getElementById('modalOverlay');
+  const content=document.getElementById('modalContent');
+  const modals={
+    login:`<div class="modal-title">Connexion</div><div class="modal-sub">Accédez à votre historique et vos documents sauvegardés</div><div class="modal-form"><input class="modal-input" type="email" placeholder="Email"><input class="modal-input" type="password" placeholder="Mot de passe"><button class="modal-btn">Se connecter</button><div style="text-align:center;font-size:12px;color:var(--text3);margin-top:8px">Pas de compte ? <a href="#" style="color:var(--accent)">S'inscrire</a></div></div>`,
+    payment:`<div class="modal-title">Passer à Pro 🚀</div><div class="modal-sub">Accès à vie pour 4,99€ — Paiement sécurisé par Stripe</div><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px;"><div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous débloquez :</div><div style="color:var(--text);line-height:2">✓ CV & lettres illimités<br>✓ Export PDF<br>✓ Historique complet<br>✓ Modèles premium</div></div><div class="modal-form"><input class="modal-input" type="email" placeholder="Votre email"><button class="modal-btn" onclick="handlePayment()">💳 Payer 4,99€ maintenant</button><div style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px">🔒 Sécurisé par Stripe · Remboursement 7 jours</div></div>`,
+    contact:`<div class="modal-title">Offre Business</div><div class="modal-sub">Intéressé par un accès multi-utilisateurs ou une intégration sur mesure ?</div><div class="modal-form"><input class="modal-input" type="text" placeholder="Votre nom"><input class="modal-input" type="email" placeholder="Email professionnel"><textarea class="modal-input" placeholder="Décrivez votre besoin…" style="min-height:80px;resize:vertical;"></textarea><button class="modal-btn">Envoyer la demande</button></div>`,
+    pricing:`<div class="modal-title">Débloquer Pro</div><div class="modal-sub">Un seul paiement · Accès à vie · Aucun abonnement</div><div class="modal-form"><button class="modal-btn" style="margin-bottom:8px;" onclick="closeModal();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Voir tous les tarifs</button><button onclick="showModal('payment')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;">Acheter Pro — 4,99€ →</button></div>`,
+  };
+  content.innerHTML=modals[type]||'';
+  overlay.classList.add('show');
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+function handlePayment(){
+  closeModal();
+  showToast('🔒 Redirection vers Stripe… (démo)');
+  setTimeout(()=>{APP.isPro=true;showToast('🎉 Pro activé ! Profitez de CVGenius sans limite','success');},2000);
+}
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+let toastT=null;
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show '+(type||'');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.className='toast',3000);
+}
+
+// ══════════════════════════════════════════
+// FAQ
+// ══════════════════════════════════════════
+function toggleFaq(el){el.classList.toggle('open');}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
