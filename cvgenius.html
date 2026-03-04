@@ -1094,8 +1094,7 @@ function closeModal(){document.getElementById('modalOverlay').classList.remove('
 function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 function handlePayment(){
   closeModal();
-  showToast('🔒 Redirection vers Stripe… (démo)');
-  setTimeout(()=>{APP.isPro=true;showToast('🎉 Pro activé ! Profitez de CVGenius sans limite','success');},2000);
+  window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00', '_blank');
 }
 
 // ══════════════════════════════════════════
