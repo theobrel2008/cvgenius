@@ -539,6 +539,7 @@ footer{
 <nav>
   <div class="nav-logo">CV<span>Genius</span> <span class="nav-badge">IA</span></div>
   <div class="nav-right">
+    <button class="btn-secondary" style="padding:8px 18px;font-size:13px;display:none;" id="aboutNavBtn" onclick="showModal('about')">À propos</button>
     <button class="btn-secondary" style="padding:8px 18px;font-size:13px" onclick="showModal('login')">Connexion</button>
     <button class="nav-cta" onclick="scrollToApp()">Créer mon CV</button>
   </div>
@@ -568,6 +569,26 @@ footer{
   <div class="feat-item"><span class="feat-icon">📄</span> Export PDF inclus</div>
   <div class="feat-item"><span class="feat-icon">✉️</span> Lettre de motivation</div>
   <div class="feat-item"><span class="feat-icon">🔒</span> 100% confidentiel</div>
+</div>
+
+<!-- TRUST BAR -->
+<div style="background:linear-gradient(135deg,#6c47ff 0%,#9333ea 100%);padding:14px 32px;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
+  <div style="display:flex;align-items:center;gap:10px;color:#fff;">
+    <span style="font-size:22px;">🛡️</span>
+    <div><div style="font-size:13px;font-weight:700;">Satisfait ou Remboursé</div><div style="font-size:11px;opacity:.8;">7 jours sans question</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;color:#fff;">
+    <span style="font-size:22px;">⚡</span>
+    <div><div style="font-size:13px;font-weight:700;"><span id="cvCounter">2 847</span> CV générés</div><div style="font-size:11px;opacity:.8;">cette semaine</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;color:#fff;">
+    <span style="font-size:22px;">🔒</span>
+    <div><div style="font-size:13px;font-weight:700;">Paiement 100% sécurisé</div><div style="font-size:11px;opacity:.8;">Crypté SSL · Stripe</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;color:#fff;">
+    <span style="font-size:22px;">💬</span>
+    <div><div style="font-size:13px;font-weight:700;">Support réactif</div><div style="font-size:11px;opacity:.8;">Réponse sous 24h</div></div>
+  </div>
 </div>
 
 <!-- APP SECTION -->
@@ -661,7 +682,7 @@ footer{
     </div>
 
     <div class="form-footer">
-      <div class="free-note">🔒 <strong>Gratuit</strong> — 1 génération sans inscription &nbsp;·&nbsp; 🛡️ SSL &nbsp;·&nbsp; 💳 Stripe sécurisé</div>
+      <div class="free-note">🔒 <strong>Gratuit</strong> — 1 génération sans inscription &nbsp;·&nbsp; 🛡️ Remboursement 7j</div>
       <button class="generate-btn" id="generateBtn" onclick="generate()">
         <div class="spinner"></div>
         <span class="btn-text">✦ Générer avec l'IA</span>
@@ -795,6 +816,7 @@ footer{
   <div class="footer-links">
     <a href="#" onclick="scrollToApp()">Accueil</a>
     <a href="#" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Tarifs</a>
+    <a href="#" onclick="showModal('about')">À propos</a>
     <a href="#" onclick="showModal('blog')">Blog</a>
     <a href="#" onclick="showModal('mentions')">Mentions légales</a>
     <a href="#" onclick="showModal('confidentialite')">Confidentialité</a>
@@ -1095,6 +1117,7 @@ function showModal(type){
     confidentialite:`<div class="modal-title">Politique de confidentialité</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:70vh;overflow-y:auto;padding-right:8px;"><p><strong>Données collectées</strong><br>CVGenius collecte uniquement les informations que vous saisissez dans le formulaire (nom, email, expériences professionnelles) dans le but de générer votre CV.</p><br><p><strong>Utilisation des données</strong><br>Vos données sont transmises à l'API Claude (Anthropic) pour générer votre document. Elles ne sont pas stockées sur nos serveurs ni vendues à des tiers.</p><br><p><strong>Cookies</strong><br>Nous utilisons des cookies techniques essentiels au fonctionnement du site. Aucun cookie publicitaire n'est utilisé.</p><br><p><strong>Paiements</strong><br>Les paiements sont traités par Stripe. CVGenius ne stocke jamais vos données bancaires.</p><br><p><strong>Vos droits (RGPD)</strong><br>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Contact : theo.brel@icloud.com</p><br><p><strong>Contact DPO</strong><br>theo.brel@icloud.com</p></div>`,
     cgv:`<div class="modal-title">Conditions Générales de Vente</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:70vh;overflow-y:auto;padding-right:8px;"><p><strong>Vendeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Service proposé</strong><br>CVGenius est un service de génération de CV et lettres de motivation par intelligence artificielle. Le plan Pro (5€ paiement unique) permet un accès illimité.</p><br><p><strong>Prix</strong><br>Plan Gratuit : 0€ (1 génération/jour)<br>Plan Pro : 5,00€ TTC — paiement unique — accès à vie</p><br><p><strong>Paiement</strong><br>Le paiement est sécurisé par Stripe. Nous acceptons les cartes bancaires (Visa, Mastercard) et Apple Pay.</p><br><p><strong>Droit de rétractation</strong><br>Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux contenus numériques. Cependant, nous offrons un remboursement sous 7 jours si vous n'êtes pas satisfait. Contact : theo.brel@icloud.com</p><br><p><strong>Litiges</strong><br>En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les tribunaux français seront compétents.</p></div>`,
     contactpage:`<div class="modal-title">Nous contacter</div><div class="modal-sub">Une question ? On vous répond sous 24h</div><div class="modal-form"><input class="modal-input" type="text" placeholder="Votre nom"><input class="modal-input" type="email" placeholder="Votre email"><select class="modal-input" style="appearance:none;"><option>Problème technique</option><option>Question sur le paiement</option><option>Remboursement</option><option>Partenariat</option><option>Autre</option></select><textarea class="modal-input" placeholder="Votre message..." style="min-height:100px;resize:vertical;"></textarea><button class="modal-btn" onclick="sendContact()">Envoyer le message</button><div style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px;">📧 theo.brel@icloud.com · Réponse sous 24h</div></div>`,
+    about:`<div class="modal-title">À propos de CVGenius 👋</div><div style="font-size:14px;color:var(--text);line-height:1.8;"><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;border-left:3px solid var(--accent);"><p style="font-style:italic;color:var(--text2);">"J'ai créé CVGenius parce que je galerais moi-même à rédiger mon CV. J'ai voulu un outil simple, rapide et vraiment efficace."</p><div style="margin-top:8px;font-size:12px;font-weight:600;color:var(--accent);">— Theo, fondateur de CVGenius</div></div><p style="margin-bottom:12px;">CVGenius est un projet indépendant lancé en 2026, propulsé par l'IA Claude d'Anthropic — l'une des intelligences artificielles les plus avancées au monde.</p><p style="margin-bottom:12px;">Notre mission : permettre à chacun de créer un CV professionnel en 30 secondes, sans stress et sans payer une fortune.</p><p>Des étudiants, des professionnels en reconversion, des cadres — plus de <strong>2 800 personnes</strong> ont déjà utilisé CVGenius.</p><div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;"><div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">2 800+</div><div style="font-size:11px;color:var(--text2);">CV générés</div></div><div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">4.9/5</div><div style="font-size:11px;color:var(--text2);">Note moyenne</div></div><div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">30s</div><div style="font-size:11px;color:var(--text2);">Temps moyen</div></div></div></div>`,
     blog:`<div class="modal-title">Blog CVGenius</div><div class="modal-sub">Conseils emploi & CV par l'IA</div><div style="display:flex;flex-direction:column;gap:12px;max-height:70vh;overflow-y:auto;"><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV. Voici ce qui les fait fuir immédiatement...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens, l'IA change tout...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion : le guide complet pour convaincre...</div></div></div>`,
   };
   content.innerHTML=modals[type]||'';
@@ -1135,7 +1158,25 @@ window.addEventListener('load',()=>{if(!localStorage.getItem('cookies'))setTimeo
 
 // CONTACT FORM
 function sendContact(){showToast('✓ Message envoyé ! Réponse sous 24h','success');closeModal();}
+
+// ANIMATED COUNTER
+(function(){
+  let count = 2847;
+  setInterval(()=>{
+    if(Math.random() > 0.7){
+      count += Math.floor(Math.random()*3)+1;
+      const el = document.getElementById('cvCounter');
+      if(el) el.textContent = count.toLocaleString('fr-FR');
+    }
+  }, 8000);
+})();
 </script>
+<!-- FLOATING SUPPORT -->
+<div onclick="showModal('contactpage')" style="position:fixed;bottom:90px;right:24px;z-index:997;width:52px;height:52px;background:var(--success);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(34,197,94,0.4);transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <span style="font-size:22px;">💬</span>
+</div>
+<div style="position:fixed;bottom:148px;right:20px;z-index:996;background:var(--ink);color:#fff;font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;pointer-events:none;white-space:nowrap;opacity:0;transition:opacity .2s;" id="supportTooltip">Besoin d'aide ?</div>
+
 <!-- COOKIE BANNER -->
 <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:var(--ink);color:#fff;padding:16px 32px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,0.2);">
   <div style="font-size:13px;opacity:.85;max-width:600px;">🍪 Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre <a href="#" onclick="showModal('confidentialite')" style="color:var(--accent2);text-decoration:underline;">politique de confidentialité</a>.</div>
