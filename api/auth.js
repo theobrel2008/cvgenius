@@ -12,7 +12,6 @@ const handler = async (req, res) => {
 
   try {
     if (action === 'register') {
-      // Register user
       const r = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
         method: 'POST',
         headers: {
@@ -27,7 +26,6 @@ const handler = async (req, res) => {
       return res.status(200).json({ success: true, message: 'Compte créé ! Vérifiez votre email.' });
 
     } else if (action === 'login') {
-      // Login user
       const r = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
         method: 'POST',
         headers: {
@@ -40,7 +38,6 @@ const handler = async (req, res) => {
       const data = await r.json();
       if (!r.ok) return res.status(400).json({ error: 'Email ou mot de passe incorrect' });
 
-      // Check if user is pro
       const userR = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=is_pro`, {
         headers: {
           'apikey': SUPABASE_SECRET,
@@ -58,7 +55,6 @@ const handler = async (req, res) => {
       });
 
     } else if (action === 'activate') {
-      // Activate pro with code
       const { code, email } = req.body;
       const validCodes = (process.env.PROMO_CODES || 'PROVIP2026,CVPRO2026,GENIUS2026').split(',');
 
@@ -66,7 +62,6 @@ const handler = async (req, res) => {
         return res.status(400).json({ error: 'Code invalide' });
       }
 
-      // Update user to pro in DB
       const r = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
         method: 'PATCH',
         headers: {
@@ -79,7 +74,6 @@ const handler = async (req, res) => {
       });
 
       if (r.ok) {
-        // Mark code as used
         await fetch(`${SUPABASE_URL}/rest/v1/used_codes`, {
           method: 'POST',
           headers: {
@@ -95,7 +89,6 @@ const handler = async (req, res) => {
       }
 
     } else if (action === 'resetPassword') {
-      // Send password reset email via Supabase
       const r = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
         method: 'POST',
         headers: {
@@ -108,6 +101,24 @@ const handler = async (req, res) => {
       if (!r.ok) {
         const data = await r.json();
         return res.status(400).json({ error: data.msg || data.message || 'Erreur envoi email' });
+      }
+      return res.status(200).json({ success: true });
+
+    } else if (action === 'updatePassword') {
+      const { token, password } = req.body;
+      if (!token || !password) return res.status(400).json({ error: 'Données manquantes' });
+      const r = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_SECRET,
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ password })
+      });
+      if (!r.ok) {
+        const data = await r.json();
+        return res.status(400).json({ error: data.msg || data.message || 'Erreur mise à jour' });
       }
       return res.status(200).json({ success: true });
     }
