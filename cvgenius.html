@@ -1172,7 +1172,113 @@ window.addEventListener('load',()=>{if(!localStorage.getItem('cookies'))setTimeo
 // CONTACT FORM
 function sendContact(){showToast('✓ Message envoyé ! Réponse sous 24h','success');closeModal();}
 
-// Legacy promo removed - using new auth system
+// ══════════════════════════════════════════
+// AUTH SYSTEM
+// ══════════════════════════════════════════
+const SUPABASE_URL = 'https://nnujcnuildmiisykfrgy.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_MP9Sm6uVKnKIzplZD4FDpw_VSyOyTFS';
+let authMode = 'login';
+let currentUser = null;
+
+function switchAuthMode(){
+  authMode = authMode === 'login' ? 'register' : 'login';
+  const title = document.getElementById('authTitle');
+  const sub = document.getElementById('authSub');
+  const btn = document.getElementById('authBtn');
+  const sw = document.getElementById('authSwitch');
+  if(title) title.textContent = authMode === 'login' ? 'Connexion' : 'Créer un compte';
+  if(sub) sub.textContent = authMode === 'login' ? 'Accédez à votre compte CVGenius' : 'Gratuit — 1 CV par jour';
+  if(btn) btn.textContent = authMode === 'login' ? 'Se connecter' : 'Créer mon compte';
+  if(sw) sw.innerHTML = authMode === 'login' ? 'Pas de compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">S\'inscrire gratuitement</a>' : 'Déjà un compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">Se connecter</a>';
+}
+
+async function handleAuth(){
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  if(!email || !password){showToast('Remplissez tous les champs','error');return;}
+  if(password.length < 6){showToast('Mot de passe trop court (min. 6 caractères)','error');return;}
+  const btn = document.getElementById('authBtn');
+  btn.textContent = '...';btn.disabled = true;
+  try{
+    const res = await fetch('/api/auth', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action: authMode, email, password})
+    });
+    const data = await res.json();
+    if(!res.ok){showToast(data.error||'Erreur','error');btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';btn.disabled=false;return;}
+    if(authMode === 'register'){
+      showToast('Compte créé ! Connectez-vous maintenant','success');
+      switchAuthMode();
+    } else {
+      currentUser = {email, token: data.token, isPro: data.isPro};
+      localStorage.setItem('cvgenius_user', JSON.stringify(currentUser));
+      APP.isPro = data.isPro;
+      updateNavForUser();
+      closeModal();
+      showToast(data.isPro ? 'Bienvenue Pro !' : 'Connecté !','success');
+    }
+  } catch(e){
+    showToast('Erreur de connexion','error');
+  }
+  btn.disabled = false;
+  btn.textContent = authMode === 'login' ? 'Se connecter' : 'Créer mon compte';
+}
+
+async function activatePromoWithAccount(){
+  const code = document.getElementById('promoInput')?.value?.trim()?.toUpperCase();
+  const email = document.getElementById('authEmail')?.value?.trim() || (currentUser && currentUser.email);
+  if(!code){showToast('Entrez votre code','error');return;}
+  if(!email){showToast('Entrez votre email puis votre code','error');return;}
+  try{
+    const res = await fetch('/api/auth', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'activate', email, code})
+    });
+    const data = await res.json();
+    if(!res.ok){showToast(data.error||'Code invalide','error');return;}
+    APP.isPro = true;
+    if(currentUser){currentUser.isPro = true; localStorage.setItem('cvgenius_user', JSON.stringify(currentUser));}
+    updateNavForUser();
+    closeModal();
+    showToast('Acces Pro active ! Generations illimitees','success');
+  } catch(e){
+    showToast('Erreur activation','error');
+  }
+}
+
+function updateNavForUser(){
+  const navBtn = document.getElementById('authNavBtn');
+  const ctaBtn = document.querySelector('.nav-cta');
+  if(currentUser){
+    if(navBtn) navBtn.textContent = currentUser.email.split('@')[0];
+    if(APP.isPro && ctaBtn){ctaBtn.textContent = 'Pro Active';ctaBtn.style.background='var(--success)';}
+  }
+}
+
+function logout(){
+  localStorage.removeItem('cvgenius_user');
+  currentUser = null;
+  APP.isPro = false;
+  APP.generationCount = 0;
+  const navBtn = document.getElementById('authNavBtn');
+  if(navBtn) navBtn.textContent = 'Connexion';
+  const ctaBtn = document.querySelector('.nav-cta');
+  if(ctaBtn){ctaBtn.textContent = 'Creer mon CV';ctaBtn.style.background='';}
+  showToast('Deconnecte','success');
+}
+
+window.addEventListener('load', ()=>{
+  const saved = localStorage.getItem('cvgenius_user');
+  if(saved){
+    try{
+      currentUser = JSON.parse(saved);
+      APP.isPro = currentUser.isPro || false;
+      updateNavForUser();
+    } catch(e){localStorage.removeItem('cvgenius_user');}
+  }
+});
 
 // ANIMATED COUNTER
 (function(){
