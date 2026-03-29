@@ -79,7 +79,7 @@ const handler = async (req, res) => {
       });
 
       if (r.ok) {
-        // Mark code as used (add to used_codes table)
+        // Mark code as used
         await fetch(`${SUPABASE_URL}/rest/v1/used_codes`, {
           method: 'POST',
           headers: {
@@ -93,6 +93,23 @@ const handler = async (req, res) => {
       } else {
         return res.status(400).json({ error: 'Erreur activation' });
       }
+
+    } else if (action === 'resetPassword') {
+      // Send password reset email via Supabase
+      const r = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_SECRET,
+          'Authorization': `Bearer ${SUPABASE_SECRET}`
+        },
+        body: JSON.stringify({ email })
+      });
+      if (!r.ok) {
+        const data = await r.json();
+        return res.status(400).json({ error: data.msg || data.message || 'Erreur envoi email' });
+      }
+      return res.status(200).json({ success: true });
     }
 
     return res.status(400).json({ error: 'Action invalide' });
