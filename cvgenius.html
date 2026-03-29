@@ -553,7 +553,7 @@ footer{
 </div>
   <div class="nav-right">
     <button class="btn-secondary" style="padding:8px 18px;font-size:13px;display:none;" id="aboutNavBtn" onclick="showModal('about')">À propos</button>
-    <button class="btn-secondary" style="padding:8px 18px;font-size:13px" onclick="showModal('login')">Connexion</button>
+    <button class="btn-secondary" style="padding:8px 18px;font-size:13px" id="authNavBtn" onclick="showModal('login')">Connexion</button>
     <button class="nav-cta" onclick="scrollToApp()">Créer mon CV</button>
   </div>
 </nav>
@@ -1122,7 +1122,7 @@ function showModal(type){
   const overlay=document.getElementById('modalOverlay');
   const content=document.getElementById('modalContent');
   const modals={
-    login:`<div class="modal-title">Connexion</div><div class="modal-sub">Accédez à votre historique et vos documents sauvegardés</div><div class="modal-form"><input class="modal-input" type="email" placeholder="Email"><input class="modal-input" type="password" placeholder="Mot de passe"><button class="modal-btn">Se connecter</button><div style="text-align:center;font-size:12px;color:var(--text3);margin-top:8px">Pas de compte ? <a href="#" style="color:var(--accent)">S'inscrire</a></div></div>`,
+    login:`<div class="modal-title" id="authTitle">Connexion</div><div class="modal-sub" id="authSub">Accédez à votre compte CVGenius</div><div class="modal-form" id="authForm"><input class="modal-input" type="email" id="authEmail" placeholder="Votre email"><input class="modal-input" type="password" id="authPassword" placeholder="Mot de passe (min. 6 caractères)"><button class="modal-btn" id="authBtn" onclick="handleAuth()">Se connecter</button><div style="text-align:center;font-size:12px;color:var(--text3);margin-top:8px" id="authSwitch">Pas de compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">S'inscrire gratuitement</a></div><div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);text-align:center;"><div style="font-size:11px;color:var(--text3);margin-bottom:8px;">Déjà un code Pro ?</div><div style="display:flex;gap:8px;"><input class="modal-input" type="text" id="promoInput" placeholder="Code promo (ex: PROVIP2026)" style="text-transform:uppercase;flex:1;"><button onclick="activatePromoWithAccount()" style="padding:10px 16px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;white-space:nowrap;">Activer</button></div></div></div>`,
     payment:`<div class="modal-title">Passer à Pro 🚀</div><div class="modal-sub">Accès à vie pour 4,99€ — Paiement sécurisé par Stripe</div><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px;"><div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous débloquez :</div><div style="color:var(--text);line-height:2">✓ CV & lettres illimités<br>✓ Export PDF<br>✓ Historique complet<br>✓ Modèles premium</div></div><div class="modal-form"><input class="modal-input" type="email" placeholder="Votre email"><button class="modal-btn" onclick="handlePayment()">💳 Payer 4,99€ maintenant</button><div style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px">🔒 Sécurisé par Stripe · Remboursement 7 jours</div></div>`,
     contact:`<div class="modal-title">Offre Business</div><div class="modal-sub">Intéressé par un accès multi-utilisateurs ou une intégration sur mesure ?</div><div class="modal-form"><input class="modal-input" type="text" placeholder="Votre nom"><input class="modal-input" type="email" placeholder="Email professionnel"><textarea class="modal-input" placeholder="Décrivez votre besoin…" style="min-height:80px;resize:vertical;"></textarea><button class="modal-btn">Envoyer la demande</button></div>`,
     pricing:`<div class="modal-title">Débloquer Pro</div><div class="modal-sub">Un seul paiement · Accès à vie · Aucun abonnement</div><div class="modal-form"><button class="modal-btn" style="margin-bottom:8px;" onclick="closeModal();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Voir tous les tarifs</button><button onclick="showModal('payment')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;">Acheter Pro — 4,99€ →</button></div>`,
@@ -1171,6 +1171,33 @@ window.addEventListener('load',()=>{if(!localStorage.getItem('cookies'))setTimeo
 
 // CONTACT FORM
 function sendContact(){showToast('✓ Message envoyé ! Réponse sous 24h','success');closeModal();}
+
+// PROMO CODE ACTIVATION
+const VALID_CODES = ['PROVIP2026', 'CVPRO2026', 'GENIUS2026', 'VIPPRO2026', 'PROLIFE2026'];
+function activatePromo(){
+  const code = document.getElementById('promoInput')?.value?.trim()?.toUpperCase();
+  if(!code){showToast('Entrez votre code d'activation','error');return;}
+  if(VALID_CODES.includes(code)){
+    APP.isPro = true;
+    localStorage.setItem('cvgenius_pro', 'true');
+    localStorage.setItem('cvgenius_code', code);
+    closeModal();
+    showToast('🎉 Accès Pro activé ! Générations illimitées','success');
+    document.querySelector('.nav-cta').textContent = '✦ Pro Activé ✓';
+    document.querySelector('.nav-cta').style.background = 'var(--success)';
+  } else {
+    showToast('Code invalide — vérifiez votre email','error');
+  }
+}
+
+// Check pro status on load
+window.addEventListener('load', ()=>{
+  if(localStorage.getItem('cvgenius_pro') === 'true'){
+    APP.isPro = true;
+    const btn = document.querySelector('.nav-cta');
+    if(btn){btn.textContent = '✦ Pro Activé ✓'; btn.style.background = 'var(--success)';}
+  }
+});
 
 // ANIMATED COUNTER
 (function(){
