@@ -1172,32 +1172,7 @@ window.addEventListener('load',()=>{if(!localStorage.getItem('cookies'))setTimeo
 // CONTACT FORM
 function sendContact(){showToast('✓ Message envoyé ! Réponse sous 24h','success');closeModal();}
 
-// PROMO CODE ACTIVATION
-const VALID_CODES = ['PROVIP2026', 'CVPRO2026', 'GENIUS2026', 'VIPPRO2026', 'PROLIFE2026'];
-function activatePromo(){
-  const code = document.getElementById('promoInput')?.value?.trim()?.toUpperCase();
-  if(!code){showToast('Entrez votre code d'activation','error');return;}
-  if(VALID_CODES.includes(code)){
-    APP.isPro = true;
-    localStorage.setItem('cvgenius_pro', 'true');
-    localStorage.setItem('cvgenius_code', code);
-    closeModal();
-    showToast('🎉 Accès Pro activé ! Générations illimitées','success');
-    document.querySelector('.nav-cta').textContent = '✦ Pro Activé ✓';
-    document.querySelector('.nav-cta').style.background = 'var(--success)';
-  } else {
-    showToast('Code invalide — vérifiez votre email','error');
-  }
-}
-
-// Check pro status on load
-window.addEventListener('load', ()=>{
-  if(localStorage.getItem('cvgenius_pro') === 'true'){
-    APP.isPro = true;
-    const btn = document.querySelector('.nav-cta');
-    if(btn){btn.textContent = '✦ Pro Activé ✓'; btn.style.background = 'var(--success)';}
-  }
-});
+// Legacy promo removed - using new auth system
 
 // ANIMATED COUNTER
 (function(){
