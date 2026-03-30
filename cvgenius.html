@@ -51,7 +51,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,
 .features-strip{display:flex;justify-content:center;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--paper2);overflow-x:auto;}
 .feat-item{display:flex;align-items:center;gap:10px;padding:18px 28px;font-size:13px;font-weight:500;color:var(--text2);white-space:nowrap;border-right:1px solid var(--border);}
 .feat-item:last-child{border-right:none;}
-.feat-icon{font-size:16px;}
 
 .app-section{max-width:1100px;margin:0 auto;padding:80px 32px;}
 .section-title{font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,42px);color:var(--ink);margin-bottom:8px;text-align:center;}
@@ -91,7 +90,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .free-note{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:6px;}
 .free-note strong{color:var(--success);}
 .generate-btn{background:var(--accent);color:#fff;font-size:14px;font-weight:700;padding:14px 36px;border-radius:28px;border:none;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:10px;box-shadow:0 4px 16px rgba(108,71,255,0.3);}
-.generate-btn:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(108,71,255,0.4);}
+.generate-btn:hover{background:var(--accent2);transform:translateY(-1px);}
 .generate-btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none;}
 .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
 .generate-btn.loading .spinner{display:block;}
@@ -105,17 +104,15 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .action-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;}
 .action-btn.copy{border:1.5px solid var(--border2);background:#fff;color:var(--text);}
 .action-btn.copy:hover{border-color:var(--accent);color:var(--accent);}
-.action-btn.download{background:var(--accent);color:#fff;border:none;box-shadow:0 2px 8px rgba(108,71,255,0.3);}
+.action-btn.download{background:var(--accent);color:#fff;border:none;}
 .action-btn.download:hover{background:var(--accent2);}
 .action-btn.regenerate{border:1.5px solid var(--border2);background:#fff;color:var(--text2);}
-.action-btn.regenerate:hover{border-color:var(--text);color:var(--text);}
 
 .cv-preview{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-xl);overflow:hidden;}
 .cv-preview-inner{padding:48px 52px;font-family:'DM Sans',sans-serif;max-width:800px;margin:0 auto;line-height:1.6;}
 .cv-name{font-family:'Instrument Serif',serif;font-size:32px;color:var(--ink);margin-bottom:4px;}
 .cv-title-line{font-size:15px;color:var(--accent);font-weight:600;margin-bottom:16px;}
 .cv-contact{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text2);padding-bottom:20px;border-bottom:2px solid var(--accent);margin-bottom:24px;}
-.cv-contact span{display:flex;align-items:center;gap:4px;}
 .cv-section-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;margin-top:24px;display:flex;align-items:center;gap:8px;}
 .cv-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 .cv-text{font-size:13px;color:var(--text);line-height:1.7;}
@@ -138,10 +135,9 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .price-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .2s;position:relative;}
 .price-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
 .price-card.popular{border-color:var(--accent);box-shadow:0 0 0 4px rgba(108,71,255,0.08);}
-.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;white-space:nowrap;letter-spacing:.5px;}
+.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;white-space:nowrap;}
 .price-name{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase;}
 .price-amount{font-family:'Instrument Serif',serif;font-size:44px;color:var(--ink);line-height:1;margin-bottom:4px;}
-.price-amount span{font-size:16px;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--text2);}
 .price-period{font-size:12px;color:var(--text3);margin-bottom:24px;}
 .price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
 .price-features li{font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px;}
@@ -150,11 +146,8 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .price-features li.no{color:var(--text3);}
 .price-btn{width:100%;padding:12px;border-radius:28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
 .price-btn.free-btn{background:var(--paper2);color:var(--text);border:1.5px solid var(--border);}
-.price-btn.free-btn:hover{border-color:var(--accent);color:var(--accent);}
 .price-btn.pro-btn{background:var(--accent);color:#fff;border:none;box-shadow:0 4px 16px rgba(108,71,255,0.3);}
-.price-btn.pro-btn:hover{background:var(--accent2);}
 .price-btn.business-btn{background:var(--ink);color:#fff;border:none;}
-.price-btn.business-btn:hover{background:var(--ink2);}
 
 .testimonials{padding:80px 32px;max-width:1000px;margin:0 auto;}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -194,8 +187,28 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 .modal-btn{background:var(--accent);color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:28px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;width:100%;}
 .modal-btn:hover{background:var(--accent2);}
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--paper2);cursor:pointer;font-size:16px;color:var(--text2);display:flex;align-items:center;justify-content:center;}
-.modal-close:hover{background:var(--border2);}
 .modal-wrapper{position:relative;}
+
+/* SUCCESS BANNER */
+.success-banner{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#fff;padding:0;
+  transform:translateY(-100%);
+  transition:transform .5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.success-banner.show{transform:translateY(0);}
+.success-banner-inner{
+  max-width:700px;margin:0 auto;padding:24px 32px;
+  text-align:center;
+}
+.success-banner h2{font-family:'Instrument Serif',serif;font-size:28px;margin-bottom:8px;}
+.success-banner p{font-size:14px;opacity:.9;margin-bottom:16px;}
+.success-banner button{
+  background:#fff;color:var(--success);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;
+  padding:10px 28px;border-radius:28px;border:none;cursor:pointer;
+}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;font-size:13px;font-weight:500;padding:12px 24px;border-radius:28px;z-index:9999;transition:transform .3s ease;white-space:nowrap;display:flex;align-items:center;gap:8px;}
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -204,6 +217,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes confetti{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
 @media(max-width:768px){
   nav{padding:0 20px;}
@@ -224,6 +238,15 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 </head>
 <body>
 
+<!-- SUCCESS BANNER -->
+<div class="success-banner" id="successBanner">
+  <div class="success-banner-inner">
+    <h2>🎉 Bienvenue dans CVGenius Pro !</h2>
+    <p>Votre paiement a été accepté. Vous avez maintenant accès à des générations illimitées, l'export PDF et bien plus.</p>
+    <button onclick="dismissSuccess()">Commencer à générer →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-logo" style="display:flex;align-items:center;gap:10px;">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,7 +263,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
   </div>
   <div class="nav-right">
     <button class="btn-secondary" style="padding:8px 18px;font-size:13px;" id="authNavBtn" onclick="showModal('login')">Connexion</button>
-    <button class="nav-cta" onclick="scrollToApp()">Créer mon CV</button>
+    <button class="nav-cta" id="navCta" onclick="scrollToApp()">Créer mon CV</button>
   </div>
 </nav>
 
@@ -261,11 +284,11 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 </section>
 
 <div class="features-strip">
-  <div class="feat-item"><span class="feat-icon">⚡</span> Génération en 15 secondes</div>
-  <div class="feat-item"><span class="feat-icon">🎨</span> Design professionnel</div>
-  <div class="feat-item"><span class="feat-icon">📄</span> Export PDF inclus</div>
-  <div class="feat-item"><span class="feat-icon">✉️</span> Lettre de motivation</div>
-  <div class="feat-item"><span class="feat-icon">🔒</span> 100% confidentiel</div>
+  <div class="feat-item"><span>⚡</span> Génération en 15 secondes</div>
+  <div class="feat-item"><span>🎨</span> Design professionnel</div>
+  <div class="feat-item"><span>📄</span> Export PDF inclus</div>
+  <div class="feat-item"><span>✉️</span> Lettre de motivation</div>
+  <div class="feat-item"><span>🔒</span> 100% confidentiel</div>
 </div>
 
 <div style="background:linear-gradient(135deg,#6c47ff 0%,#9333ea 100%);padding:14px 32px;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
@@ -294,7 +317,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
       <form id="cvForm" onsubmit="return false;">
         <div class="form-grid">
           <div class="form-group"><label>Prénom & Nom *</label><input type="text" id="name" placeholder="ex: Sophie Martin" required></div>
-          <div class="form-group"><label>Poste visé *</label><input type="text" id="jobTitle" placeholder="ex: Développeur Web, Chef de projet…" required></div>
+          <div class="form-group"><label>Poste visé *</label><input type="text" id="jobTitle" placeholder="ex: Développeur Web…" required></div>
           <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="sophie@email.com"></div>
           <div class="form-group"><label>Téléphone</label><input type="tel" id="phone" placeholder="06 12 34 56 78"></div>
           <div class="form-group"><label>Ville</label><input type="text" id="city" placeholder="Paris"></div>
@@ -307,10 +330,10 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
               <option value="reconversion">Reconversion professionnelle</option>
             </select>
           </div>
-          <div class="form-group full"><label>Expériences professionnelles *</label><textarea id="experience" placeholder="Décrivez vos expériences passées :&#10;- Développeur chez XYZ (2022-2024) : création d'une app mobile…" required></textarea></div>
+          <div class="form-group full"><label>Expériences professionnelles *</label><textarea id="experience" placeholder="Décrivez vos expériences passées…" required></textarea></div>
           <div class="form-group full"><label>Formation</label><textarea id="education" placeholder="ex: Master en Informatique - Université Paris (2020-2022)" style="min-height:70px;"></textarea></div>
-          <div class="form-group full"><label>Compétences clés</label><input type="text" id="skills" placeholder="ex: JavaScript, React, Gestion de projet, Excel…"></div>
-          <div class="form-group full cover-field" style="display:none"><label>Entreprise cible</label><input type="text" id="company" placeholder="ex: Google, La SNCF, Startup XYZ…"></div>
+          <div class="form-group full"><label>Compétences clés</label><input type="text" id="skills" placeholder="ex: JavaScript, React, Gestion de projet…"></div>
+          <div class="form-group full cover-field" style="display:none"><label>Entreprise cible</label><input type="text" id="company" placeholder="ex: Google, La SNCF…"></div>
           <div class="form-group full cover-field" style="display:none"><label>Description du poste</label><textarea id="jobDesc" placeholder="Copiez ici la description du poste…" style="min-height:80px;"></textarea></div>
           <div class="form-group full">
             <label>Ton du document</label>
@@ -347,7 +370,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
         <div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.7;margin-bottom:8px;text-transform:uppercase">LIMITE ATTEINTE</div>
         <div style="font-family:'Instrument Serif',serif;font-size:26px;margin-bottom:8px;">Débloquez l'accès illimité</div>
         <div style="font-size:14px;opacity:.85;margin-bottom:24px;">Générez autant de CV et lettres que vous voulez · Export PDF · Historique</div>
-        <button onclick="showModal('payment')" style="background:#fff;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:13px 32px;border-radius:28px;border:none;cursor:pointer;">Passer à Pro — 4,99€ <span style="opacity:.6;font-size:12px;font-weight:400">paiement unique</span></button>
+        <button onclick="handlePayment()" style="background:#fff;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:13px 32px;border-radius:28px;border:none;cursor:pointer;">Passer à Pro — 4,99€</button>
       </div>
     </div>
   </div>
@@ -376,7 +399,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
         <li>CV illimités</li><li>Lettres illimitées</li><li>Export PDF haute qualité</li>
         <li>Historique de vos documents</li><li>3 modèles de design</li><li>Support prioritaire</li>
       </ul>
-      <button class="price-btn pro-btn" onclick="showModal('payment')">Acheter maintenant</button>
+      <button class="price-btn pro-btn" onclick="handlePayment()">Acheter maintenant</button>
     </div>
     <div class="price-card">
       <div class="price-name">Business</div>
@@ -386,7 +409,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
         <li>Tout Pro inclus</li><li>Jusqu'à 50 utilisateurs</li><li>Tableau de bord admin</li>
         <li>Marque blanche (logo custom)</li><li>API access</li><li>Support dédié</li>
       </ul>
-      <button class="price-btn business-btn" onclick="showModal('contactpage')">Contacter</button>
+      <button class="price-btn business-btn" onclick="showModal('business')">Contacter</button>
     </div>
   </div>
 </section>
@@ -404,10 +427,10 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 <section class="faq-section">
   <div class="section-title" style="font-size:28px;margin-bottom:8px">Questions fréquentes</div>
   <div style="font-size:14px;color:var(--text2);text-align:center;margin-bottom:36px">Tout ce que vous devez savoir</div>
-  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Comment fonctionne la génération IA ? <span class="faq-icon">+</span></div><div class="faq-a">Notre IA (Claude d'Anthropic) analyse vos informations et génère un CV structuré et professionnel en tenant compte de votre secteur, niveau d'expérience et ton souhaité. Chaque document est unique et personnalisé.</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Comment fonctionne la génération IA ? <span class="faq-icon">+</span></div><div class="faq-a">Notre IA (Claude d'Anthropic) analyse vos informations et génère un CV structuré et professionnel en tenant compte de votre secteur, niveau d'expérience et ton souhaité.</div></div>
   <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Mes données sont-elles sécurisées ? <span class="faq-icon">+</span></div><div class="faq-a">Oui, vos données ne sont jamais stockées sur nos serveurs sans votre consentement. Les informations saisies sont uniquement transmises à l'IA pour générer votre document, puis supprimées.</div></div>
   <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Le plan Pro est-il vraiment un paiement unique ? <span class="faq-icon">+</span></div><div class="faq-a">Oui, 4,99€ une seule fois et vous avez accès à vie à toutes les fonctionnalités Pro. Aucun renouvellement automatique, aucune surprise.</div></div>
-  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Puis-je modifier le CV généré ? <span class="faq-icon">+</span></div><div class="faq-a">Absolument. Vous pouvez copier le contenu généré et le coller dans Word ou Google Docs pour le personnaliser. Avec le plan Pro, vous pouvez aussi regénérer autant de fois que vous voulez.</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Puis-je modifier le CV généré ? <span class="faq-icon">+</span></div><div class="faq-a">Absolument. Vous pouvez copier le contenu généré et le coller dans Word ou Google Docs pour le personnaliser.</div></div>
 </section>
 
 <footer>
@@ -441,7 +464,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
   <span style="font-size:22px;">💬</span>
 </div>
 
-<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:var(--ink);color:#fff;padding:16px 32px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,0.2);">
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:var(--ink);color:#fff;padding:16px 32px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
   <div style="font-size:13px;opacity:.85;max-width:600px;">🍪 Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre <a href="#" onclick="showModal('confidentialite')" style="color:var(--accent2);text-decoration:underline;">politique de confidentialité</a>.</div>
   <div style="display:flex;gap:8px;">
     <button onclick="rejectCookies()" style="padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;">Refuser</button>
@@ -455,19 +478,53 @@ let authMode='login';
 let currentUser=null;
 
 function scrollToApp(){document.getElementById('app').scrollIntoView({behavior:'smooth'});}
+function switchTab(tab){APP.tab=tab;document.querySelectorAll('.form-tab').forEach(t=>{t.classList.remove('active');if(t.dataset.tab===tab)t.classList.add('active');});document.querySelectorAll('.cover-field').forEach(f=>f.style.display=(tab==='cover'||tab==='both')?'flex':'none');}
+function selectTone(el){APP.tone=el.dataset.tone;document.querySelectorAll('.tone-opt').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
 
-function switchTab(tab){
-  APP.tab=tab;
-  document.querySelectorAll('.form-tab').forEach(t=>{t.classList.remove('active');if(t.dataset.tab===tab)t.classList.add('active');});
-  document.querySelectorAll('.cover-field').forEach(f=>f.style.display=(tab==='cover'||tab==='both')?'flex':'none');
+// ══════════════════════════════════════════
+// PAYMENT SUCCESS
+// ══════════════════════════════════════════
+function checkPaymentSuccess(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('success')==='true'){
+    // Active Pro localement
+    APP.isPro=true;
+    if(currentUser){
+      currentUser.isPro=true;
+      localStorage.setItem('cvgenius_user',JSON.stringify(currentUser));
+    } else {
+      // Stocke temporairement même sans compte
+      localStorage.setItem('cvgenius_pro_temp','true');
+    }
+    updateNavForUser();
+    // Affiche la bannière de succès
+    setTimeout(()=>{
+      document.getElementById('successBanner').classList.add('show');
+      launchConfetti();
+    },300);
+    // Nettoie l'URL
+    window.history.replaceState({},'',window.location.pathname);
+  }
 }
 
-function selectTone(el){
-  APP.tone=el.dataset.tone;
-  document.querySelectorAll('.tone-opt').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
+function dismissSuccess(){
+  document.getElementById('successBanner').classList.remove('show');
+  scrollToApp();
 }
 
+function launchConfetti(){
+  const colors=['#6c47ff','#22c55e','#f5a623','#ef4444','#fff'];
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div');
+    el.style.cssText=`position:fixed;top:-10px;left:${Math.random()*100}vw;width:8px;height:8px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};animation:confetti ${1.5+Math.random()*2}s ease-out ${Math.random()*0.5}s forwards;z-index:9998;pointer-events:none;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),4000);
+  }
+}
+
+// ══════════════════════════════════════════
+// GENERATE
+// ══════════════════════════════════════════
 async function generate(){
   const name=document.getElementById('name').value.trim();
   const jobTitle=document.getElementById('jobTitle').value.trim();
@@ -476,7 +533,7 @@ async function generate(){
   if(!APP.isPro&&APP.generationCount>=APP.maxFree){
     document.getElementById('resultSection').classList.add('show');
     document.getElementById('paywallBanner').style.display='block';
-    showModal('payment');return;
+    return;
   }
   const btn=document.getElementById('generateBtn');
   btn.classList.add('loading');btn.disabled=true;
@@ -498,24 +555,20 @@ async function generate(){
   }finally{btn.classList.remove('loading');btn.disabled=false;}
 }
 
-function renderLoading(){
-  return `<div style="text-align:center;padding:60px 32px;"><div style="width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px;"></div><div style="font-family:'Instrument Serif',serif;font-size:20px;color:var(--ink);margin-bottom:8px;">L'IA génère votre document…</div><div style="font-size:13px;color:var(--text3)">Analyse de votre profil · Rédaction optimisée · Mise en forme</div></div>`;
-}
+function renderLoading(){return `<div style="text-align:center;padding:60px 32px;"><div style="width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px;"></div><div style="font-family:'Instrument Serif',serif;font-size:20px;color:var(--ink);margin-bottom:8px;">L'IA génère votre document…</div><div style="font-size:13px;color:var(--text3)">Analyse de votre profil · Rédaction optimisée · Mise en forme</div></div>`;}
 
 async function generateCV(d){
-  const levelMap={junior:'profil junior avec peu d\'expérience',intermediaire:'profil intermédiaire avec 3-5 ans d\'expérience',senior:'profil senior expert avec 5+ ans',etudiant:'étudiant ou alternant',reconversion:'en reconversion professionnelle'};
-  const prompt=`Tu es un expert RH et rédacteur de CV professionnel.\nGénère un CV complet pour :\n- Nom : ${d.name}\n- Poste visé : ${d.jobTitle}\n- Niveau : ${levelMap[d.level]||d.level}\n- Expériences : ${d.experience}\n- Formation : ${d.education||'non précisée'}\n- Compétences : ${d.skills||'à déduire des expériences'}\n- Ville : ${d.city||'non précisée'}\n- Ton souhaité : ${d.tone}\n\nRéponds UNIQUEMENT en JSON valide, sans markdown :\n{"name":"${d.name}","title":"titre accrocheur","email":"${d.email||'email@exemple.com'}","phone":"${d.phone||'06 XX XX XX XX'}","city":"${d.city||'France'}","summary":"accroche 2-3 phrases","experiences":[{"title":"","company":"","period":"","description":""}],"education":[{"degree":"","school":"","year":""}],"skills":["skill1","skill2","skill3","skill4","skill5"],"languages":["Français - Natif"]}`;
+  const levelMap={junior:'profil junior',intermediaire:'profil intermédiaire 3-5 ans',senior:'profil senior 5+ ans',etudiant:'étudiant ou alternant',reconversion:'en reconversion'};
+  const prompt=`Tu es un expert RH. Génère un CV pour :\n- Nom : ${d.name}\n- Poste : ${d.jobTitle}\n- Niveau : ${levelMap[d.level]||d.level}\n- Expériences : ${d.experience}\n- Formation : ${d.education||'non précisée'}\n- Compétences : ${d.skills||'à déduire'}\n- Ville : ${d.city||'France'}\n- Ton : ${d.tone}\n\nRéponds UNIQUEMENT en JSON valide sans markdown :\n{"name":"${d.name}","title":"titre accrocheur","email":"${d.email||'email@exemple.com'}","phone":"${d.phone||'06 XX XX XX XX'}","city":"${d.city||'France'}","summary":"accroche 2-3 phrases","experiences":[{"title":"","company":"","period":"","description":""}],"education":[{"degree":"","school":"","year":""}],"skills":["skill1","skill2","skill3","skill4","skill5"],"languages":["Français - Natif"]}`;
   const res=await callClaude(prompt);
   const cv=JSON.parse(res.replace(/```json|```/g,'').trim());
-  APP.lastResult=JSON.stringify(cv);
   document.getElementById('resultTitle').textContent='Votre CV est prêt ✓';
   document.getElementById('resultContent').innerHTML=renderCV(cv);
 }
 
 async function generateCoverLetter(d){
-  const prompt=`Tu es expert en rédaction de lettres de motivation percutantes.\nRédige une lettre pour :\n- Candidat : ${d.name}\n- Poste : ${d.jobTitle}\n- Entreprise : ${d.company||'l\'entreprise'}\n- Expériences : ${d.experience}\n- Compétences : ${d.skills||''}\n- Ton : ${d.tone}\n${d.jobDesc?'Annonce : '+d.jobDesc:''}\n300-350 mots. Directement la lettre.`;
+  const prompt=`Rédige une lettre de motivation pour ${d.name}, poste : ${d.jobTitle} chez ${d.company||'l\'entreprise'}.\nExpériences : ${d.experience}. Compétences : ${d.skills||''}. Ton : ${d.tone}.\n${d.jobDesc?'Annonce : '+d.jobDesc:''}\n300-350 mots. Directement la lettre.`;
   const res=await callClaude(prompt);
-  APP.lastResult=res;
   document.getElementById('resultTitle').textContent='Votre lettre de motivation est prête ✓';
   document.getElementById('resultContent').innerHTML=`<div class="letter-preview">${res}</div>`;
 }
@@ -532,8 +585,7 @@ async function generateBoth(d){
 async function callClaude(prompt){
   const res=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt})});
   if(!res.ok){const err=await res.json().catch(()=>({}));throw new Error(err.error||`Erreur serveur (${res.status})`);}
-  const data=await res.json();
-  return data.result;
+  return (await res.json()).result;
 }
 
 function renderCV(cv){
@@ -545,32 +597,22 @@ function renderCV(cv){
 }
 
 function showExample(){
-  const ex={name:"Sophie Martin",title:"Développeuse Web Full Stack",email:"sophie.martin@email.com",phone:"06 12 34 56 78",city:"Paris",summary:"Développeuse passionnée avec 4 ans d'expérience en React et Node.js. J'ai contribué à des projets qui ont atteint 100k utilisateurs.",experiences:[{title:"Développeuse Front-End Senior",company:"TechStartup SAS",period:"2022 – 2024",description:"Développement de l'interface principale SaaS (React, TypeScript). Réduction de 40% du temps de chargement."},{title:"Développeuse Web",company:"Agence Digital Pro",period:"2020 – 2022",description:"Création de sites e-commerce (React, Next.js, Stripe). Tests automatisés."}],education:[{degree:"Master Génie Logiciel",school:"Université Paris-Saclay",year:"2020"}],skills:["React / Next.js","Node.js","TypeScript","PostgreSQL","Git / CI-CD","Agile"],languages:["Français — Natif","Anglais — Courant (C1)"]};
+  const ex={name:"Sophie Martin",title:"Développeuse Web Full Stack",email:"sophie.martin@email.com",phone:"06 12 34 56 78",city:"Paris",summary:"Développeuse passionnée avec 4 ans d'expérience en React et Node.js.",experiences:[{title:"Développeuse Front-End Senior",company:"TechStartup SAS",period:"2022–2024",description:"Développement SaaS React/TypeScript. Réduction 40% du temps de chargement."},{title:"Développeuse Web",company:"Agence Digital Pro",period:"2020–2022",description:"Sites e-commerce React/Next.js/Stripe."}],education:[{degree:"Master Génie Logiciel",school:"Université Paris-Saclay",year:"2020"}],skills:["React","Node.js","TypeScript","PostgreSQL","Git","Agile"],languages:["Français — Natif","Anglais — Courant"]};
   document.getElementById('resultSection').classList.add('show');
   document.getElementById('resultTitle').textContent='Exemple de CV généré ✓';
   document.getElementById('resultContent').innerHTML=renderCV(ex);
   document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
 }
 
-function copyResult(){
-  const text=document.querySelector('.cv-preview-inner,.letter-preview')?.innerText||'';
-  navigator.clipboard.writeText(text).then(()=>showToast('✓ Copié dans le presse-papier','success')).catch(()=>showToast('Erreur lors de la copie','error'));
-}
-function copyLetter(){
-  const text=document.querySelector('.letter-preview')?.innerText||'';
-  navigator.clipboard.writeText(text).then(()=>showToast('✓ Lettre copiée','success'));
-}
-function downloadPDF(){
-  if(!APP.isPro&&APP.generationCount>=APP.maxFree){showModal('payment');return;}
-  showToast('⬇ Préparation du PDF…');
-  setTimeout(()=>{window.print();showToast('✓ Impression lancée','success');},500);
-}
+function copyResult(){const text=document.querySelector('.cv-preview-inner,.letter-preview')?.innerText||'';navigator.clipboard.writeText(text).then(()=>showToast('✓ Copié !','success'));}
+function copyLetter(){const text=document.querySelector('.letter-preview')?.innerText||'';navigator.clipboard.writeText(text).then(()=>showToast('✓ Lettre copiée','success'));}
+function downloadPDF(){if(!APP.isPro&&APP.generationCount>=APP.maxFree){handlePayment();return;}showToast('⬇ Préparation du PDF…');setTimeout(()=>{window.print();},500);}
+function handlePayment(){window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00','_blank');}
 
 // ══════════════════════════════════════════
 // MODAL
 // ══════════════════════════════════════════
 function showModal(type){
-  const overlay=document.getElementById('modalOverlay');
   const content=document.getElementById('modalContent');
   const modals={
     login:`
@@ -581,15 +623,10 @@ function showModal(type){
         <input class="modal-input" type="password" id="authPassword" placeholder="Mot de passe (min. 6 caractères)">
         <button class="modal-btn" id="authBtn" onclick="handleAuth()">${authMode==='login'?'Se connecter':'Créer mon compte'}</button>
         ${authMode==='login'?`<div style="text-align:center;font-size:12px;"><a href="#" onclick="showModal('forgotPassword')" style="color:var(--accent);">Mot de passe oublié ?</a></div>`:''}
-        <div style="text-align:center;font-size:12px;color:var(--text3);">
-          ${authMode==='login'?`Pas de compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">S'inscrire gratuitement</a>`:`Déjà un compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">Se connecter</a>`}
-        </div>
+        <div style="text-align:center;font-size:12px;color:var(--text3);">${authMode==='login'?`Pas de compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">S'inscrire gratuitement</a>`:`Déjà un compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">Se connecter</a>`}</div>
         <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
           <div style="font-size:11px;color:var(--text3);margin-bottom:8px;text-align:center;">Déjà un code Pro ?</div>
-          <div style="display:flex;gap:8px;">
-            <input class="modal-input" type="text" id="promoInput" placeholder="CODE PROMO" style="text-transform:uppercase;flex:1;">
-            <button onclick="activatePromoWithAccount()" style="padding:10px 16px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;white-space:nowrap;">Activer</button>
-          </div>
+          <div style="display:flex;gap:8px;"><input class="modal-input" type="text" id="promoInput" placeholder="CODE PROMO" style="text-transform:uppercase;flex:1;"><button onclick="activatePromoWithAccount()" style="padding:10px 16px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;white-space:nowrap;">Activer</button></div>
         </div>
       </div>`,
 
@@ -599,9 +636,7 @@ function showModal(type){
       <div class="modal-form">
         <input class="modal-input" type="email" id="resetEmail" placeholder="Votre email">
         <button class="modal-btn" onclick="sendResetPassword()">Envoyer le lien</button>
-        <div style="text-align:center;font-size:12px;margin-top:4px;">
-          <a href="#" onclick="showModal('login')" style="color:var(--accent);">← Retour à la connexion</a>
-        </div>
+        <div style="text-align:center;font-size:12px;"><a href="#" onclick="showModal('login')" style="color:var(--accent);">← Retour à la connexion</a></div>
       </div>`,
 
     newPassword:`
@@ -617,21 +652,33 @@ function showModal(type){
       <div class="modal-title">Mon compte</div>
       <div style="font-size:14px;color:var(--text2);margin-bottom:20px;padding:12px;background:var(--paper2);border-radius:8px;">📧 ${currentUser?.email||''}</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        ${APP.isPro?'<div style="background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:12px 16px;border-radius:8px;text-align:center;">✦ Compte Pro actif 🎉</div>':'<button class="modal-btn" onclick="showModal(\'payment\')">Passer à Pro — 4,99€</button>'}
-        <button onclick="showModal('forgotPassword')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);font-weight:500;">🔑 Changer mon mot de passe</button>
+        ${APP.isPro?'<div style="background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:12px 16px;border-radius:8px;text-align:center;">✦ Compte Pro actif 🎉</div>':'<button class="modal-btn" onclick="handlePayment()">Passer à Pro — 4,99€</button>'}
+        <button onclick="showModal('forgotPassword')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;">🔑 Changer mon mot de passe</button>
         <button onclick="logout()" style="padding:12px;border-radius:28px;border:1.5px solid var(--danger);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--danger);font-weight:600;">🚪 Se déconnecter</button>
       </div>`,
 
-    payment:`
-      <div class="modal-title">Passer à Pro 🚀</div>
-      <div class="modal-sub">Accès à vie pour 4,99€ — Paiement sécurisé par Stripe</div>
+    business:`
+      <div class="modal-title">Offre Business 🏢</div>
+      <div class="modal-sub">Pour les équipes RH, cabinets de recrutement et entreprises</div>
       <div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px;">
-        <div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous débloquez :</div>
-        <div style="color:var(--text);line-height:2">✓ CV & lettres illimités<br>✓ Export PDF<br>✓ Historique complet<br>✓ Modèles premium</div>
+        <div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous obtenez :</div>
+        <div style="color:var(--text);line-height:2;">✓ Jusqu'à 50 utilisateurs<br>✓ Tableau de bord admin<br>✓ Marque blanche (votre logo)<br>✓ API access<br>✓ Support dédié</div>
       </div>
       <div class="modal-form">
-        <button class="modal-btn" onclick="handlePayment()">💳 Payer 4,99€ maintenant</button>
-        <div style="text-align:center;font-size:11px;color:var(--text3);">🔒 Sécurisé par Stripe · Remboursement 7 jours</div>
+        <input class="modal-input" type="text" id="bizNom" placeholder="Votre nom & prénom">
+        <input class="modal-input" type="text" id="bizEntreprise" placeholder="Nom de l'entreprise">
+        <input class="modal-input" type="email" id="bizEmail" placeholder="Email professionnel">
+        <input class="modal-input" type="tel" id="bizTel" placeholder="Téléphone (optionnel)">
+        <select class="modal-input" id="bizTaille" style="appearance:none;">
+          <option value="">Taille de l'équipe...</option>
+          <option>Moins de 10 personnes</option>
+          <option>10 à 50 personnes</option>
+          <option>50 à 200 personnes</option>
+          <option>Plus de 200 personnes</option>
+        </select>
+        <textarea class="modal-input" id="bizMessage" placeholder="Décrivez votre besoin..." style="min-height:80px;resize:vertical;"></textarea>
+        <button class="modal-btn" id="bizSendBtn" onclick="sendBusinessContact()">Envoyer la demande</button>
+        <div style="text-align:center;font-size:11px;color:var(--text3);">📧 On vous recontacte sous 24h</div>
       </div>`,
 
     contactpage:`
@@ -652,98 +699,44 @@ function showModal(type){
         <div style="text-align:center;font-size:11px;color:var(--text3);">📧 theo.brel@icloud.com · Réponse sous 24h</div>
       </div>`,
 
-    mentions:`
-      <div class="modal-title">Mentions légales</div>
-      <div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;padding-right:8px;">
-        <p><strong>Éditeur du site</strong><br>Nom : Brel<br>Prénom : Theo<br>Email : theo.brel@icloud.com<br>Ville : Cussac-Fort-Médoc, France</p><br>
-        <p><strong>Hébergement</strong><br>Vercel Inc.<br>440 N Barranca Ave #4133<br>Covina, CA 91723, USA<br>vercel.com</p><br>
-        <p><strong>Propriété intellectuelle</strong><br>L'ensemble du contenu de ce site est protégé par le droit d'auteur. Toute reproduction sans autorisation est interdite.</p><br>
-        <p><strong>Responsabilité</strong><br>CVGenius utilise l'intelligence artificielle pour générer des documents. Les résultats sont fournis à titre indicatif.</p><br>
-        <p><strong>Contact</strong><br>theo.brel@icloud.com</p>
-      </div>`,
+    mentions:`<div class="modal-title">Mentions légales</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;"><p><strong>Éditeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Hébergement</strong><br>Vercel Inc. — 440 N Barranca Ave #4133, Covina, CA 91723, USA</p><br><p><strong>Propriété intellectuelle</strong><br>L'ensemble du contenu est protégé par le droit d'auteur. Toute reproduction sans autorisation est interdite.</p><br><p><strong>Responsabilité</strong><br>CVGenius utilise l'IA pour générer des documents. Les résultats sont fournis à titre indicatif.</p><br><p><strong>Contact</strong><br>theo.brel@icloud.com</p></div>`,
 
-    confidentialite:`
-      <div class="modal-title">Politique de confidentialité</div>
-      <div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;padding-right:8px;">
-        <p><strong>Données collectées</strong><br>CVGenius collecte uniquement les informations que vous saisissez dans le formulaire dans le but de générer votre CV.</p><br>
-        <p><strong>Utilisation des données</strong><br>Vos données sont transmises à l'API Claude (Anthropic) pour générer votre document. Elles ne sont pas stockées sur nos serveurs ni vendues à des tiers.</p><br>
-        <p><strong>Cookies</strong><br>Nous utilisons des cookies techniques essentiels au fonctionnement du site. Aucun cookie publicitaire n'est utilisé.</p><br>
-        <p><strong>Paiements</strong><br>Les paiements sont traités par Stripe. CVGenius ne stocke jamais vos données bancaires.</p><br>
-        <p><strong>Vos droits (RGPD)</strong><br>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Contact : theo.brel@icloud.com</p>
-      </div>`,
+    confidentialite:`<div class="modal-title">Politique de confidentialité</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;"><p><strong>Données collectées</strong><br>CVGenius collecte uniquement les informations saisies dans le formulaire pour générer votre CV.</p><br><p><strong>Utilisation</strong><br>Vos données sont transmises à l'API Claude (Anthropic). Elles ne sont pas stockées ni vendues.</p><br><p><strong>Cookies</strong><br>Uniquement des cookies techniques essentiels. Aucun cookie publicitaire.</p><br><p><strong>Paiements</strong><br>Traités par Stripe. CVGenius ne stocke jamais vos données bancaires.</p><br><p><strong>Vos droits (RGPD)</strong><br>Droit d'accès, rectification et suppression. Contact : theo.brel@icloud.com</p></div>`,
 
-    cgv:`
-      <div class="modal-title">Conditions Générales de Vente</div>
-      <div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;padding-right:8px;">
-        <p><strong>Vendeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br>
-        <p><strong>Service proposé</strong><br>CVGenius est un service de génération de CV et lettres de motivation par IA. Le plan Pro (5€ paiement unique) permet un accès illimité.</p><br>
-        <p><strong>Prix</strong><br>Plan Gratuit : 0€ (1 génération/jour)<br>Plan Pro : 5,00€ TTC — paiement unique — accès à vie</p><br>
-        <p><strong>Paiement</strong><br>Sécurisé par Stripe. Visa, Mastercard, Apple Pay acceptés.</p><br>
-        <p><strong>Droit de rétractation</strong><br>Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux contenus numériques. Nous offrons un remboursement sous 7 jours si vous n'êtes pas satisfait.</p><br>
-        <p><strong>Litiges</strong><br>En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les tribunaux français seront compétents.</p>
-      </div>`,
+    cgv:`<div class="modal-title">Conditions Générales de Vente</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;"><p><strong>Vendeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Service</strong><br>Génération de CV et lettres par IA. Plan Pro : 5€ paiement unique, accès à vie.</p><br><p><strong>Prix</strong><br>Gratuit : 0€ (1/jour) · Pro : 5,00€ TTC paiement unique</p><br><p><strong>Paiement</strong><br>Sécurisé par Stripe. Visa, Mastercard, Apple Pay.</p><br><p><strong>Remboursement</strong><br>7 jours sans question si non satisfait. Contact : theo.brel@icloud.com</p><br><p><strong>Litiges</strong><br>Solution amiable en priorité. Tribunaux français compétents.</p></div>`,
 
-    about:`
-      <div class="modal-title">À propos de CVGenius 👋</div>
-      <div style="font-size:14px;color:var(--text);line-height:1.8;">
-        <div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;border-left:3px solid var(--accent);">
-          <p style="font-style:italic;color:var(--text2);">"J'ai créé CVGenius parce que je galerais moi-même à rédiger mon CV. J'ai voulu un outil simple, rapide et vraiment efficace."</p>
-          <div style="margin-top:8px;font-size:12px;font-weight:600;color:var(--accent);">— Theo, fondateur de CVGenius</div>
-        </div>
-        <p style="margin-bottom:12px;">CVGenius est un projet indépendant lancé en 2026, propulsé par l'IA Claude d'Anthropic.</p>
-        <p>Notre mission : permettre à chacun de créer un CV professionnel en 30 secondes, sans stress.</p>
-        <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">2 800+</div><div style="font-size:11px;color:var(--text2);">CV générés</div></div>
-          <div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">4.9/5</div><div style="font-size:11px;color:var(--text2);">Note moyenne</div></div>
-          <div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">30s</div><div style="font-size:11px;color:var(--text2);">Temps moyen</div></div>
-        </div>
-      </div>`,
+    about:`<div class="modal-title">À propos de CVGenius 👋</div><div style="font-size:14px;color:var(--text);line-height:1.8;"><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;border-left:3px solid var(--accent);"><p style="font-style:italic;color:var(--text2);">"J'ai créé CVGenius parce que je galerais moi-même à rédiger mon CV. J'ai voulu un outil simple, rapide et vraiment efficace."</p><div style="margin-top:8px;font-size:12px;font-weight:600;color:var(--accent);">— Theo, fondateur de CVGenius</div></div><p style="margin-bottom:12px;">CVGenius est un projet indépendant lancé en 2026, propulsé par l'IA Claude d'Anthropic.</p><p>Notre mission : permettre à chacun de créer un CV professionnel en 30 secondes, sans stress.</p><div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;"><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">2 800+</div><div style="font-size:11px;color:var(--text2);">CV générés</div></div><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">4.9/5</div><div style="font-size:11px;color:var(--text2);">Note moyenne</div></div><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">30s</div><div style="font-size:11px;color:var(--text2);">Temps moyen</div></div></div></div>`,
 
-    blog:`
-      <div class="modal-title">Blog CVGenius</div>
-      <div class="modal-sub">Conseils emploi & CV par l'IA</div>
-      <div style="display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;">
-        <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV. Voici ce qui les fait fuir immédiatement...</div></div>
-        <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens, l'IA change tout...</div></div>
-        <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion : le guide complet pour convaincre...</div></div>
-      </div>`
+    blog:`<div class="modal-title">Blog CVGenius</div><div class="modal-sub">Conseils emploi & CV par l'IA</div><div style="display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;"><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion...</div></div></div>`
   };
   content.innerHTML=modals[type]||'';
-  overlay.classList.add('show');
+  document.getElementById('modalOverlay').classList.add('show');
 }
 
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
 function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-function handlePayment(){closeModal();window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00','_blank');}
 
 // ══════════════════════════════════════════
 // AUTH
 // ══════════════════════════════════════════
-function switchAuthMode(){
-  authMode=authMode==='login'?'register':'login';
-  showModal('login');
-}
+function switchAuthMode(){authMode=authMode==='login'?'register':'login';showModal('login');}
 
 async function handleAuth(){
   const email=document.getElementById('authEmail')?.value?.trim();
   const password=document.getElementById('authPassword')?.value;
   if(!email||!password){showToast('Remplissez tous les champs','error');return;}
-  if(password.length<6){showToast('Mot de passe trop court (min. 6 caractères)','error');return;}
+  if(password.length<6){showToast('Mot de passe trop court','error');return;}
   const btn=document.getElementById('authBtn');
   if(btn){btn.textContent='...';btn.disabled=true;}
   try{
     const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:authMode,email,password})});
     const data=await res.json();
     if(!res.ok){showToast(data.error||'Erreur','error');if(btn){btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';btn.disabled=false;}return;}
-    if(authMode==='register'){
-      showToast('Compte créé ! Vérifiez votre email puis connectez-vous','success');
-      authMode='login';showModal('login');
-    } else {
+    if(authMode==='register'){showToast('Compte créé ! Vérifiez votre email','success');authMode='login';showModal('login');}
+    else{
       currentUser={email,token:data.token,isPro:data.isPro};
       localStorage.setItem('cvgenius_user',JSON.stringify(currentUser));
-      APP.isPro=data.isPro;
-      updateNavForUser();
-      closeModal();
+      APP.isPro=data.isPro;updateNavForUser();closeModal();
       showToast(data.isPro?'Bienvenue Pro ! 🎉':'Connecté !','success');
     }
   }catch(e){showToast('Erreur de connexion','error');}
@@ -758,16 +751,16 @@ async function sendResetPassword(){
   try{
     const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'resetPassword',email})});
     const data=await res.json();
-    if(!res.ok){showToast(data.error||'Erreur','error');}
+    if(!res.ok) showToast(data.error||'Erreur','error');
     else{showToast('✓ Email envoyé ! Vérifiez votre boîte','success');closeModal();}
-  }catch(e){showToast('Erreur envoi email','error');}
+  }catch(e){showToast('Erreur','error');}
   if(btn){btn.textContent='Envoyer le lien';btn.disabled=false;}
 }
 
 async function updatePassword(){
   const pwd=document.getElementById('newPwd')?.value;
   const pwd2=document.getElementById('newPwd2')?.value;
-  if(!pwd||pwd.length<6){showToast('Mot de passe trop court (min. 6 caractères)','error');return;}
+  if(!pwd||pwd.length<6){showToast('Mot de passe trop court','error');return;}
   if(pwd!==pwd2){showToast('Les mots de passe ne correspondent pas','error');return;}
   const token=window._resetToken;
   if(!token){showToast('Token invalide, recommencez','error');return;}
@@ -776,23 +769,16 @@ async function updatePassword(){
   try{
     const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'updatePassword',token,password:pwd})});
     const data=await res.json();
-    if(!res.ok){showToast(data.error||'Erreur','error');}
-    else{
-      showToast('✓ Mot de passe mis à jour ! Connectez-vous','success');
-      window._resetToken=null;
-      window.location.hash='';
-      closeModal();
-      setTimeout(()=>showModal('login'),600);
-    }
+    if(!res.ok) showToast(data.error||'Erreur','error');
+    else{showToast('✓ Mot de passe mis à jour !','success');window._resetToken=null;window.location.hash='';closeModal();setTimeout(()=>showModal('login'),600);}
   }catch(e){showToast('Erreur','error');}
-  if(btn){btn.textContent='✓ Enregistrer le mot de passe';btn.disabled=false;}
+  if(btn){btn.textContent='✓ Enregistrer';btn.disabled=false;}
 }
 
 async function activatePromoWithAccount(){
   const code=document.getElementById('promoInput')?.value?.trim()?.toUpperCase();
   const email=document.getElementById('authEmail')?.value?.trim()||(currentUser&&currentUser.email);
-  if(!code){showToast('Entrez votre code','error');return;}
-  if(!email){showToast('Entrez votre email puis votre code','error');return;}
+  if(!code||!email){showToast('Entrez votre email et votre code','error');return;}
   try{
     const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'activate',email,code})});
     const data=await res.json();
@@ -800,13 +786,13 @@ async function activatePromoWithAccount(){
     APP.isPro=true;
     if(currentUser){currentUser.isPro=true;localStorage.setItem('cvgenius_user',JSON.stringify(currentUser));}
     updateNavForUser();closeModal();
-    showToast('✓ Accès Pro activé ! Générations illimitées 🎉','success');
+    showToast('✓ Accès Pro activé ! 🎉','success');
   }catch(e){showToast('Erreur activation','error');}
 }
 
 function updateNavForUser(){
   const navBtn=document.getElementById('authNavBtn');
-  const ctaBtn=document.querySelector('.nav-cta');
+  const ctaBtn=document.getElementById('navCta');
   if(currentUser){
     if(navBtn){navBtn.textContent=currentUser.email.split('@')[0];navBtn.onclick=()=>showModal('userMenu');}
     if(APP.isPro&&ctaBtn){ctaBtn.textContent='Pro ✦';ctaBtn.style.background='var(--success)';}
@@ -819,8 +805,7 @@ function updateNavForUser(){
 function logout(){
   localStorage.removeItem('cvgenius_user');
   currentUser=null;APP.isPro=false;APP.generationCount=0;
-  updateNavForUser();closeModal();
-  showToast('✓ Déconnecté','success');
+  updateNavForUser();closeModal();showToast('✓ Déconnecté','success');
 }
 
 // ══════════════════════════════════════════
@@ -842,17 +827,34 @@ async function sendContact(){
   if(btn){btn.textContent='Envoyer le message';btn.disabled=false;}
 }
 
+async function sendBusinessContact(){
+  const nom=document.getElementById('bizNom')?.value?.trim();
+  const entreprise=document.getElementById('bizEntreprise')?.value?.trim();
+  const email=document.getElementById('bizEmail')?.value?.trim();
+  const tel=document.getElementById('bizTel')?.value?.trim();
+  const taille=document.getElementById('bizTaille')?.value;
+  const message=document.getElementById('bizMessage')?.value?.trim();
+  if(!nom||!entreprise||!email){showToast('Remplissez les champs obligatoires','error');return;}
+  const btn=document.getElementById('bizSendBtn');
+  if(btn){btn.textContent='Envoi...';btn.disabled=true;}
+  const fullMessage=`Entreprise : ${entreprise}\nTaille : ${taille||'Non précisé'}\nTéléphone : ${tel||'Non précisé'}\n\n${message||'Demande d\'informations Business'}`;
+  try{
+    const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nom,email,sujet:'Offre Business',message:fullMessage})});
+    if(res.ok){showToast('✓ Demande envoyée ! On vous recontacte sous 24h','success');closeModal();}
+    else showToast('Erreur envoi, réessayez','error');
+  }catch(e){showToast('Erreur envoi','error');}
+  if(btn){btn.textContent='Envoyer la demande';btn.disabled=false;}
+}
+
 // ══════════════════════════════════════════
-// TOAST
+// TOAST & FAQ
 // ══════════════════════════════════════════
 let toastT=null;
 function showToast(msg,type=''){
   const t=document.getElementById('toast');
   t.textContent=msg;t.className='toast show '+(type||'');
-  clearTimeout(toastT);
-  toastT=setTimeout(()=>t.className='toast',3500);
+  clearTimeout(toastT);toastT=setTimeout(()=>t.className='toast',3500);
 }
-
 function toggleFaq(el){el.classList.toggle('open');}
 function acceptCookies(){localStorage.setItem('cookies','accepted');document.getElementById('cookieBanner').style.display='none';}
 function rejectCookies(){localStorage.setItem('cookies','rejected');document.getElementById('cookieBanner').style.display='none';}
@@ -864,28 +866,25 @@ window.addEventListener('load',()=>{
   const saved=localStorage.getItem('cvgenius_user');
   if(saved){try{currentUser=JSON.parse(saved);APP.isPro=currentUser.isPro||false;updateNavForUser();}catch(e){localStorage.removeItem('cvgenius_user');}}
 
-  // Détecte lien de reset password dans l'URL
+  // Pro temporaire (acheté sans compte)
+  if(localStorage.getItem('cvgenius_pro_temp')==='true'){APP.isPro=true;updateNavForUser();}
+
+  // Détecte succès paiement Stripe
+  checkPaymentSuccess();
+
+  // Détecte reset password
   const hash=window.location.hash;
   if(hash.includes('type=recovery')&&hash.includes('access_token')){
     const params=new URLSearchParams(hash.replace('#',''));
     const token=params.get('access_token');
-    if(token){
-      window._resetToken=token;
-      setTimeout(()=>showModal('newPassword'),300);
-    }
+    if(token){window._resetToken=token;setTimeout(()=>showModal('newPassword'),300);}
   }
 
   // Cookie banner
   if(!localStorage.getItem('cookies')) setTimeout(()=>{document.getElementById('cookieBanner').style.display='flex';},1500);
 });
 
-// Animated counter
-(function(){
-  let count=2847;
-  setInterval(()=>{
-    if(Math.random()>.7){count+=Math.floor(Math.random()*3)+1;const el=document.getElementById('cvCounter');if(el)el.textContent=count.toLocaleString('fr-FR');}
-  },8000);
-})();
+(function(){let count=2847;setInterval(()=>{if(Math.random()>.7){count+=Math.floor(Math.random()*3)+1;const el=document.getElementById('cvCounter');if(el)el.textContent=count.toLocaleString('fr-FR');}},8000);})();
 </script>
 </body>
 </html>
