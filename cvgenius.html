@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CVGenius — Créez votre CV professionnel en 30 secondes grâce à l'IA. Lettre de motivation incluse. Gratuit.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236c47ff'/><rect x='8' y='7' width='11' height='16' rx='1.5' fill='white'/><circle cx='22' cy='22' r='7' fill='%236c47ff'/><text x='22' y='26' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700' font-size='8'>AI</text></svg>">
 <title>CVGenius — Créez votre CV parfait en 30 secondes</title>
+
+<!-- Google Analytics — remplace G-XXXXXXXXXX par ton vrai ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -48,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,
 .avatar{width:32px;height:32px;border-radius:50%;border:2px solid var(--paper);margin-left:-8px;font-size:14px;display:flex;align-items:center;justify-content:center;background:var(--accent-soft);color:var(--accent);font-weight:600;}
 .stars{color:var(--gold);letter-spacing:1px;font-size:12px;}
 
-.features-strip{display:flex;justify-content:center;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--paper2);overflow-x:auto;}
+.features-strip{display:flex;justify-content:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--paper2);overflow-x:auto;}
 .feat-item{display:flex;align-items:center;gap:10px;padding:18px 28px;font-size:13px;font-weight:500;color:var(--text2);white-space:nowrap;border-right:1px solid var(--border);}
 .feat-item:last-child{border-right:none;}
 
@@ -67,7 +78,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,
 .form-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--paper2);}
 .form-tab{flex:1;padding:16px;text-align:center;font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;display:flex;align-items:center;justify-content:center;gap:6px;}
 .form-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:#fff;}
-.form-tab:hover:not(.active){color:var(--text);}
 .form-body{padding:32px;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .form-group{display:flex;flex-direction:column;gap:6px;}
@@ -87,7 +97,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .tone-desc{font-size:10px;color:var(--text3);}
 
 .form-footer{padding:24px 32px;border-top:1px solid var(--border);background:var(--paper2);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.free-note{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:6px;}
+.free-note{font-size:12px;color:var(--text3);}
 .free-note strong{color:var(--success);}
 .generate-btn{background:var(--accent);color:#fff;font-size:14px;font-weight:700;padding:14px 36px;border-radius:28px;border:none;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:10px;box-shadow:0 4px 16px rgba(108,71,255,0.3);}
 .generate-btn:hover{background:var(--accent2);transform:translateY(-1px);}
@@ -189,26 +199,20 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--paper2);cursor:pointer;font-size:16px;color:var(--text2);display:flex;align-items:center;justify-content:center;}
 .modal-wrapper{position:relative;}
 
-/* SUCCESS BANNER */
-.success-banner{
-  position:fixed;top:0;left:0;right:0;z-index:9999;
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-  color:#fff;padding:0;
-  transform:translateY(-100%);
-  transition:transform .5s cubic-bezier(0.34,1.56,0.64,1);
-}
+/* Blog article */
+.blog-article{font-size:14px;color:var(--text);line-height:1.9;max-height:65vh;overflow-y:auto;padding-right:8px;}
+.blog-article h3{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink);margin:20px 0 8px;}
+.blog-article p{margin-bottom:12px;}
+.blog-article ul{padding-left:20px;margin-bottom:12px;}
+.blog-article li{margin-bottom:6px;}
+.blog-tag{display:inline-block;font-size:11px;color:var(--accent);font-weight:600;background:var(--accent-soft);padding:3px 10px;border-radius:20px;margin-bottom:12px;}
+
+.success-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;transform:translateY(-100%);transition:transform .5s cubic-bezier(0.34,1.56,0.64,1);}
 .success-banner.show{transform:translateY(0);}
-.success-banner-inner{
-  max-width:700px;margin:0 auto;padding:24px 32px;
-  text-align:center;
-}
+.success-banner-inner{max-width:700px;margin:0 auto;padding:24px 32px;text-align:center;}
 .success-banner h2{font-family:'Instrument Serif',serif;font-size:28px;margin-bottom:8px;}
 .success-banner p{font-size:14px;opacity:.9;margin-bottom:16px;}
-.success-banner button{
-  background:#fff;color:var(--success);
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;
-  padding:10px 28px;border-radius:28px;border:none;cursor:pointer;
-}
+.success-banner button{background:#fff;color:var(--success);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:10px 28px;border-radius:28px;border:none;cursor:pointer;}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;font-size:13px;font-weight:500;padding:12px 24px;border-radius:28px;z-index:9999;transition:transform .3s ease;white-space:nowrap;display:flex;align-items:center;gap:8px;}
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -238,7 +242,6 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 </head>
 <body>
 
-<!-- SUCCESS BANNER -->
 <div class="success-banner" id="successBanner">
   <div class="success-banner-inner">
     <h2>🎉 Bienvenue dans CVGenius Pro !</h2>
@@ -407,7 +410,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
       <div class="price-period">Pour les équipes RH & cabinets</div>
       <ul class="price-features">
         <li>Tout Pro inclus</li><li>Jusqu'à 50 utilisateurs</li><li>Tableau de bord admin</li>
-        <li>Marque blanche (logo custom)</li><li>API access</li><li>Support dédié</li>
+        <li>Marque blanche</li><li>API access</li><li>Support dédié</li>
       </ul>
       <button class="price-btn business-btn" onclick="showModal('business')">Contacter</button>
     </div>
@@ -427,10 +430,10 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 <section class="faq-section">
   <div class="section-title" style="font-size:28px;margin-bottom:8px">Questions fréquentes</div>
   <div style="font-size:14px;color:var(--text2);text-align:center;margin-bottom:36px">Tout ce que vous devez savoir</div>
-  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Comment fonctionne la génération IA ? <span class="faq-icon">+</span></div><div class="faq-a">Notre IA (Claude d'Anthropic) analyse vos informations et génère un CV structuré et professionnel en tenant compte de votre secteur, niveau d'expérience et ton souhaité.</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Comment fonctionne la génération IA ? <span class="faq-icon">+</span></div><div class="faq-a">Notre IA (Claude d'Anthropic) analyse vos informations et génère un CV structuré et professionnel en tenant compte de votre secteur, niveau d'expérience et ton souhaité. Chaque document est unique et personnalisé.</div></div>
   <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Mes données sont-elles sécurisées ? <span class="faq-icon">+</span></div><div class="faq-a">Oui, vos données ne sont jamais stockées sur nos serveurs sans votre consentement. Les informations saisies sont uniquement transmises à l'IA pour générer votre document, puis supprimées.</div></div>
   <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Le plan Pro est-il vraiment un paiement unique ? <span class="faq-icon">+</span></div><div class="faq-a">Oui, 4,99€ une seule fois et vous avez accès à vie à toutes les fonctionnalités Pro. Aucun renouvellement automatique, aucune surprise.</div></div>
-  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Puis-je modifier le CV généré ? <span class="faq-icon">+</span></div><div class="faq-a">Absolument. Vous pouvez copier le contenu généré et le coller dans Word ou Google Docs pour le personnaliser.</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Puis-je modifier le CV généré ? <span class="faq-icon">+</span></div><div class="faq-a">Absolument. Vous pouvez copier le contenu généré et le coller dans Word ou Google Docs pour le personnaliser. Avec le plan Pro, vous pouvez aussi regénérer autant de fois que vous voulez.</div></div>
 </section>
 
 <footer>
@@ -473,58 +476,39 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 </div>
 
 <script>
-const APP={tab:'cv',tone:'dynamique',generationCount:0,maxFree:1,isPro:false,lastResult:''};
+const APP={tab:'cv',tone:'dynamique',generationCount:0,maxFree:1,isPro:false};
 let authMode='login';
 let currentUser=null;
 
 function scrollToApp(){document.getElementById('app').scrollIntoView({behavior:'smooth'});}
 function switchTab(tab){APP.tab=tab;document.querySelectorAll('.form-tab').forEach(t=>{t.classList.remove('active');if(t.dataset.tab===tab)t.classList.add('active');});document.querySelectorAll('.cover-field').forEach(f=>f.style.display=(tab==='cover'||tab==='both')?'flex':'none');}
 function selectTone(el){APP.tone=el.dataset.tone;document.querySelectorAll('.tone-opt').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+function handlePayment(){gtag('event','begin_checkout',{value:4.99,currency:'EUR'});window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00','_blank');}
 
-// ══════════════════════════════════════════
-// PAYMENT SUCCESS
-// ══════════════════════════════════════════
+// ══ PAYMENT SUCCESS ══
 function checkPaymentSuccess(){
   const params=new URLSearchParams(window.location.search);
   if(params.get('success')==='true'){
-    // Active Pro localement
     APP.isPro=true;
-    if(currentUser){
-      currentUser.isPro=true;
-      localStorage.setItem('cvgenius_user',JSON.stringify(currentUser));
-    } else {
-      // Stocke temporairement même sans compte
-      localStorage.setItem('cvgenius_pro_temp','true');
-    }
+    if(currentUser){currentUser.isPro=true;localStorage.setItem('cvgenius_user',JSON.stringify(currentUser));}
+    else localStorage.setItem('cvgenius_pro_temp','true');
     updateNavForUser();
-    // Affiche la bannière de succès
-    setTimeout(()=>{
-      document.getElementById('successBanner').classList.add('show');
-      launchConfetti();
-    },300);
-    // Nettoie l'URL
+    setTimeout(()=>{document.getElementById('successBanner').classList.add('show');launchConfetti();},300);
     window.history.replaceState({},'',window.location.pathname);
+    gtag('event','purchase',{value:4.99,currency:'EUR'});
   }
 }
-
-function dismissSuccess(){
-  document.getElementById('successBanner').classList.remove('show');
-  scrollToApp();
-}
-
+function dismissSuccess(){document.getElementById('successBanner').classList.remove('show');scrollToApp();}
 function launchConfetti(){
   const colors=['#6c47ff','#22c55e','#f5a623','#ef4444','#fff'];
   for(let i=0;i<60;i++){
     const el=document.createElement('div');
-    el.style.cssText=`position:fixed;top:-10px;left:${Math.random()*100}vw;width:8px;height:8px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};animation:confetti ${1.5+Math.random()*2}s ease-out ${Math.random()*0.5}s forwards;z-index:9998;pointer-events:none;`;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),4000);
+    el.style.cssText=`position:fixed;top:-10px;left:${Math.random()*100}vw;width:8px;height:8px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>.5?'50%':'2px'};animation:confetti ${1.5+Math.random()*2}s ease-out ${Math.random()*.5}s forwards;z-index:9998;pointer-events:none;`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
   }
 }
 
-// ══════════════════════════════════════════
-// GENERATE
-// ══════════════════════════════════════════
+// ══ GENERATE ══
 async function generate(){
   const name=document.getElementById('name').value.trim();
   const jobTitle=document.getElementById('jobTitle').value.trim();
@@ -532,8 +516,7 @@ async function generate(){
   if(!name||!jobTitle||!experience){showToast('Remplissez les champs obligatoires *','error');return;}
   if(!APP.isPro&&APP.generationCount>=APP.maxFree){
     document.getElementById('resultSection').classList.add('show');
-    document.getElementById('paywallBanner').style.display='block';
-    return;
+    document.getElementById('paywallBanner').style.display='block';return;
   }
   const btn=document.getElementById('generateBtn');
   btn.classList.add('loading');btn.disabled=true;
@@ -549,6 +532,7 @@ async function generate(){
     APP.generationCount++;
     resultSection.scrollIntoView({behavior:'smooth',block:'start'});
     showToast('✓ Généré avec succès !','success');
+    gtag('event','generate_cv',{type:APP.tab});
     if(!APP.isPro&&APP.generationCount>=APP.maxFree) setTimeout(()=>{document.getElementById('paywallBanner').style.display='block';},1500);
   }catch(e){
     document.getElementById('resultContent').innerHTML=`<div style="padding:32px;text-align:center;color:var(--danger)">⚠ Erreur : ${e.message}<br><br><button onclick="generate()" style="margin-top:12px;padding:10px 24px;border-radius:20px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">↺ Réessayer</button></div>`;
@@ -606,98 +590,76 @@ function showExample(){
 
 function copyResult(){const text=document.querySelector('.cv-preview-inner,.letter-preview')?.innerText||'';navigator.clipboard.writeText(text).then(()=>showToast('✓ Copié !','success'));}
 function copyLetter(){const text=document.querySelector('.letter-preview')?.innerText||'';navigator.clipboard.writeText(text).then(()=>showToast('✓ Lettre copiée','success'));}
-function downloadPDF(){if(!APP.isPro&&APP.generationCount>=APP.maxFree){handlePayment();return;}showToast('⬇ Préparation du PDF…');setTimeout(()=>{window.print();},500);}
-function handlePayment(){window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00','_blank');}
+function downloadPDF(){if(!APP.isPro&&APP.generationCount>=APP.maxFree){handlePayment();return;}showToast('⬇ Préparation du PDF…');setTimeout(()=>window.print(),500);}
 
-// ══════════════════════════════════════════
-// MODAL
-// ══════════════════════════════════════════
+// ══ MODAL ══
 function showModal(type){
   const content=document.getElementById('modalContent');
   const modals={
-    login:`
-      <div class="modal-title">${authMode==='login'?'Connexion':'Créer un compte'}</div>
-      <div class="modal-sub">${authMode==='login'?'Accédez à votre compte CVGenius':'Gratuit — 1 CV par jour'}</div>
-      <div class="modal-form">
-        <input class="modal-input" type="email" id="authEmail" placeholder="Votre email">
-        <input class="modal-input" type="password" id="authPassword" placeholder="Mot de passe (min. 6 caractères)">
-        <button class="modal-btn" id="authBtn" onclick="handleAuth()">${authMode==='login'?'Se connecter':'Créer mon compte'}</button>
-        ${authMode==='login'?`<div style="text-align:center;font-size:12px;"><a href="#" onclick="showModal('forgotPassword')" style="color:var(--accent);">Mot de passe oublié ?</a></div>`:''}
-        <div style="text-align:center;font-size:12px;color:var(--text3);">${authMode==='login'?`Pas de compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">S'inscrire gratuitement</a>`:`Déjà un compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">Se connecter</a>`}</div>
-        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
-          <div style="font-size:11px;color:var(--text3);margin-bottom:8px;text-align:center;">Déjà un code Pro ?</div>
-          <div style="display:flex;gap:8px;"><input class="modal-input" type="text" id="promoInput" placeholder="CODE PROMO" style="text-transform:uppercase;flex:1;"><button onclick="activatePromoWithAccount()" style="padding:10px 16px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;white-space:nowrap;">Activer</button></div>
-        </div>
-      </div>`,
+    login:`<div class="modal-title">${authMode==='login'?'Connexion':'Créer un compte'}</div><div class="modal-sub">${authMode==='login'?'Accédez à votre compte CVGenius':'Gratuit — 1 CV par jour'}</div><div class="modal-form"><input class="modal-input" type="email" id="authEmail" placeholder="Votre email"><input class="modal-input" type="password" id="authPassword" placeholder="Mot de passe (min. 6 caractères)"><button class="modal-btn" id="authBtn" onclick="handleAuth()">${authMode==='login'?'Se connecter':'Créer mon compte'}</button>${authMode==='login'?`<div style="text-align:center;font-size:12px;"><a href="#" onclick="showModal('forgotPassword')" style="color:var(--accent);">Mot de passe oublié ?</a></div>`:''}<div style="text-align:center;font-size:12px;color:var(--text3);">${authMode==='login'?`Pas de compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">S'inscrire gratuitement</a>`:`Déjà un compte ? <a href="#" onclick="switchAuthMode()" style="color:var(--accent)">Se connecter</a>`}</div><div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);"><div style="font-size:11px;color:var(--text3);margin-bottom:8px;text-align:center;">Déjà un code Pro ?</div><div style="display:flex;gap:8px;"><input class="modal-input" type="text" id="promoInput" placeholder="CODE PROMO" style="text-transform:uppercase;flex:1;"><button onclick="activatePromoWithAccount()" style="padding:10px 16px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;white-space:nowrap;">Activer</button></div></div></div>`,
 
-    forgotPassword:`
-      <div class="modal-title">Mot de passe oublié</div>
-      <div class="modal-sub">Entrez votre email pour recevoir un lien de réinitialisation</div>
-      <div class="modal-form">
-        <input class="modal-input" type="email" id="resetEmail" placeholder="Votre email">
-        <button class="modal-btn" onclick="sendResetPassword()">Envoyer le lien</button>
-        <div style="text-align:center;font-size:12px;"><a href="#" onclick="showModal('login')" style="color:var(--accent);">← Retour à la connexion</a></div>
-      </div>`,
+    forgotPassword:`<div class="modal-title">Mot de passe oublié</div><div class="modal-sub">Entrez votre email pour recevoir un lien de réinitialisation</div><div class="modal-form"><input class="modal-input" type="email" id="resetEmail" placeholder="Votre email"><button class="modal-btn" onclick="sendResetPassword()">Envoyer le lien</button><div style="text-align:center;font-size:12px;"><a href="#" onclick="showModal('login')" style="color:var(--accent);">← Retour à la connexion</a></div></div>`,
 
-    newPassword:`
-      <div class="modal-title">🔑 Nouveau mot de passe</div>
-      <div class="modal-sub">Choisissez votre nouveau mot de passe</div>
-      <div class="modal-form">
-        <input class="modal-input" type="password" id="newPwd" placeholder="Nouveau mot de passe (min. 6 caractères)">
-        <input class="modal-input" type="password" id="newPwd2" placeholder="Confirmer le mot de passe">
-        <button class="modal-btn" id="newPwdBtn" onclick="updatePassword()">✓ Enregistrer le mot de passe</button>
-      </div>`,
+    newPassword:`<div class="modal-title">🔑 Nouveau mot de passe</div><div class="modal-sub">Choisissez votre nouveau mot de passe</div><div class="modal-form"><input class="modal-input" type="password" id="newPwd" placeholder="Nouveau mot de passe (min. 6 caractères)"><input class="modal-input" type="password" id="newPwd2" placeholder="Confirmer le mot de passe"><button class="modal-btn" id="newPwdBtn" onclick="updatePassword()">✓ Enregistrer le mot de passe</button></div>`,
 
-    userMenu:`
-      <div class="modal-title">Mon compte</div>
-      <div style="font-size:14px;color:var(--text2);margin-bottom:20px;padding:12px;background:var(--paper2);border-radius:8px;">📧 ${currentUser?.email||''}</div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        ${APP.isPro?'<div style="background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:12px 16px;border-radius:8px;text-align:center;">✦ Compte Pro actif 🎉</div>':'<button class="modal-btn" onclick="handlePayment()">Passer à Pro — 4,99€</button>'}
-        <button onclick="showModal('forgotPassword')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;">🔑 Changer mon mot de passe</button>
-        <button onclick="logout()" style="padding:12px;border-radius:28px;border:1.5px solid var(--danger);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--danger);font-weight:600;">🚪 Se déconnecter</button>
-      </div>`,
+    userMenu:`<div class="modal-title">Mon compte</div><div style="font-size:14px;color:var(--text2);margin-bottom:20px;padding:12px;background:var(--paper2);border-radius:8px;">📧 ${currentUser?.email||''}</div><div style="display:flex;flex-direction:column;gap:10px;">${APP.isPro?'<div style="background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:12px 16px;border-radius:8px;text-align:center;">✦ Compte Pro actif 🎉</div>':'<button class="modal-btn" onclick="handlePayment()">Passer à Pro — 4,99€</button>'}<button onclick="showModal('forgotPassword')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;">🔑 Changer mon mot de passe</button><button onclick="logout()" style="padding:12px;border-radius:28px;border:1.5px solid var(--danger);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--danger);font-weight:600;">🚪 Se déconnecter</button></div>`,
 
-    business:`
-      <div class="modal-title">Offre Business 🏢</div>
-      <div class="modal-sub">Pour les équipes RH, cabinets de recrutement et entreprises</div>
-      <div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px;">
-        <div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous obtenez :</div>
-        <div style="color:var(--text);line-height:2;">✓ Jusqu'à 50 utilisateurs<br>✓ Tableau de bord admin<br>✓ Marque blanche (votre logo)<br>✓ API access<br>✓ Support dédié</div>
-      </div>
-      <div class="modal-form">
-        <input class="modal-input" type="text" id="bizNom" placeholder="Votre nom & prénom">
-        <input class="modal-input" type="text" id="bizEntreprise" placeholder="Nom de l'entreprise">
-        <input class="modal-input" type="email" id="bizEmail" placeholder="Email professionnel">
-        <input class="modal-input" type="tel" id="bizTel" placeholder="Téléphone (optionnel)">
-        <select class="modal-input" id="bizTaille" style="appearance:none;">
-          <option value="">Taille de l'équipe...</option>
-          <option>Moins de 10 personnes</option>
-          <option>10 à 50 personnes</option>
-          <option>50 à 200 personnes</option>
-          <option>Plus de 200 personnes</option>
-        </select>
-        <textarea class="modal-input" id="bizMessage" placeholder="Décrivez votre besoin..." style="min-height:80px;resize:vertical;"></textarea>
-        <button class="modal-btn" id="bizSendBtn" onclick="sendBusinessContact()">Envoyer la demande</button>
-        <div style="text-align:center;font-size:11px;color:var(--text3);">📧 On vous recontacte sous 24h</div>
-      </div>`,
+    business:`<div class="modal-title">Offre Business 🏢</div><div class="modal-sub">Pour les équipes RH, cabinets et entreprises</div><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px;"><div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous obtenez :</div><div style="color:var(--text);line-height:2;">✓ Jusqu'à 50 utilisateurs<br>✓ Tableau de bord admin<br>✓ Marque blanche (votre logo)<br>✓ API access<br>✓ Support dédié</div></div><div class="modal-form"><input class="modal-input" type="text" id="bizNom" placeholder="Votre nom & prénom"><input class="modal-input" type="text" id="bizEntreprise" placeholder="Nom de l'entreprise"><input class="modal-input" type="email" id="bizEmail" placeholder="Email professionnel"><input class="modal-input" type="tel" id="bizTel" placeholder="Téléphone (optionnel)"><select class="modal-input" id="bizTaille" style="appearance:none;"><option value="">Taille de l'équipe...</option><option>Moins de 10 personnes</option><option>10 à 50 personnes</option><option>50 à 200 personnes</option><option>Plus de 200 personnes</option></select><textarea class="modal-input" id="bizMessage" placeholder="Décrivez votre besoin..." style="min-height:80px;resize:vertical;"></textarea><button class="modal-btn" id="bizSendBtn" onclick="sendBusinessContact()">Envoyer la demande</button><div style="text-align:center;font-size:11px;color:var(--text3);">📧 On vous recontacte sous 24h</div></div>`,
 
-    contactpage:`
-      <div class="modal-title">Nous contacter</div>
-      <div class="modal-sub">Une question ? On vous répond sous 24h</div>
-      <div class="modal-form">
-        <input class="modal-input" type="text" id="contactNom" placeholder="Votre nom">
-        <input class="modal-input" type="email" id="contactEmail" placeholder="Votre email">
-        <select class="modal-input" id="contactSujet" style="appearance:none;">
-          <option>Problème technique</option>
-          <option>Question sur le paiement</option>
-          <option>Remboursement</option>
-          <option>Partenariat</option>
-          <option>Autre</option>
-        </select>
-        <textarea class="modal-input" id="contactMessage" placeholder="Votre message..." style="min-height:100px;resize:vertical;"></textarea>
-        <button class="modal-btn" id="contactSendBtn" onclick="sendContact()">Envoyer le message</button>
-        <div style="text-align:center;font-size:11px;color:var(--text3);">📧 theo.brel@icloud.com · Réponse sous 24h</div>
-      </div>`,
+    contactpage:`<div class="modal-title">Nous contacter</div><div class="modal-sub">Une question ? On vous répond sous 24h</div><div class="modal-form"><input class="modal-input" type="text" id="contactNom" placeholder="Votre nom"><input class="modal-input" type="email" id="contactEmail" placeholder="Votre email"><select class="modal-input" id="contactSujet" style="appearance:none;"><option>Problème technique</option><option>Question sur le paiement</option><option>Remboursement</option><option>Partenariat</option><option>Autre</option></select><textarea class="modal-input" id="contactMessage" placeholder="Votre message..." style="min-height:100px;resize:vertical;"></textarea><button class="modal-btn" id="contactSendBtn" onclick="sendContact()">Envoyer le message</button><div style="text-align:center;font-size:11px;color:var(--text3);">📧 theo.brel@icloud.com · Réponse sous 24h</div></div>`,
+
+    blog:`<div class="modal-title">Blog CVGenius</div><div class="modal-sub">Conseils emploi & CV par l'IA</div><div style="display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;">
+      <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog1')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV. Voici ce qui les fait fuir immédiatement...</div></div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog2')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens, l'IA change tout...</div></div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog3')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion : le guide complet pour convaincre...</div></div>
+    </div>`,
+
+    blog1:`<div class="modal-title">5 erreurs qui font rejeter votre CV</div><div style="margin-bottom:16px;"><span class="blog-tag">CONSEILS CV</span></div><div class="blog-article">
+      <p>Les recruteurs passent en moyenne <strong>7 secondes</strong> sur un CV avant de décider de le garder ou de le jeter. Ces 7 secondes font toute la différence. Voici les 5 erreurs les plus fréquentes qui envoient votre CV à la corbeille.</p>
+      <h3>1. Une mise en forme chaotique</h3>
+      <p>Un CV illisible est un CV rejeté. Trop de polices différentes, des marges inégales, des blocs de texte compacts sans aération — tout cela fatigue l'œil du recruteur. Utilisez une seule police, des espacements cohérents et une structure claire avec des sections bien délimitées.</p>
+      <h3>2. Un résumé générique ou absent</h3>
+      <p>L'accroche en haut du CV est votre première impression. "Professionnel motivé cherchant un poste dynamique" ne dit rien. Préférez quelque chose de spécifique : vos années d'expérience, vos spécialités, et ce que vous apportez concrètement.</p>
+      <h3>3. Des expériences sans résultats chiffrés</h3>
+      <p>Dire "j'ai géré l'équipe" ne convainc personne. Dire "j'ai managé une équipe de 6 personnes et augmenté la productivité de 30% en 6 mois" — voilà ce qui marque les esprits. Chiffrez vos réalisations autant que possible.</p>
+      <h3>4. Un CV non adapté à l'offre</h3>
+      <p>Envoyer le même CV à 50 entreprises est une erreur classique. Chaque offre a ses mots-clés, ses priorités, son contexte. Adaptez votre CV en mettant en avant les compétences et expériences les plus pertinentes pour chaque poste.</p>
+      <h3>5. Des fautes d'orthographe</h3>
+      <p>Une faute dans un CV, c'est rédhibitoire pour la majorité des recruteurs. Relisez-vous, faites relire par quelqu'un d'autre, utilisez un correcteur. Un CV soigné traduit un candidat sérieux.</p>
+      <p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius évite automatiquement toutes ces erreurs grâce à l'IA.</p>
+    </div>`,
+
+    blog2:`<div class="modal-title">L'IA révolutionne la recherche d'emploi</div><div style="margin-bottom:16px;"><span class="blog-tag">IA & EMPLOI</span></div><div class="blog-article">
+      <p>En 2026, l'intelligence artificielle n'est plus un gadget dans la recherche d'emploi — c'est devenu un avantage concurrentiel décisif. Les candidats qui l'utilisent intelligemment se démarquent. Voici comment.</p>
+      <h3>Générer un CV professionnel en secondes</h3>
+      <p>Fini les heures passées à reformuler ses expériences. Les outils comme CVGenius analysent votre parcours et génèrent un CV structuré, bien rédigé et adapté au poste en moins de 30 secondes. Le gain de temps est considérable, et la qualité souvent supérieure à ce qu'on ferait soi-même.</p>
+      <h3>Des lettres de motivation ultra-personnalisées</h3>
+      <p>L'IA peut analyser une offre d'emploi et rédiger une lettre qui reprend exactement les mots-clés de l'annonce, met en avant les compétences les plus pertinentes, et adopte le ton attendu par l'entreprise. Les recruteurs le remarquent.</p>
+      <h3>La préparation aux entretiens</h3>
+      <p>Les outils IA peuvent simuler des entretiens, vous poser des questions difficiles et analyser vos réponses. C'est comme avoir un coach disponible 24h/24, gratuitement.</p>
+      <h3>Attention aux excès</h3>
+      <p>L'IA est un outil, pas un remplaçant. Un CV entièrement généré sans relecture ni personnalisation peut sembler froid ou générique. L'idéal : utiliser l'IA comme base solide, puis apporter votre touche personnelle.</p>
+      <p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius utilise Claude d'Anthropic, l'une des IA les plus avancées au monde.</p>
+    </div>`,
+
+    blog3:`<div class="modal-title">La structure parfaite d'une lettre de motivation</div><div style="margin-bottom:16px;"><span class="blog-tag">LETTRE DE MOTIVATION</span></div><div class="blog-article">
+      <p>Une lettre de motivation efficace en 2026 n'est pas un résumé de votre CV. C'est une démonstration de votre valeur ajoutée pour l'entreprise, rédigée de façon engageante et personnalisée. Voici la structure qui fonctionne.</p>
+      <h3>L'accroche (2-3 lignes)</h3>
+      <p>Commencez par quelque chose qui sort de l'ordinaire. Plutôt que "Je me permets de vous adresser ma candidature...", essayez une accroche qui montre votre connaissance de l'entreprise ou votre enthousiasme spécifique pour le poste. Ex : "Suivre la croissance de [Entreprise] depuis 3 ans m'a convaincu que ma double expertise en marketing et data serait un atout immédiat pour votre équipe."</p>
+      <h3>Pourquoi eux (1 paragraphe)</h3>
+      <p>Montrez que vous avez fait vos recherches. Mentionnez un produit, une valeur, un projet récent de l'entreprise. Les recruteurs voient immédiatement si la lettre est générique ou réellement personnalisée.</p>
+      <h3>Pourquoi vous (1-2 paragraphes)</h3>
+      <p>C'est le cœur de la lettre. Sélectionnez 2-3 réalisations concrètes et chiffrées qui correspondent exactement aux besoins du poste. Ne listez pas vos compétences — racontez ce que vous avez accompli avec.</p>
+      <h3>La conclusion avec call-to-action</h3>
+      <p>Fermez avec confiance, pas avec timidité. "Je reste disponible pour un entretien à votre convenance" est mou. Préférez : "Je serais ravi de vous présenter comment j'ai [réalisation clé] lors d'un entretien."</p>
+      <ul>
+        <li>Longueur idéale : 250-350 mots</li>
+        <li>Police lisible, marges aérées</li>
+        <li>Relecture obligatoire — une faute = corbeille</li>
+        <li>Adapter à chaque offre, sans exception</li>
+      </ul>
+      <p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius génère automatiquement des lettres qui respectent cette structure.</p>
+    </div>`,
 
     mentions:`<div class="modal-title">Mentions légales</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;"><p><strong>Éditeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Hébergement</strong><br>Vercel Inc. — 440 N Barranca Ave #4133, Covina, CA 91723, USA</p><br><p><strong>Propriété intellectuelle</strong><br>L'ensemble du contenu est protégé par le droit d'auteur. Toute reproduction sans autorisation est interdite.</p><br><p><strong>Responsabilité</strong><br>CVGenius utilise l'IA pour générer des documents. Les résultats sont fournis à titre indicatif.</p><br><p><strong>Contact</strong><br>theo.brel@icloud.com</p></div>`,
 
@@ -705,9 +667,7 @@ function showModal(type){
 
     cgv:`<div class="modal-title">Conditions Générales de Vente</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;"><p><strong>Vendeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Service</strong><br>Génération de CV et lettres par IA. Plan Pro : 5€ paiement unique, accès à vie.</p><br><p><strong>Prix</strong><br>Gratuit : 0€ (1/jour) · Pro : 5,00€ TTC paiement unique</p><br><p><strong>Paiement</strong><br>Sécurisé par Stripe. Visa, Mastercard, Apple Pay.</p><br><p><strong>Remboursement</strong><br>7 jours sans question si non satisfait. Contact : theo.brel@icloud.com</p><br><p><strong>Litiges</strong><br>Solution amiable en priorité. Tribunaux français compétents.</p></div>`,
 
-    about:`<div class="modal-title">À propos de CVGenius 👋</div><div style="font-size:14px;color:var(--text);line-height:1.8;"><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;border-left:3px solid var(--accent);"><p style="font-style:italic;color:var(--text2);">"J'ai créé CVGenius parce que je galerais moi-même à rédiger mon CV. J'ai voulu un outil simple, rapide et vraiment efficace."</p><div style="margin-top:8px;font-size:12px;font-weight:600;color:var(--accent);">— Theo, fondateur de CVGenius</div></div><p style="margin-bottom:12px;">CVGenius est un projet indépendant lancé en 2026, propulsé par l'IA Claude d'Anthropic.</p><p>Notre mission : permettre à chacun de créer un CV professionnel en 30 secondes, sans stress.</p><div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;"><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">2 800+</div><div style="font-size:11px;color:var(--text2);">CV générés</div></div><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">4.9/5</div><div style="font-size:11px;color:var(--text2);">Note moyenne</div></div><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">30s</div><div style="font-size:11px;color:var(--text2);">Temps moyen</div></div></div></div>`,
-
-    blog:`<div class="modal-title">Blog CVGenius</div><div class="modal-sub">Conseils emploi & CV par l'IA</div><div style="display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;"><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="closeModal()"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion...</div></div></div>`
+    about:`<div class="modal-title">À propos de CVGenius 👋</div><div style="font-size:14px;color:var(--text);line-height:1.8;"><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;border-left:3px solid var(--accent);"><p style="font-style:italic;color:var(--text2);">"J'ai créé CVGenius parce que je galerais moi-même à rédiger mon CV. J'ai voulu un outil simple, rapide et vraiment efficace."</p><div style="margin-top:8px;font-size:12px;font-weight:600;color:var(--accent);">— Theo, fondateur de CVGenius</div></div><p style="margin-bottom:12px;">CVGenius est un projet indépendant lancé en 2026, propulsé par l'IA Claude d'Anthropic.</p><p>Notre mission : permettre à chacun de créer un CV professionnel en 30 secondes, sans stress.</p><div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;"><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">2 800+</div><div style="font-size:11px;color:var(--text2);">CV générés</div></div><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">4.9/5</div><div style="font-size:11px;color:var(--text2);">Note moyenne</div></div><div style="flex:1;min-width:100px;text-align:center;padding:12px;background:var(--paper2);border-radius:8px;"><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--accent);">30s</div><div style="font-size:11px;color:var(--text2);">Temps moyen</div></div></div></div>`
   };
   content.innerHTML=modals[type]||'';
   document.getElementById('modalOverlay').classList.add('show');
@@ -716,9 +676,7 @@ function showModal(type){
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
 function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 
-// ══════════════════════════════════════════
-// AUTH
-// ══════════════════════════════════════════
+// ══ AUTH ══
 function switchAuthMode(){authMode=authMode==='login'?'register':'login';showModal('login');}
 
 async function handleAuth(){
@@ -738,6 +696,7 @@ async function handleAuth(){
       localStorage.setItem('cvgenius_user',JSON.stringify(currentUser));
       APP.isPro=data.isPro;updateNavForUser();closeModal();
       showToast(data.isPro?'Bienvenue Pro ! 🎉':'Connecté !','success');
+      gtag('event','login');
     }
   }catch(e){showToast('Erreur de connexion','error');}
   if(btn){btn.disabled=false;btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';}
@@ -752,7 +711,7 @@ async function sendResetPassword(){
     const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'resetPassword',email})});
     const data=await res.json();
     if(!res.ok) showToast(data.error||'Erreur','error');
-    else{showToast('✓ Email envoyé ! Vérifiez votre boîte','success');closeModal();}
+    else{showToast('✓ Email envoyé !','success');closeModal();}
   }catch(e){showToast('Erreur','error');}
   if(btn){btn.textContent='Envoyer le lien';btn.disabled=false;}
 }
@@ -802,15 +761,9 @@ function updateNavForUser(){
   }
 }
 
-function logout(){
-  localStorage.removeItem('cvgenius_user');
-  currentUser=null;APP.isPro=false;APP.generationCount=0;
-  updateNavForUser();closeModal();showToast('✓ Déconnecté','success');
-}
+function logout(){localStorage.removeItem('cvgenius_user');currentUser=null;APP.isPro=false;APP.generationCount=0;updateNavForUser();closeModal();showToast('✓ Déconnecté','success');}
 
-// ══════════════════════════════════════════
-// CONTACT
-// ══════════════════════════════════════════
+// ══ CONTACT ══
 async function sendContact(){
   const nom=document.getElementById('contactNom')?.value?.trim();
   const email=document.getElementById('contactEmail')?.value?.trim();
@@ -846,41 +799,25 @@ async function sendBusinessContact(){
   if(btn){btn.textContent='Envoyer la demande';btn.disabled=false;}
 }
 
-// ══════════════════════════════════════════
-// TOAST & FAQ
-// ══════════════════════════════════════════
+// ══ UTILS ══
 let toastT=null;
-function showToast(msg,type=''){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast show '+(type||'');
-  clearTimeout(toastT);toastT=setTimeout(()=>t.className='toast',3500);
-}
+function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');clearTimeout(toastT);toastT=setTimeout(()=>t.className='toast',3500);}
 function toggleFaq(el){el.classList.toggle('open');}
 function acceptCookies(){localStorage.setItem('cookies','accepted');document.getElementById('cookieBanner').style.display='none';}
 function rejectCookies(){localStorage.setItem('cookies','rejected');document.getElementById('cookieBanner').style.display='none';}
-
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
 window.addEventListener('load',()=>{
-  // Restore session
   const saved=localStorage.getItem('cvgenius_user');
   if(saved){try{currentUser=JSON.parse(saved);APP.isPro=currentUser.isPro||false;updateNavForUser();}catch(e){localStorage.removeItem('cvgenius_user');}}
-
-  // Pro temporaire (acheté sans compte)
   if(localStorage.getItem('cvgenius_pro_temp')==='true'){APP.isPro=true;updateNavForUser();}
-
-  // Détecte succès paiement Stripe
   checkPaymentSuccess();
-
-  // Détecte reset password
   const hash=window.location.hash;
   if(hash.includes('type=recovery')&&hash.includes('access_token')){
     const params=new URLSearchParams(hash.replace('#',''));
     const token=params.get('access_token');
     if(token){window._resetToken=token;setTimeout(()=>showModal('newPassword'),300);}
   }
-
-  // Cookie banner
   if(!localStorage.getItem('cookies')) setTimeout(()=>{document.getElementById('cookieBanner').style.display='flex';},1500);
 });
 
