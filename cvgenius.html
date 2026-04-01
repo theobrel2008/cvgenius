@@ -7,7 +7,6 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236c47ff'/><rect x='8' y='7' width='11' height='16' rx='1.5' fill='white'/><circle cx='22' cy='22' r='7' fill='%236c47ff'/><text x='22' y='26' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700' font-size='8'>AI</text></svg>">
 <title>CVGenius — Créez votre CV parfait en 30 secondes</title>
 
-<!-- Google Analytics — remplace G-XXXXXXXXXX par ton vrai ID -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VN2PQG7D7M"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -199,7 +198,6 @@ footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:48px 32px 32px;
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--paper2);cursor:pointer;font-size:16px;color:var(--text2);display:flex;align-items:center;justify-content:center;}
 .modal-wrapper{position:relative;}
 
-/* Blog article */
 .blog-article{font-size:14px;color:var(--text);line-height:1.9;max-height:65vh;overflow-y:auto;padding-right:8px;}
 .blog-article h3{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink);margin:20px 0 8px;}
 .blog-article p{margin-bottom:12px;}
@@ -548,6 +546,8 @@ async function generateCV(d){
   const cv=JSON.parse(res.replace(/```json|```/g,'').trim());
   document.getElementById('resultTitle').textContent='Votre CV est prêt ✓';
   document.getElementById('resultContent').innerHTML=renderCV(cv);
+  // Sauvegarde dans l'historique si Pro
+  if(currentUser&&APP.isPro) saveToHistory('cv',d.name,d.jobTitle,JSON.stringify(cv));
 }
 
 async function generateCoverLetter(d){
@@ -555,6 +555,8 @@ async function generateCoverLetter(d){
   const res=await callClaude(prompt);
   document.getElementById('resultTitle').textContent='Votre lettre de motivation est prête ✓';
   document.getElementById('resultContent').innerHTML=`<div class="letter-preview">${res}</div>`;
+  // Sauvegarde dans l'historique si Pro
+  if(currentUser&&APP.isPro) saveToHistory('cover',d.name,d.jobTitle,res);
 }
 
 async function generateBoth(d){
@@ -564,6 +566,7 @@ async function generateBoth(d){
   const letterRes=await callClaude(prompt);
   document.getElementById('resultTitle').textContent='CV + Lettre de motivation prêts ✓';
   document.getElementById('resultContent').innerHTML=cvHTML+`<div style="margin-top:32px"><div class="result-header" style="margin-bottom:16px"><div class="result-title">Votre lettre de motivation</div><div class="result-actions"><button class="action-btn copy" onclick="copyLetter()">📋 Copier la lettre</button></div></div><div class="letter-preview">${letterRes}</div></div>`;
+  if(currentUser&&APP.isPro) saveToHistory('both',d.name,d.jobTitle,letterRes);
 }
 
 async function callClaude(prompt){
@@ -602,64 +605,19 @@ function showModal(type){
 
     newPassword:`<div class="modal-title">🔑 Nouveau mot de passe</div><div class="modal-sub">Choisissez votre nouveau mot de passe</div><div class="modal-form"><input class="modal-input" type="password" id="newPwd" placeholder="Nouveau mot de passe (min. 6 caractères)"><input class="modal-input" type="password" id="newPwd2" placeholder="Confirmer le mot de passe"><button class="modal-btn" id="newPwdBtn" onclick="updatePassword()">✓ Enregistrer le mot de passe</button></div>`,
 
-    userMenu:`<div class="modal-title">Mon compte</div><div style="font-size:14px;color:var(--text2);margin-bottom:20px;padding:12px;background:var(--paper2);border-radius:8px;">📧 ${currentUser?.email||''}</div><div style="display:flex;flex-direction:column;gap:10px;">${APP.isPro?'<div style="background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:12px 16px;border-radius:8px;text-align:center;">✦ Compte Pro actif 🎉</div>':'<button class="modal-btn" onclick="handlePayment()">Passer à Pro — 4,99€</button>'}<button onclick="showModal('forgotPassword')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;">🔑 Changer mon mot de passe</button><button onclick="logout()" style="padding:12px;border-radius:28px;border:1.5px solid var(--danger);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--danger);font-weight:600;">🚪 Se déconnecter</button></div>`,
+    userMenu:`<div class="modal-title">Mon compte</div><div style="font-size:14px;color:var(--text2);margin-bottom:20px;padding:12px;background:var(--paper2);border-radius:8px;">📧 ${currentUser?.email||''}</div><div style="display:flex;flex-direction:column;gap:10px;">${APP.isPro?'<div style="background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:12px 16px;border-radius:8px;text-align:center;">✦ Compte Pro actif 🎉</div>':'<button class="modal-btn" onclick="handlePayment()">Passer à Pro — 4,99€</button>'}<button onclick="showHistory()" style="padding:12px;border-radius:28px;border:1.5px solid var(--accent);background:var(--accent-soft);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--accent);font-weight:600;">📋 Mon historique de CV</button><button onclick="showModal('forgotPassword')" style="padding:12px;border-radius:28px;border:1.5px solid var(--border2);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;">🔑 Changer mon mot de passe</button><button onclick="logout()" style="padding:12px;border-radius:28px;border:1.5px solid var(--danger);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--danger);font-weight:600;">🚪 Se déconnecter</button></div>`,
 
     business:`<div class="modal-title">Offre Business 🏢</div><div class="modal-sub">Pour les équipes RH, cabinets et entreprises</div><div style="background:var(--accent-soft);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px;"><div style="font-weight:700;margin-bottom:8px;color:var(--accent)">✦ Ce que vous obtenez :</div><div style="color:var(--text);line-height:2;">✓ Jusqu'à 50 utilisateurs<br>✓ Tableau de bord admin<br>✓ Marque blanche (votre logo)<br>✓ API access<br>✓ Support dédié</div></div><div class="modal-form"><input class="modal-input" type="text" id="bizNom" placeholder="Votre nom & prénom"><input class="modal-input" type="text" id="bizEntreprise" placeholder="Nom de l'entreprise"><input class="modal-input" type="email" id="bizEmail" placeholder="Email professionnel"><input class="modal-input" type="tel" id="bizTel" placeholder="Téléphone (optionnel)"><select class="modal-input" id="bizTaille" style="appearance:none;"><option value="">Taille de l'équipe...</option><option>Moins de 10 personnes</option><option>10 à 50 personnes</option><option>50 à 200 personnes</option><option>Plus de 200 personnes</option></select><textarea class="modal-input" id="bizMessage" placeholder="Décrivez votre besoin..." style="min-height:80px;resize:vertical;"></textarea><button class="modal-btn" id="bizSendBtn" onclick="sendBusinessContact()">Envoyer la demande</button><div style="text-align:center;font-size:11px;color:var(--text3);">📧 On vous recontacte sous 24h</div></div>`,
 
     contactpage:`<div class="modal-title">Nous contacter</div><div class="modal-sub">Une question ? On vous répond sous 24h</div><div class="modal-form"><input class="modal-input" type="text" id="contactNom" placeholder="Votre nom"><input class="modal-input" type="email" id="contactEmail" placeholder="Votre email"><select class="modal-input" id="contactSujet" style="appearance:none;"><option>Problème technique</option><option>Question sur le paiement</option><option>Remboursement</option><option>Partenariat</option><option>Autre</option></select><textarea class="modal-input" id="contactMessage" placeholder="Votre message..." style="min-height:100px;resize:vertical;"></textarea><button class="modal-btn" id="contactSendBtn" onclick="sendContact()">Envoyer le message</button><div style="text-align:center;font-size:11px;color:var(--text3);">📧 theo.brel@icloud.com · Réponse sous 24h</div></div>`,
 
-    blog:`<div class="modal-title">Blog CVGenius</div><div class="modal-sub">Conseils emploi & CV par l'IA</div><div style="display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;">
-      <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog1')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV. Voici ce qui les fait fuir immédiatement...</div></div>
-      <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog2')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens, l'IA change tout...</div></div>
-      <div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog3')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion : le guide complet pour convaincre...</div></div>
-    </div>`,
+    blog:`<div class="modal-title">Blog CVGenius</div><div class="modal-sub">Conseils emploi & CV par l'IA</div><div style="display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;"><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog1')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">CONSEILS CV</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">5 erreurs qui font rejeter votre CV en 10 secondes</div><div style="font-size:12px;color:var(--text2);">Les recruteurs passent en moyenne 7 secondes sur un CV. Voici ce qui les fait fuir immédiatement...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog2')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">IA & EMPLOI</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Comment l'IA révolutionne la recherche d'emploi en 2026</div><div style="font-size:12px;color:var(--text2);">De la génération de CV à la préparation d'entretiens, l'IA change tout...</div></div><div style="padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;" onclick="showModal('blog3')"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px;">LETTRE DE MOTIVATION</div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">La structure parfaite d'une lettre de motivation en 2026</div><div style="font-size:12px;color:var(--text2);">Introduction, développement, conclusion : le guide complet pour convaincre...</div></div></div>`,
 
-    blog1:`<div class="modal-title">5 erreurs qui font rejeter votre CV</div><div style="margin-bottom:16px;"><span class="blog-tag">CONSEILS CV</span></div><div class="blog-article">
-      <p>Les recruteurs passent en moyenne <strong>7 secondes</strong> sur un CV avant de décider de le garder ou de le jeter. Ces 7 secondes font toute la différence. Voici les 5 erreurs les plus fréquentes qui envoient votre CV à la corbeille.</p>
-      <h3>1. Une mise en forme chaotique</h3>
-      <p>Un CV illisible est un CV rejeté. Trop de polices différentes, des marges inégales, des blocs de texte compacts sans aération — tout cela fatigue l'œil du recruteur. Utilisez une seule police, des espacements cohérents et une structure claire avec des sections bien délimitées.</p>
-      <h3>2. Un résumé générique ou absent</h3>
-      <p>L'accroche en haut du CV est votre première impression. "Professionnel motivé cherchant un poste dynamique" ne dit rien. Préférez quelque chose de spécifique : vos années d'expérience, vos spécialités, et ce que vous apportez concrètement.</p>
-      <h3>3. Des expériences sans résultats chiffrés</h3>
-      <p>Dire "j'ai géré l'équipe" ne convainc personne. Dire "j'ai managé une équipe de 6 personnes et augmenté la productivité de 30% en 6 mois" — voilà ce qui marque les esprits. Chiffrez vos réalisations autant que possible.</p>
-      <h3>4. Un CV non adapté à l'offre</h3>
-      <p>Envoyer le même CV à 50 entreprises est une erreur classique. Chaque offre a ses mots-clés, ses priorités, son contexte. Adaptez votre CV en mettant en avant les compétences et expériences les plus pertinentes pour chaque poste.</p>
-      <h3>5. Des fautes d'orthographe</h3>
-      <p>Une faute dans un CV, c'est rédhibitoire pour la majorité des recruteurs. Relisez-vous, faites relire par quelqu'un d'autre, utilisez un correcteur. Un CV soigné traduit un candidat sérieux.</p>
-      <p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius évite automatiquement toutes ces erreurs grâce à l'IA.</p>
-    </div>`,
+    blog1:`<div class="modal-title">5 erreurs qui font rejeter votre CV</div><div style="margin-bottom:16px;"><span class="blog-tag">CONSEILS CV</span></div><div class="blog-article"><p>Les recruteurs passent en moyenne <strong>7 secondes</strong> sur un CV avant de décider de le garder ou de le jeter. Ces 7 secondes font toute la différence. Voici les 5 erreurs les plus fréquentes qui envoient votre CV à la corbeille.</p><h3>1. Une mise en forme chaotique</h3><p>Un CV illisible est un CV rejeté. Trop de polices différentes, des marges inégales, des blocs de texte compacts sans aération — tout cela fatigue l'œil du recruteur. Utilisez une seule police, des espacements cohérents et une structure claire avec des sections bien délimitées.</p><h3>2. Un résumé générique ou absent</h3><p>L'accroche en haut du CV est votre première impression. "Professionnel motivé cherchant un poste dynamique" ne dit rien. Préférez quelque chose de spécifique : vos années d'expérience, vos spécialités, et ce que vous apportez concrètement.</p><h3>3. Des expériences sans résultats chiffrés</h3><p>Dire "j'ai géré l'équipe" ne convainc personne. Dire "j'ai managé une équipe de 6 personnes et augmenté la productivité de 30% en 6 mois" — voilà ce qui marque les esprits. Chiffrez vos réalisations autant que possible.</p><h3>4. Un CV non adapté à l'offre</h3><p>Envoyer le même CV à 50 entreprises est une erreur classique. Chaque offre a ses mots-clés, ses priorités, son contexte. Adaptez votre CV en mettant en avant les compétences et expériences les plus pertinentes pour chaque poste.</p><h3>5. Des fautes d'orthographe</h3><p>Une faute dans un CV, c'est rédhibitoire pour la majorité des recruteurs. Relisez-vous, faites relire par quelqu'un d'autre, utilisez un correcteur. Un CV soigné traduit un candidat sérieux.</p><p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius évite automatiquement toutes ces erreurs grâce à l'IA.</p></div>`,
 
-    blog2:`<div class="modal-title">L'IA révolutionne la recherche d'emploi</div><div style="margin-bottom:16px;"><span class="blog-tag">IA & EMPLOI</span></div><div class="blog-article">
-      <p>En 2026, l'intelligence artificielle n'est plus un gadget dans la recherche d'emploi — c'est devenu un avantage concurrentiel décisif. Les candidats qui l'utilisent intelligemment se démarquent. Voici comment.</p>
-      <h3>Générer un CV professionnel en secondes</h3>
-      <p>Fini les heures passées à reformuler ses expériences. Les outils comme CVGenius analysent votre parcours et génèrent un CV structuré, bien rédigé et adapté au poste en moins de 30 secondes. Le gain de temps est considérable, et la qualité souvent supérieure à ce qu'on ferait soi-même.</p>
-      <h3>Des lettres de motivation ultra-personnalisées</h3>
-      <p>L'IA peut analyser une offre d'emploi et rédiger une lettre qui reprend exactement les mots-clés de l'annonce, met en avant les compétences les plus pertinentes, et adopte le ton attendu par l'entreprise. Les recruteurs le remarquent.</p>
-      <h3>La préparation aux entretiens</h3>
-      <p>Les outils IA peuvent simuler des entretiens, vous poser des questions difficiles et analyser vos réponses. C'est comme avoir un coach disponible 24h/24, gratuitement.</p>
-      <h3>Attention aux excès</h3>
-      <p>L'IA est un outil, pas un remplaçant. Un CV entièrement généré sans relecture ni personnalisation peut sembler froid ou générique. L'idéal : utiliser l'IA comme base solide, puis apporter votre touche personnelle.</p>
-      <p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius utilise Claude d'Anthropic, l'une des IA les plus avancées au monde.</p>
-    </div>`,
+    blog2:`<div class="modal-title">L'IA révolutionne la recherche d'emploi</div><div style="margin-bottom:16px;"><span class="blog-tag">IA & EMPLOI</span></div><div class="blog-article"><p>En 2026, l'intelligence artificielle n'est plus un gadget dans la recherche d'emploi — c'est devenu un avantage concurrentiel décisif. Les candidats qui l'utilisent intelligemment se démarquent. Voici comment.</p><h3>Générer un CV professionnel en secondes</h3><p>Fini les heures passées à reformuler ses expériences. Les outils comme CVGenius analysent votre parcours et génèrent un CV structuré, bien rédigé et adapté au poste en moins de 30 secondes. Le gain de temps est considérable, et la qualité souvent supérieure à ce qu'on ferait soi-même.</p><h3>Des lettres de motivation ultra-personnalisées</h3><p>L'IA peut analyser une offre d'emploi et rédiger une lettre qui reprend exactement les mots-clés de l'annonce, met en avant les compétences les plus pertinentes, et adopte le ton attendu par l'entreprise. Les recruteurs le remarquent.</p><h3>La préparation aux entretiens</h3><p>Les outils IA peuvent simuler des entretiens, vous poser des questions difficiles et analyser vos réponses. C'est comme avoir un coach disponible 24h/24, gratuitement.</p><h3>Attention aux excès</h3><p>L'IA est un outil, pas un remplaçant. Un CV entièrement généré sans relecture ni personnalisation peut sembler froid ou générique. L'idéal : utiliser l'IA comme base solide, puis apporter votre touche personnelle.</p><p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius utilise Claude d'Anthropic, l'une des IA les plus avancées au monde.</p></div>`,
 
-    blog3:`<div class="modal-title">La structure parfaite d'une lettre de motivation</div><div style="margin-bottom:16px;"><span class="blog-tag">LETTRE DE MOTIVATION</span></div><div class="blog-article">
-      <p>Une lettre de motivation efficace en 2026 n'est pas un résumé de votre CV. C'est une démonstration de votre valeur ajoutée pour l'entreprise, rédigée de façon engageante et personnalisée. Voici la structure qui fonctionne.</p>
-      <h3>L'accroche (2-3 lignes)</h3>
-      <p>Commencez par quelque chose qui sort de l'ordinaire. Plutôt que "Je me permets de vous adresser ma candidature...", essayez une accroche qui montre votre connaissance de l'entreprise ou votre enthousiasme spécifique pour le poste. Ex : "Suivre la croissance de [Entreprise] depuis 3 ans m'a convaincu que ma double expertise en marketing et data serait un atout immédiat pour votre équipe."</p>
-      <h3>Pourquoi eux (1 paragraphe)</h3>
-      <p>Montrez que vous avez fait vos recherches. Mentionnez un produit, une valeur, un projet récent de l'entreprise. Les recruteurs voient immédiatement si la lettre est générique ou réellement personnalisée.</p>
-      <h3>Pourquoi vous (1-2 paragraphes)</h3>
-      <p>C'est le cœur de la lettre. Sélectionnez 2-3 réalisations concrètes et chiffrées qui correspondent exactement aux besoins du poste. Ne listez pas vos compétences — racontez ce que vous avez accompli avec.</p>
-      <h3>La conclusion avec call-to-action</h3>
-      <p>Fermez avec confiance, pas avec timidité. "Je reste disponible pour un entretien à votre convenance" est mou. Préférez : "Je serais ravi de vous présenter comment j'ai [réalisation clé] lors d'un entretien."</p>
-      <ul>
-        <li>Longueur idéale : 250-350 mots</li>
-        <li>Police lisible, marges aérées</li>
-        <li>Relecture obligatoire — une faute = corbeille</li>
-        <li>Adapter à chaque offre, sans exception</li>
-      </ul>
-      <p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius génère automatiquement des lettres qui respectent cette structure.</p>
-    </div>`,
+    blog3:`<div class="modal-title">La structure parfaite d'une lettre de motivation</div><div style="margin-bottom:16px;"><span class="blog-tag">LETTRE DE MOTIVATION</span></div><div class="blog-article"><p>Une lettre de motivation efficace en 2026 n'est pas un résumé de votre CV. C'est une démonstration de votre valeur ajoutée pour l'entreprise, rédigée de façon engageante et personnalisée. Voici la structure qui fonctionne.</p><h3>L'accroche (2-3 lignes)</h3><p>Commencez par quelque chose qui sort de l'ordinaire. Plutôt que "Je me permets de vous adresser ma candidature...", essayez une accroche qui montre votre connaissance de l'entreprise ou votre enthousiasme spécifique pour le poste.</p><h3>Pourquoi eux (1 paragraphe)</h3><p>Montrez que vous avez fait vos recherches. Mentionnez un produit, une valeur, un projet récent de l'entreprise. Les recruteurs voient immédiatement si la lettre est générique ou réellement personnalisée.</p><h3>Pourquoi vous (1-2 paragraphes)</h3><p>C'est le cœur de la lettre. Sélectionnez 2-3 réalisations concrètes et chiffrées qui correspondent exactement aux besoins du poste. Ne listez pas vos compétences — racontez ce que vous avez accompli avec.</p><h3>La conclusion avec call-to-action</h3><p>Fermez avec confiance. "Je reste disponible pour un entretien à votre convenance" est mou. Préférez : "Je serais ravi de vous présenter comment j'ai [réalisation clé] lors d'un entretien."</p><ul><li>Longueur idéale : 250-350 mots</li><li>Police lisible, marges aérées</li><li>Relecture obligatoire — une faute = corbeille</li><li>Adapter à chaque offre, sans exception</li></ul><p style="margin-top:16px;padding:12px;background:var(--accent-soft);border-radius:8px;font-size:13px;color:var(--accent);font-weight:600;">💡 CVGenius génère automatiquement des lettres qui respectent cette structure.</p></div>`,
 
     mentions:`<div class="modal-title">Mentions légales</div><div style="font-size:13px;color:var(--text);line-height:1.9;max-height:60vh;overflow-y:auto;"><p><strong>Éditeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Hébergement</strong><br>Vercel Inc. — 440 N Barranca Ave #4133, Covina, CA 91723, USA</p><br><p><strong>Propriété intellectuelle</strong><br>L'ensemble du contenu est protégé par le droit d'auteur. Toute reproduction sans autorisation est interdite.</p><br><p><strong>Responsabilité</strong><br>CVGenius utilise l'IA pour générer des documents. Les résultats sont fournis à titre indicatif.</p><br><p><strong>Contact</strong><br>theo.brel@icloud.com</p></div>`,
 
@@ -797,6 +755,80 @@ async function sendBusinessContact(){
     else showToast('Erreur envoi, réessayez','error');
   }catch(e){showToast('Erreur envoi','error');}
   if(btn){btn.textContent='Envoyer la demande';btn.disabled=false;}
+}
+
+// ══ HISTORIQUE ══
+async function showHistory(){
+  const content=document.getElementById('modalContent');
+  content.innerHTML=`<div class="modal-title">📋 Mes CV sauvegardés</div><div style="text-align:center;padding:24px;color:var(--text3);"><div style="width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;"></div>Chargement...</div>`;
+  document.getElementById('modalOverlay').classList.add('show');
+  try{
+    const res=await fetch(`/api/history?action=list&email=${encodeURIComponent(currentUser.email)}`);
+    const data=await res.json();
+    const history=data.history||[];
+    if(history.length===0){
+      content.innerHTML=`<div class="modal-title">📋 Mes CV sauvegardés</div><div style="text-align:center;padding:32px;color:var(--text3);"><div style="font-size:40px;margin-bottom:12px;">📄</div><div style="font-size:14px;">Aucun CV sauvegardé pour l'instant.<br>Générez un CV et il apparaîtra ici !</div><button onclick="closeModal();scrollToApp()" style="margin-top:16px;padding:10px 24px;border-radius:20px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;">Créer mon premier CV →</button></div>`;
+      return;
+    }
+    window._historyData=history;
+    const items=history.map(h=>{
+      const date=new Date(h.created_at).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
+      const typeLabel=h.type==='cv'?'📄 CV':h.type==='cover'?'✉️ Lettre':'✦ CV + Lettre';
+      return `<div style="padding:14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <div style="font-size:13px;font-weight:600;color:var(--ink);">${h.name||'Sans nom'} — ${h.job_title||''}</div>
+          <div style="font-size:11px;color:var(--text3);">${date}</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:11px;color:var(--accent);font-weight:600;">${typeLabel}</span>
+          <div style="display:flex;gap:8px;">
+            <button onclick="restoreCV('${h.id}')" style="padding:5px 12px;border-radius:20px;border:1.5px solid var(--accent);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--accent);font-weight:600;">Restaurer</button>
+            <button onclick="deleteCV('${h.id}')" style="padding:5px 12px;border-radius:20px;border:1.5px solid var(--danger);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--danger);">Supprimer</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    content.innerHTML=`<div class="modal-title">📋 Mes CV sauvegardés</div><div style="font-size:12px;color:var(--text3);margin-bottom:16px;">${history.length} document${history.length>1?'s':''} sauvegardé${history.length>1?'s':''}</div><div style="max-height:55vh;overflow-y:auto;">${items}</div>`;
+  }catch(e){
+    content.innerHTML=`<div class="modal-title">📋 Mes CV sauvegardés</div><div style="text-align:center;padding:24px;color:var(--danger);">Erreur de chargement</div>`;
+  }
+}
+
+function restoreCV(id){
+  const item=window._historyData?.find(h=>h.id===id);
+  if(!item) return;
+  try{
+    const cv=JSON.parse(item.content);
+    document.getElementById('resultSection').classList.add('show');
+    document.getElementById('resultTitle').textContent='CV restauré ✓';
+    document.getElementById('resultContent').innerHTML=renderCV(cv);
+    closeModal();
+    document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+    showToast('✓ CV restauré !','success');
+  }catch(e){
+    document.getElementById('resultSection').classList.add('show');
+    document.getElementById('resultTitle').textContent='Document restauré ✓';
+    document.getElementById('resultContent').innerHTML=`<div class="letter-preview">${item.content}</div>`;
+    closeModal();
+    document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+    showToast('✓ Document restauré !','success');
+  }
+}
+
+async function deleteCV(id){
+  if(!confirm('Supprimer ce document ?')) return;
+  try{
+    await fetch('/api/history',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id,email:currentUser.email})});
+    showToast('✓ Supprimé','success');
+    showHistory();
+  }catch(e){showToast('Erreur suppression','error');}
+}
+
+async function saveToHistory(type,name,jobTitle,content){
+  if(!currentUser||!APP.isPro) return;
+  try{
+    await fetch('/api/history',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save',email:currentUser.email,type,name,jobTitle,content})});
+  }catch(e){console.log('History save failed:',e);}
 }
 
 // ══ UTILS ══
