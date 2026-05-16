@@ -5,5 +5,23 @@
     <lastmod>2026-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-</urlset>
+    <url>
+  <loc>https://www.cv-genius.com/blog/comment-faire-un-cv</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.cv-genius.com/lettre-motivation</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.cv-genius.com/cv-etudiant</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.cv-genius.com/cv-reconversion</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
