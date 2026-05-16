@@ -7,7 +7,20 @@
     { "src": "api/webhook.js", "use": "@vercel/node" },
     { "src": "api/history.js", "use": "@vercel/node" },
     { "src": "cvgenius.html", "use": "@vercel/static" },
-    { "src": "sitemap.xml", "use": "@vercel/static" }
+    { "src": "sitemap.xml", "use": "@vercel/static" },
+    { "src": "blog/comment-faire-un-cv/index.html", "use": "@vercel/static" },
+    { "src": "cv-etudiant/index.html", "use": "@vercel/static" },
+    { "src": "cv-alternance/index.html", "use": "@vercel/static" },
+    { "src": "cv-anglais/index.html", "use": "@vercel/static" },
+    { "src": "cv-ats/index.html", "use": "@vercel/static" },
+    { "src": "cv-cadre/index.html", "use": "@vercel/static" },
+    { "src": "cv-commercial/index.html", "use": "@vercel/static" },
+    { "src": "cv-developpeur/index.html", "use": "@vercel/static" },
+    { "src": "cv-infirmier/index.html", "use": "@vercel/static" },
+    { "src": "cv-reconversion/index.html", "use": "@vercel/static" },
+    { "src": "cv-sans-experience/index.html", "use": "@vercel/static" },
+    { "src": "lettre-motivation/index.html", "use": "@vercel/static" },
+    { "src": "modeles-cv/index.html", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/generate", "dest": "/api/generate.js" },
@@ -16,6 +29,19 @@
     { "src": "/api/webhook", "dest": "/api/webhook.js" },
     { "src": "/api/history", "dest": "/api/history.js" },
     { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
+    { "src": "/blog/comment-faire-un-cv", "dest": "/blog/comment-faire-un-cv/index.html" },
+    { "src": "/cv-etudiant", "dest": "/cv-etudiant/index.html" },
+    { "src": "/cv-alternance", "dest": "/cv-alternance/index.html" },
+    { "src": "/cv-anglais", "dest": "/cv-anglais/index.html" },
+    { "src": "/cv-ats", "dest": "/cv-ats/index.html" },
+    { "src": "/cv-cadre", "dest": "/cv-cadre/index.html" },
+    { "src": "/cv-commercial", "dest": "/cv-commercial/index.html" },
+    { "src": "/cv-developpeur", "dest": "/cv-developpeur/index.html" },
+    { "src": "/cv-infirmier", "dest": "/cv-infirmier/index.html" },
+    { "src": "/cv-reconversion", "dest": "/cv-reconversion/index.html" },
+    { "src": "/cv-sans-experience", "dest": "/cv-sans-experience/index.html" },
+    { "src": "/lettre-motivation", "dest": "/lettre-motivation/index.html" },
+    { "src": "/modeles-cv", "dest": "/modeles-cv/index.html" },
     { "src": "/(.*)", "dest": "/cvgenius.html" }
   ]
 }
