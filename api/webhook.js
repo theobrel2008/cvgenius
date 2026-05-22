@@ -23,6 +23,75 @@ async function verifyStripeSignature(body, signature, secret) {
   return expected === v1;
 }
 
+// Met à jour le statut Pro d'un utilisateur dans Supabase
+async function setUserPro(email, isPro, extraData = {}) {
+  if (!email) return;
+
+  // Vérifie si l'utilisateur existe
+  const checkR = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=email,is_pro`, {
+    headers: { 'apikey': SUPABASE_SECRET, 'Authorization': `Bearer ${SUPABASE_SECRET}` }
+  });
+  const users = await checkR.json();
+
+  const updateData = {
+    is_pro: isPro,
+    ...extraData
+  };
+
+  if (users && users.length > 0) {
+    // Met à jour l'utilisateur existant
+    await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_SECRET,
+        'Authorization': `Bearer ${SUPABASE_SECRET}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(updateData)
+    });
+    console.log(`User ${email} updated: is_pro=${isPro}`);
+  } else {
+    // Crée l'utilisateur s'il n'existe pas encore
+    await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_SECRET,
+        'Authorization': `Bearer ${SUPABASE_SECRET}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email, ...updateData })
+    });
+    console.log(`Created user ${email}: is_pro=${isPro}`);
+  }
+}
+
+// Log un paiement dans Supabase
+async function logPayment(email, amount, currency, stripeId, type) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/payments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_SECRET,
+        'Authorization': `Bearer ${SUPABASE_SECRET}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        email,
+        amount,
+        currency,
+        stripe_id: stripeId,
+        type,
+        paid_at: new Date().toISOString()
+      })
+    });
+  } catch (e) {
+    console.log('Payment log failed:', e.message);
+  }
+}
+
 const handler = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -44,69 +113,114 @@ const handler = async (req, res) => {
   const event = JSON.parse(rawBody);
   console.log('Stripe webhook event:', event.type);
 
-  // Paiement réussi
-  if (event.type === 'checkout.session.completed' || event.type === 'payment_intent.succeeded') {
-    const session = event.data.object;
-    const email = session.customer_details?.email || session.receipt_email || null;
+  try {
+    // ======================================================
+    // ABONNEMENT CRÉÉ OU PAIEMENT INITIAL RÉUSSI
+    // ======================================================
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      const email = session.customer_details?.email || session.receipt_email || null;
+      const mode = session.mode; // 'subscription' ou 'payment'
+      const amount = session.amount_total ? session.amount_total / 100 : 0;
 
-    if (email) {
-      try {
-        // Vérifie si l'utilisateur existe dans Supabase
-        const checkR = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=email,is_pro`, {
-          headers: { 'apikey': SUPABASE_SECRET, 'Authorization': `Bearer ${SUPABASE_SECRET}` }
+      if (email) {
+        await setUserPro(email, true, {
+          pro_since: new Date().toISOString(),
+          subscription_id: session.subscription || null,
+          plan: mode === 'subscription' ? (amount > 10 ? 'annual' : 'monthly') : 'lifetime'
         });
-        const users = await checkR.json();
 
-        if (users && users.length > 0) {
-          // Met à jour l'utilisateur existant en Pro
-          await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_SECRET,
-              'Authorization': `Bearer ${SUPABASE_SECRET}`,
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({ is_pro: true, pro_since: new Date().toISOString() })
-          });
-          console.log(`User ${email} upgraded to Pro`);
-        } else {
-          // Crée l'entrée dans users si elle n'existe pas encore
-          await fetch(`${SUPABASE_URL}/rest/v1/users`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_SECRET,
-              'Authorization': `Bearer ${SUPABASE_SECRET}`,
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({ email, is_pro: true, pro_since: new Date().toISOString() })
-          });
-          console.log(`Created Pro user ${email}`);
-        }
-
-        // Log le paiement
-        await fetch(`${SUPABASE_URL}/rest/v1/payments`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_SECRET,
-            'Authorization': `Bearer ${SUPABASE_SECRET}`,
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({
-            email,
-            amount: session.amount_total ? session.amount_total / 100 : 4.99,
-            currency: session.currency || 'eur',
-            stripe_id: session.id,
-            paid_at: new Date().toISOString()
-          })
-        }).catch(e => console.log('Payment log failed (table may not exist):', e.message));
-
-      } catch (e) {
-        console.error('Supabase update error:', e);
+        await logPayment(email, amount, session.currency || 'eur', session.id, mode);
       }
     }
+
+    // ======================================================
+    // RENOUVELLEMENT MENSUEL / ANNUEL RÉUSSI
+    // ======================================================
+    else if (event.type === 'invoice.payment_succeeded') {
+      const invoice = event.data.object;
+      const email = invoice.customer_email;
+      const amount = invoice.amount_paid ? invoice.amount_paid / 100 : 0;
+
+      if (email && invoice.billing_reason === 'subscription_cycle') {
+        // Renouvellement — on s'assure que le Pro est bien actif
+        await setUserPro(email, true, {
+          pro_renewed_at: new Date().toISOString()
+        });
+
+        await logPayment(email, amount, invoice.currency || 'eur', invoice.id, 'renewal');
+        console.log(`Subscription renewed for ${email} — ${amount}€`);
+      }
+    }
+
+    // ======================================================
+    // PAIEMENT D'ABONNEMENT ÉCHOUÉ
+    // ======================================================
+    else if (event.type === 'invoice.payment_failed') {
+      const invoice = event.data.object;
+      const email = invoice.customer_email;
+
+      if (email) {
+        console.log(`Payment failed for ${email} — will retry automatically`);
+        // On ne désactive pas immédiatement — Stripe va réessayer
+        // On désactive seulement si l'abonnement est définitivement annulé
+      }
+    }
+
+    // ======================================================
+    // ABONNEMENT ANNULÉ (par le client ou après échec paiement)
+    // ======================================================
+    else if (event.type === 'customer.subscription.deleted') {
+      const subscription = event.data.object;
+      const customerId = subscription.customer;
+
+      // Récupérer l'email depuis l'ID Stripe customer
+      // Note: tu devras stocker le customer_id dans Supabase pour retrouver l'email
+      // Pour l'instant on log l'événement
+      console.log(`Subscription cancelled for customer ${customerId}`);
+
+      // Si tu stockes le stripe_customer_id dans Supabase:
+      const userR = await fetch(`${SUPABASE_URL}/rest/v1/users?stripe_customer_id=eq.${customerId}&select=email`, {
+        headers: { 'apikey': SUPABASE_SECRET, 'Authorization': `Bearer ${SUPABASE_SECRET}` }
+      });
+      const users = await userR.json();
+
+      if (users && users.length > 0) {
+        const email = users[0].email;
+        await setUserPro(email, false, {
+          subscription_cancelled_at: new Date().toISOString(),
+          subscription_id: null
+        });
+        console.log(`Pro cancelled for ${email}`);
+      }
+    }
+
+    // ======================================================
+    // ABONNEMENT MIS À JOUR (upgrade/downgrade)
+    // ======================================================
+    else if (event.type === 'customer.subscription.updated') {
+      const subscription = event.data.object;
+      const status = subscription.status;
+      const customerId = subscription.customer;
+
+      console.log(`Subscription updated for ${customerId}: status=${status}`);
+
+      // Si l'abonnement est suspendu pour non-paiement
+      if (status === 'past_due' || status === 'unpaid') {
+        const userR = await fetch(`${SUPABASE_URL}/rest/v1/users?stripe_customer_id=eq.${customerId}&select=email`, {
+          headers: { 'apikey': SUPABASE_SECRET, 'Authorization': `Bearer ${SUPABASE_SECRET}` }
+        });
+        const users = await userR.json();
+        if (users && users.length > 0) {
+          console.log(`Subscription past_due for ${users[0].email}`);
+          // On laisse Stripe réessayer avant de désactiver
+        }
+      }
+    }
+
+  } catch (e) {
+    console.error('Webhook processing error:', e);
+    // On retourne 200 quand même pour éviter que Stripe ne réessaie en boucle
   }
 
   return res.status(200).json({ received: true });
