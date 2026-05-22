@@ -1313,8 +1313,8 @@ function switchTab(tab,btn){
   document.querySelectorAll('.cover-field').forEach(f=>f.style.display=(tab==='cover'||tab==='both')?'flex':'none');
 }
 function setTone(el){APP.tone=el.dataset.tone;document.querySelectorAll('.tone-card').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
-function handlePayment(){gtag('event','begin_checkout',{value:4.99,currency:'EUR'});window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00','_blank');}
-function handlePaymentAnnual(){gtag('event','begin_checkout',{value:35.99,currency:'EUR'});window.open('https://buy.stripe.com/eVq28tb7PguCdHYdeN0gw00','_blank');}
+function handlePayment(){gtag('event','begin_checkout',{value:4.99,currency:'EUR'});window.open('https://buy.stripe.com/dRm3cx7VDcem6fwb6F0gw01','_blank');}
+function handlePaymentAnnual(){gtag('event','begin_checkout',{value:35.99,currency:'EUR'});window.open('https://buy.stripe.com/4gM14pa3L5PY8nE0s10gw02','_blank');}
 function updateNav(){
   const btn=document.getElementById('authNavBtn'),cta=document.getElementById('navCta');
   if(currentUser){
