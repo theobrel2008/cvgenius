@@ -1058,40 +1058,67 @@ footer{
   <div class="pricing-inner">
     <div class="sec-eyebrow" style="text-align:center">Tarifs</div>
     <div class="sec-title">Simple & transparent</div>
-    <div class="sec-sub">Un seul paiement. Aucun abonnement. Accès à vie.</div>
-    <div class="pricing-grid">
+    <div class="sec-sub">Commencez gratuitement. Passez Pro quand vous voulez. Annulable en 1 clic.</div>
+    <div class="pricing-grid" style="grid-template-columns:1fr 1.15fr 1fr;gap:16px;max-width:960px;margin:48px auto 0;">
+
+      <!-- GRATUIT -->
       <div class="p-card">
         <div class="p-name">Gratuit</div>
         <div class="p-price"><span>€</span>0</div>
         <div class="p-period">Pour toujours</div>
         <div style="height:22px"></div>
         <ul class="p-feats">
-          <li><span class="c">✓</span> 1 CV généré par jour</li>
+          <li><span class="c">✓</span> 1 CV par jour</li>
           <li><span class="c">✓</span> 1 lettre de motivation</li>
           <li><span class="c">✓</span> Aperçu en ligne</li>
           <li class="off"><span class="x">✗</span> Export PDF</li>
-          <li class="off"><span class="x">✗</span> Générations illimitées</li>
+          <li class="off"><span class="x">✗</span> CV illimités</li>
           <li class="off"><span class="x">✗</span> Historique</li>
+          <li class="off"><span class="x">✗</span> Support prioritaire</li>
         </ul>
         <button class="p-btn free" onclick="scrollToApp()">Commencer gratuitement</button>
       </div>
+
+      <!-- PRO MENSUEL -->
       <div class="p-card featured">
         <div class="p-hot">⭐ PLUS POPULAIRE</div>
         <div class="p-name">Pro</div>
         <div class="p-price"><span>€</span>4,99</div>
-        <div class="p-period">Paiement unique · Accès à vie</div>
-        <div class="p-was">Au lieu de 14,99€ — Prix de lancement</div>
+        <div class="p-period">par mois · Sans engagement</div>
+        <div class="p-was">Moins cher qu'un café ☕</div>
         <ul class="p-feats">
           <li><span class="c">✓</span> CV et lettres <strong>illimités</strong></li>
           <li><span class="c">✓</span> Export <strong>PDF haute qualité</strong></li>
           <li><span class="c">✓</span> Historique de vos documents</li>
-          <li><span class="c">✓</span> 3 modèles de design</li>
+          <li><span class="c">✓</span> 5 modèles de design</li>
           <li><span class="c">✓</span> Support prioritaire 24h</li>
-          <li><span class="c">✓</span> Toutes les futures mises à jour</li>
+          <li><span class="c">✓</span> Toutes les mises à jour</li>
+          <li><span class="c">✓</span> Annulable en 1 clic</li>
         </ul>
-        <button class="p-btn pro" onclick="handlePayment()">Débloquer à vie — 4,99€ →</button>
+        <button class="p-btn pro" onclick="handlePayment()">Commencer — 4,99€/mois →</button>
         <div class="p-note">🛡 Satisfait ou remboursé 7 jours · Stripe sécurisé</div>
       </div>
+
+      <!-- PRO ANNUEL -->
+      <div class="p-card" style="border:1.5px solid var(--green);position:relative;">
+        <div class="p-hot" style="background:var(--green);color:#fff;position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-family:'Syne',sans-serif;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 16px;border-radius:20px;white-space:nowrap;">💚 MEILLEURE VALEUR</div>
+        <div class="p-name">Pro Annuel</div>
+        <div class="p-price" style="font-size:38px;"><span>€</span>2,99</div>
+        <div class="p-period">par mois · Facturé 35,99€/an</div>
+        <div class="p-was" style="color:var(--green);text-decoration:none;font-weight:700;">Économisez 24€ vs mensuel</div>
+        <ul class="p-feats">
+          <li><span class="c">✓</span> Tout le plan Pro inclus</li>
+          <li><span class="c">✓</span> CV et lettres <strong>illimités</strong></li>
+          <li><span class="c">✓</span> Export PDF haute qualité</li>
+          <li><span class="c">✓</span> Historique complet</li>
+          <li><span class="c">✓</span> Support prioritaire 24h</li>
+          <li><span class="c">✓</span> Accès à toutes les nouveautés</li>
+          <li><span class="c">✓</span> <strong>-40% vs mensuel</strong></li>
+        </ul>
+        <button class="p-btn pro" style="background:var(--green);" onclick="handlePaymentAnnual()">Commencer — 35,99€/an →</button>
+        <div class="p-note">🛡 Satisfait ou remboursé 7 jours · Stripe sécurisé</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1178,19 +1205,6 @@ footer{
     <div class="footer-links">
       <a onclick="scrollToApp()">Accueil</a>
       <a onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Tarifs</a>
-      <a href="/blog/comment-faire-un-cv">Guide CV</a>
-      <a href="/lettre-motivation">Lettre de motivation</a>
-      <a href="/modeles-cv">Modèles CV</a>
-      <a href="/cv-etudiant">CV Étudiant</a>
-      <a href="/cv-alternance">CV Alternance</a>
-      <a href="/cv-sans-experience">CV Sans expérience</a>
-      <a href="/cv-reconversion">CV Reconversion</a>
-      <a href="/cv-commercial">CV Commercial</a>
-      <a href="/cv-developpeur">CV Développeur</a>
-      <a href="/cv-infirmier">CV Infirmier</a>
-      <a href="/cv-cadre">CV Cadre</a>
-      <a href="/cv-ats">CV ATS</a>
-      <a href="/cv-anglais">CV Anglais</a>
       <a onclick="showModal('about')">À propos</a>
       <a onclick="showModal('blog')">Blog CV</a>
       <a onclick="showModal('mentions')">Mentions légales</a>
