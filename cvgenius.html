@@ -52,7 +52,7 @@
   "mainEntity": [
     {"@type": "Question", "name": "Comment créer un CV avec l'IA gratuitement ?", "acceptedAnswer": {"@type": "Answer", "text": "Remplissez le formulaire CVGenius avec votre nom, poste visé et expériences. L'IA Claude d'Anthropic génère votre CV professionnel en moins de 30 secondes, gratuitement et sans inscription."}},
     {"@type": "Question", "name": "Quelle IA génère les CV sur CVGenius ?", "acceptedAnswer": {"@type": "Answer", "text": "CVGenius utilise Claude, l'IA d'Anthropic — la même technologie utilisée par les grandes entreprises mondiales."}},
-    {"@type": "Question", "name": "Le plan Pro est-il un paiement unique ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. 4,99€ par mois. Annulable à tout moment en 1 clic."}},
+    {"@type": "Question", "name": "Le plan Pro est-il un paiement unique ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. 4,99€ une seule fois pour un accès à vie. Aucun abonnement, aucune surprise."}},
     {"@type": "Question", "name": "Combien de temps faut-il pour créer un CV avec l'IA ?", "acceptedAnswer": {"@type": "Answer", "text": "Entre 18 et 30 secondes. Remplissez le formulaire en 2 minutes, l'IA génère votre CV instantanément."}}
   ]
 }
@@ -975,7 +975,7 @@ footer{
           <div class="pw-title">Débloquez l'accès illimité</div>
           <div class="pw-sub">CV et lettres illimités · Export PDF · Historique complet</div>
           <div class="pw-price"><span class="pw-old">14,99€</span><span class="pw-new">4,99€</span></div>
-          <div class="pw-period">4,99€/mois · Sans engagement · Annulable en 1 clic</div>
+          <div class="pw-period">Paiement unique · Accès à vie · Aucun abonnement</div>
           <div class="pw-feats">
             <span class="pw-feat">✓ CV illimités</span>
             <span class="pw-feat">✓ Lettres illimitées</span>
@@ -983,7 +983,7 @@ footer{
             <span class="pw-feat">✓ Historique</span>
             <span class="pw-feat">✓ Support 24h</span>
           </div>
-          <button class="pw-btn" onclick="handlePayment()">Commencer — 4,99€/mois →</button>
+          <button class="pw-btn" onclick="handlePayment()">Débloquer à vie — 4,99€ →</button>
           <div class="pw-guarantee">🛡 Satisfait ou remboursé 7 jours — sans question</div>
         </div>
       </div>
@@ -1058,67 +1058,40 @@ footer{
   <div class="pricing-inner">
     <div class="sec-eyebrow" style="text-align:center">Tarifs</div>
     <div class="sec-title">Simple & transparent</div>
-    <div class="sec-sub">Commencez gratuitement. Passez Pro quand vous voulez. Annulable en 1 clic.</div>
-    <div class="pricing-grid" style="grid-template-columns:1fr 1.15fr 1fr;gap:16px">
-
-      <!-- GRATUIT -->
+    <div class="sec-sub">Un seul paiement. Aucun abonnement. Accès à vie.</div>
+    <div class="pricing-grid">
       <div class="p-card">
         <div class="p-name">Gratuit</div>
         <div class="p-price"><span>€</span>0</div>
         <div class="p-period">Pour toujours</div>
         <div style="height:22px"></div>
         <ul class="p-feats">
-          <li><span class="c">✓</span> 1 CV par jour</li>
+          <li><span class="c">✓</span> 1 CV généré par jour</li>
           <li><span class="c">✓</span> 1 lettre de motivation</li>
           <li><span class="c">✓</span> Aperçu en ligne</li>
           <li class="off"><span class="x">✗</span> Export PDF</li>
-          <li class="off"><span class="x">✗</span> CV illimités</li>
+          <li class="off"><span class="x">✗</span> Générations illimitées</li>
           <li class="off"><span class="x">✗</span> Historique</li>
-          <li class="off"><span class="x">✗</span> Support prioritaire</li>
         </ul>
         <button class="p-btn free" onclick="scrollToApp()">Commencer gratuitement</button>
       </div>
-
-      <!-- PRO MENSUEL - LE PLUS POPULAIRE -->
       <div class="p-card featured">
         <div class="p-hot">⭐ PLUS POPULAIRE</div>
         <div class="p-name">Pro</div>
         <div class="p-price"><span>€</span>4,99</div>
-        <div class="p-period">par mois · Sans engagement</div>
-        <div class="p-was">Moins cher qu'un café ☕</div>
+        <div class="p-period">Paiement unique · Accès à vie</div>
+        <div class="p-was">Au lieu de 14,99€ — Prix de lancement</div>
         <ul class="p-feats">
           <li><span class="c">✓</span> CV et lettres <strong>illimités</strong></li>
           <li><span class="c">✓</span> Export <strong>PDF haute qualité</strong></li>
           <li><span class="c">✓</span> Historique de vos documents</li>
-          <li><span class="c">✓</span> 5 modèles de design</li>
+          <li><span class="c">✓</span> 3 modèles de design</li>
           <li><span class="c">✓</span> Support prioritaire 24h</li>
-          <li><span class="c">✓</span> Toutes les mises à jour</li>
-          <li><span class="c">✓</span> Annulable en 1 clic</li>
+          <li><span class="c">✓</span> Toutes les futures mises à jour</li>
         </ul>
-        <button class="p-btn pro" onclick="handlePayment()">Commencer — 4,99€/mois →</button>
+        <button class="p-btn pro" onclick="handlePayment()">Débloquer à vie — 4,99€ →</button>
         <div class="p-note">🛡 Satisfait ou remboursé 7 jours · Stripe sécurisé</div>
       </div>
-
-      <!-- ANNUEL - MEILLEURE VALEUR -->
-      <div class="p-card" style="border:1.5px solid var(--green)">
-        <div class="p-hot" style="background:var(--green);color:#fff">💚 MEILLEURE VALEUR</div>
-        <div class="p-name">Pro Annuel</div>
-        <div class="p-price" style="font-size:36px"><span>€</span>2,99</div>
-        <div class="p-period">par mois · Facturé 35,99€/an</div>
-        <div class="p-was" style="color:var(--green);text-decoration:none;font-weight:700">Économisez 24€ vs mensuel</div>
-        <ul class="p-feats">
-          <li><span class="c">✓</span> Tout le plan Pro inclus</li>
-          <li><span class="c">✓</span> CV et lettres <strong>illimités</strong></li>
-          <li><span class="c">✓</span> Export PDF haute qualité</li>
-          <li><span class="c">✓</span> Historique complet</li>
-          <li><span class="c">✓</span> Support prioritaire 24h</li>
-          <li><span class="c">✓</span> Accès à toutes les nouveautés</li>
-          <li><span class="c">✓</span> <strong>-40% vs mensuel</strong></li>
-        </ul>
-        <button class="p-btn pro" style="background:var(--green)" onclick="handlePaymentAnnual()">Commencer — 35,99€/an →</button>
-        <div class="p-note">🛡 Satisfait ou remboursé 7 jours · Stripe sécurisé</div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1139,39 +1112,59 @@ footer{
 <!-- SEO INTERNAL LINKS -->
 <section class="seo-section">
   <div class="seo-inner">
-    <div class="seo-title">CV par profil — Générateur gratuit</div>
+    <div class="seo-title">Guides & CV par profil</div>
     <div class="seo-grid">
-      <a class="seo-link" href="#app" onclick="document.getElementById('level').value='etudiant';scrollToApp()">
-        <div class="seo-link-title">📚 CV Étudiant / Alternant</div>
-        <div class="seo-link-sub">Créer un CV alternance gratuit avec l'IA</div>
+      <a class="seo-link" href="/blog/comment-faire-un-cv">
+        <div class="seo-link-title">📖 Comment faire un CV</div>
+        <div class="seo-link-sub">Guide complet étape par étape 2026</div>
       </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('level').value='reconversion';scrollToApp()">
-        <div class="seo-link-title">🔄 CV Reconversion Pro</div>
-        <div class="seo-link-sub">Valoriser un parcours atypique par l'IA</div>
-      </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('level').value='senior';scrollToApp()">
-        <div class="seo-link-title">💼 CV Senior (5+ ans)</div>
-        <div class="seo-link-sub">CV expert généré par IA en 30 secondes</div>
-      </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('level').value='junior';scrollToApp()">
-        <div class="seo-link-title">🚀 CV Junior / Primo-accédant</div>
-        <div class="seo-link-sub">Premier CV professionnel par IA</div>
-      </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('jobTitle').value='Développeur Web';scrollToApp()">
-        <div class="seo-link-title">💻 CV Développeur Web</div>
-        <div class="seo-link-sub">CV dev optimisé pour les ATS</div>
-      </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('jobTitle').value='Commercial B2B';scrollToApp()">
-        <div class="seo-link-title">📈 CV Commercial / Vente</div>
-        <div class="seo-link-sub">CV commercial percutant par IA</div>
-      </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('jobTitle').value='Chef de projet';scrollToApp()">
-        <div class="seo-link-title">📋 CV Chef de Projet</div>
-        <div class="seo-link-sub">CV management généré par IA</div>
-      </a>
-      <a class="seo-link" href="#app" onclick="document.getElementById('tab').value='cover';switchTab('cover');scrollToApp()">
+      <a class="seo-link" href="/lettre-motivation">
         <div class="seo-link-title">✉️ Lettre de motivation IA</div>
         <div class="seo-link-sub">Générateur lettre motivation gratuit</div>
+      </a>
+      <a class="seo-link" href="/cv-etudiant">
+        <div class="seo-link-title">📚 CV Étudiant</div>
+        <div class="seo-link-sub">Stage & premier emploi</div>
+      </a>
+      <a class="seo-link" href="/cv-alternance">
+        <div class="seo-link-title">🔄 CV Alternance</div>
+        <div class="seo-link-sub">Contrat apprentissage & pro</div>
+      </a>
+      <a class="seo-link" href="/cv-sans-experience">
+        <div class="seo-link-title">🌱 CV Sans Expérience</div>
+        <div class="seo-link-sub">Valoriser son profil junior</div>
+      </a>
+      <a class="seo-link" href="/cv-reconversion">
+        <div class="seo-link-title">🔀 CV Reconversion</div>
+        <div class="seo-link-sub">Changer de secteur efficacement</div>
+      </a>
+      <a class="seo-link" href="/cv-commercial">
+        <div class="seo-link-title">📈 CV Commercial</div>
+        <div class="seo-link-sub">Résultats chiffrés, CRM, KPI</div>
+      </a>
+      <a class="seo-link" href="/cv-developpeur">
+        <div class="seo-link-title">💻 CV Développeur</div>
+        <div class="seo-link-sub">Stack technique, GitHub, ATS</div>
+      </a>
+      <a class="seo-link" href="/cv-infirmier">
+        <div class="seo-link-title">🏥 CV Infirmier</div>
+        <div class="seo-link-sub">Santé & aide à la personne</div>
+      </a>
+      <a class="seo-link" href="/cv-cadre">
+        <div class="seo-link-title">👔 CV Cadre & Manager</div>
+        <div class="seo-link-sub">Leadership & impact stratégique</div>
+      </a>
+      <a class="seo-link" href="/cv-ats">
+        <div class="seo-link-title">🎯 CV Compatible ATS</div>
+        <div class="seo-link-sub">Passez les filtres recruteurs</div>
+      </a>
+      <a class="seo-link" href="/cv-anglais">
+        <div class="seo-link-title">🌍 CV en Anglais</div>
+        <div class="seo-link-sub">Resume au standard international</div>
+      </a>
+      <a class="seo-link" href="/modeles-cv">
+        <div class="seo-link-title">📄 Modèles CV</div>
+        <div class="seo-link-sub">50+ templates professionnels 2026</div>
       </a>
     </div>
   </div>
@@ -1185,6 +1178,19 @@ footer{
     <div class="footer-links">
       <a onclick="scrollToApp()">Accueil</a>
       <a onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Tarifs</a>
+      <a href="/blog/comment-faire-un-cv">Guide CV</a>
+      <a href="/lettre-motivation">Lettre de motivation</a>
+      <a href="/modeles-cv">Modèles CV</a>
+      <a href="/cv-etudiant">CV Étudiant</a>
+      <a href="/cv-alternance">CV Alternance</a>
+      <a href="/cv-sans-experience">CV Sans expérience</a>
+      <a href="/cv-reconversion">CV Reconversion</a>
+      <a href="/cv-commercial">CV Commercial</a>
+      <a href="/cv-developpeur">CV Développeur</a>
+      <a href="/cv-infirmier">CV Infirmier</a>
+      <a href="/cv-cadre">CV Cadre</a>
+      <a href="/cv-ats">CV ATS</a>
+      <a href="/cv-anglais">CV Anglais</a>
       <a onclick="showModal('about')">À propos</a>
       <a onclick="showModal('blog')">Blog CV</a>
       <a onclick="showModal('mentions')">Mentions légales</a>
@@ -1206,13 +1212,13 @@ footer{
   <div class="exit-box">
     <div class="exit-icon">⏳</div>
     <div class="exit-title">Attendez — une offre !</div>
-    <div class="exit-sub">87% de nos utilisateurs Pro décrochent un entretien en 2 semaines. Moins cher qu'un café par mois.</div>
+    <div class="exit-sub">87% de nos utilisateurs Pro décrochent un entretien en 2 semaines. Débloquez l'accès illimité pour toujours.</div>
     <div class="exit-price-box">
       <div class="exit-old">14,99€</div>
       <div class="exit-new">4,99€</div>
-      <div class="exit-period">4,99€/mois · Sans engagement · Annulable en 1 clic</div>
+      <div class="exit-period">Paiement unique · Accès à vie · Aucun abonnement</div>
     </div>
-    <button class="exit-btn" onclick="handlePayment();closeExit()">Commencer maintenant — 4,99€/mois →</button>
+    <button class="exit-btn" onclick="handlePayment();closeExit()">Débloquer maintenant — 4,99€ →</button>
     <button class="exit-skip" onclick="closeExit()">Non merci, je pars sans</button>
   </div>
 </div>
@@ -1473,7 +1479,7 @@ function showModal(type){
     login:`<div class="m-title">${authMode==='login'?'Connexion':'Créer un compte'}</div><div class="m-sub">${authMode==='login'?'Accédez à votre compte CVGenius':'Gratuit — 1 CV par jour'}</div><div class="m-form"><input class="m-input" type="email" id="aEmail" placeholder="Votre email"><input class="m-input" type="password" id="aPwd" placeholder="Mot de passe (min. 6 car.)"><button class="m-btn" id="aBtn" onclick="handleAuth()">${authMode==='login'?'Se connecter':'Créer mon compte'}</button>${authMode==='login'?`<div style="text-align:center;font-size:12px;color:var(--ink3)"><a href="#" onclick="showModal('forgotPassword')" style="color:var(--accent2)">Mot de passe oublié ?</a></div>`:''}<div style="text-align:center;font-size:12px;color:var(--ink3)">${authMode==='login'?`Pas de compte ? <a href="#" onclick="switchAuth()" style="color:var(--accent2)">S'inscrire</a>`:`Déjà un compte ? <a href="#" onclick="switchAuth()" style="color:var(--accent2)">Se connecter</a>`}</div><div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><div style="font-size:11px;color:var(--ink3);margin-bottom:8px;text-align:center">Déjà un code Pro ?</div><div style="display:flex;gap:8px"><input class="m-input" type="text" id="promoInp" placeholder="CODE PROMO" style="text-transform:uppercase;flex:1"><button onclick="activatePromo()" style="padding:10px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;white-space:nowrap">Activer</button></div></div></div>`,
     forgotPassword:`<div class="m-title">Mot de passe oublié</div><div class="m-sub">Recevez un lien de réinitialisation</div><div class="m-form"><input class="m-input" type="email" id="rEmail" placeholder="Votre email"><button class="m-btn" onclick="sendReset()">Envoyer le lien</button><div style="text-align:center;font-size:12px"><a href="#" onclick="showModal('login')" style="color:var(--accent2)">← Retour</a></div></div>`,
     newPassword:`<div class="m-title">🔑 Nouveau mot de passe</div><div class="m-sub">Choisissez votre nouveau mot de passe</div><div class="m-form"><input class="m-input" type="password" id="np1" placeholder="Nouveau mot de passe"><input class="m-input" type="password" id="np2" placeholder="Confirmer"><button class="m-btn" id="npBtn" onclick="updatePwd()">✓ Enregistrer</button></div>`,
-    userMenu:`<div class="m-title">Mon compte</div><div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;font-size:14px;color:var(--ink2);margin-bottom:20px">📧 ${currentUser?.email||''}</div><div style="display:flex;flex-direction:column;gap:10px">${APP.isPro?'<div style="background:rgba(124,92,255,.15);color:var(--accent2);font-size:13px;font-weight:600;padding:12px 16px;border-radius:var(--r-sm);text-align:center;border:1px solid rgba(124,92,255,.3)">✦ Compte Pro actif 🎉</div>':'<button class="m-btn" onclick="handlePayment()">Souscrire Pro — 4,99€/mois →</button>'}<button onclick="showHistory()" style="padding:12px;border-radius:50px;border:1px solid var(--accent);background:rgba(124,92,255,.1);cursor:pointer;font-family:inherit;font-size:14px;color:var(--accent2);font-weight:600">📋 Mon historique</button><button onclick="showModal(\'forgotPassword\')" style="padding:12px;border-radius:50px;border:1px solid var(--border2);background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--ink2)">🔑 Changer mot de passe</button><button onclick="logout()" style="padding:12px;border-radius:50px;border:1px solid rgba(255,77,77,.3);background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--red);font-weight:600">🚪 Se déconnecter</button></div>`,
+    userMenu:`<div class="m-title">Mon compte</div><div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;font-size:14px;color:var(--ink2);margin-bottom:20px">📧 ${currentUser?.email||''}</div><div style="display:flex;flex-direction:column;gap:10px">${APP.isPro?'<div style="background:rgba(124,92,255,.15);color:var(--accent2);font-size:13px;font-weight:600;padding:12px 16px;border-radius:var(--r-sm);text-align:center;border:1px solid rgba(124,92,255,.3)">✦ Compte Pro actif 🎉</div>':'<button class="m-btn" onclick="handlePayment()">Débloquer Pro — 4,99€ →</button>'}<button onclick="showHistory()" style="padding:12px;border-radius:50px;border:1px solid var(--accent);background:rgba(124,92,255,.1);cursor:pointer;font-family:inherit;font-size:14px;color:var(--accent2);font-weight:600">📋 Mon historique</button><button onclick="showModal(\'forgotPassword\')" style="padding:12px;border-radius:50px;border:1px solid var(--border2);background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--ink2)">🔑 Changer mot de passe</button><button onclick="logout()" style="padding:12px;border-radius:50px;border:1px solid rgba(255,77,77,.3);background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--red);font-weight:600">🚪 Se déconnecter</button></div>`,
     contactpage:`<div class="m-title">Nous contacter</div><div class="m-sub">Réponse sous 24h</div><div class="m-form"><input class="m-input" type="text" id="cNom" placeholder="Votre nom"><input class="m-input" type="email" id="cEmail" placeholder="Votre email"><select class="m-input" id="cSujet" style="appearance:none"><option>Problème technique</option><option>Question paiement</option><option>Remboursement</option><option>Partenariat</option><option>Autre</option></select><textarea class="m-input" id="cMsg" placeholder="Votre message..." style="min-height:90px;resize:vertical"></textarea><button class="m-btn" id="cBtn" onclick="sendContact()">Envoyer</button><div style="text-align:center;font-size:11px;color:var(--ink3)">theo.brel@icloud.com</div></div>`,
     about:`<div class="m-title">À propos 👋</div><div style="font-size:14px;color:var(--ink2);line-height:1.8"><div style="background:rgba(124,92,255,.1);border:1px solid rgba(124,92,255,.2);border-radius:var(--r-sm);padding:16px;margin-bottom:20px"><p style="font-style:italic">"J'ai créé CVGenius parce que je galerais moi-même à rédiger mon CV. J'ai voulu un outil simple, rapide et vraiment efficace."</p><div style="margin-top:8px;font-size:12px;font-weight:700;color:var(--accent2)">— Theo, fondateur · Cussac-Fort-Médoc 🇫🇷</div></div><p>CVGenius est un projet indépendant lancé en 2026, propulsé par l'IA Claude d'Anthropic.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><div style="flex:1;min-width:90px;text-align:center;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm)"><div style="font-family:'Syne',sans-serif;font-size:22px;color:var(--accent2)">12 400+</div><div style="font-size:11px;color:var(--ink3)">CV générés</div></div><div style="flex:1;min-width:90px;text-align:center;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm)"><div style="font-family:'Syne',sans-serif;font-size:22px;color:var(--accent2)">4,9/5</div><div style="font-size:11px;color:var(--ink3)">Note moyenne</div></div><div style="flex:1;min-width:90px;text-align:center;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm)"><div style="font-family:'Syne',sans-serif;font-size:22px;color:var(--accent2)">18s</div><div style="font-size:11px;color:var(--ink3)">Génération</div></div></div></div>`,
     mentions:`<div class="m-title">Mentions légales</div><div style="font-size:13px;color:var(--ink2);line-height:1.9;max-height:60vh;overflow-y:auto"><p><strong>Éditeur</strong><br>Brel Theo — theo.brel@icloud.com — Cussac-Fort-Médoc, France</p><br><p><strong>Hébergement</strong><br>Vercel Inc. — 440 N Barranca Ave, Covina, CA, USA</p><br><p><strong>Propriété intellectuelle</strong><br>Tout le contenu est protégé. Reproduction interdite sans autorisation.</p></div>`,
